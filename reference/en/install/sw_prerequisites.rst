@@ -86,9 +86,13 @@ The different applications that are contained in Tomcat require some custom conf
    .. code-block:: sh
 
      # Java options
-     JAVA_OPTS="-server -Xms1024m -Xmx1024m -XX:MaxPermSize=128m -XX:PermSize=64m -XX:+UseConcMarkSweepGC -XX:NewSize=48m -Dorg.geotools.shapefile.datetime=true -DGEOSERVER_DATA_DIR=/var/geoserver/data -DGEOSERVER_LOG_LOCATION=/var/tomcat/logs/geoserver.log -Duser.timezone=GMT -DMINIFIED_JS=true -DPORTAL_CONFIG_DIR=/var/portal"
+     JAVA_OPTS="-server -Xms1024m -Xmx1024m -XX:MaxPermSize=128m -XX:PermSize=64m -XX:+UseConcMarkSweepGC -XX:NewSize=48m -Dorg.geotools.shapefile.datetime=true -DGEOSERVER_DATA_DIR=/var/geoserver/data -DGEOSERVER_LOG_LOCATION=/var/tomcat/logs/geoserver.log -Duser.timezone=GMT -DNFMS_CONFIG_CACHE=true -DPORTAL_CONFIG_DIR=/var/portal"
 
-.. warning:: The two last parameters (MINIFIED_JS and PORTAL_CONFIG_DIR) are not necessary in the staging area because they are specific for the dissemination portal and the staging does not require it.
+From all the specified parameters, there are two that are read by the portal:
+
+- PORTAL_CONFIG_DIR: folder that is the root for the portal configuration.
+- NFMS_CONFIG_CACHE: when present and true it caches the configuration folders: layers.json, portal.properties and the language .properties files. If not specified or set to false, they are read each time.
+
 
 Configuring tomcat as a service
 ................................
