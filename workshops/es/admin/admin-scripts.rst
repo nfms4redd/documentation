@@ -52,6 +52,7 @@ Por su parte, los *scripts* de *Python* se utilizan exclusivamente para administ
 * portal-add-layer.py
 * portal-layer-tree.py
 * portal-rm-layer.py
+* portal-rm-group.py
 * portal-set-group.py
 * portal-set-layer.py
 
@@ -117,9 +118,10 @@ También es posible modificar grupos y capas que ya existan::
 	$ portal-set-group.py --id g1 --label admin
 	$ portal-set-layer.py --id layer1 --label mi_otra_capa
 
-o eliminar capas::
+o eliminar capas y grupos::
 
 	$ portal-rm-layer.py --id layer1
+	$ portal-rm-group.py --id g1
 
 Ayuda de los *scripts*
 ----------------------
