@@ -6,7 +6,7 @@ Despliegue y actualización
 	=================  ================================================
 	Fecha              Autores
 	=================  ================================================             
-	17 Marzo 2014		* Fernando González (fernando.gonzalez@fao.org)
+	17 Marzo 2014		* Víctor González (victor.gonzalez@geomati.co)
 	=================  ================================================	
 
 	©2013 FAO Forestry 
