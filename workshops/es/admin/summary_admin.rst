@@ -1,6 +1,19 @@
 Resumen administración
 =========================
 
+.. note::
+
+	=================  ================================================
+	Fecha              Autores
+	=================  ================================================             
+	24 Junio 2013		* Fernando González (fernando.gonzalez@fao.org)
+	18 Marzo 2014		* Víctor González (victor.gonzalez@geomati.co)
+	=================  ================================================	
+
+	©2013 FAO Forestry 
+	
+	Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : Creative Commons (Creative Commons - Attribution - Share Alike: http://creativecommons.org/licenses/by-sa/3.0/deed.es)
+
 Java
 -----
 
@@ -49,6 +62,14 @@ Dentro de dicho directorio:
 	* Imágenes internacionalizadas: static/loc/<lang>/images (donde <lang> corresponde con el idioma en el que se encuentran los recursos)
 	* HTML internacionalizado: static/loc/<lang>/html (donde <lang> corresponde con el idioma en el que se encuentran los recursos)
 	* Ficheros internacionalización de texto: messages/
+
+Para desplegar el portal en el servidor basta con copiar el fichero ``portal.war`` en ``/var/tomcat/webapps/portal.war``.
+
+Una vez copiado, si Tomcat está arrancado y funcionando, el portal se desplegará de manera automática en unos instantes.
+
+En el caso de que se quiera **actualizar** el portal con una nueva versión, bastará con sobreescribir el fichero
+``/var/tomcat/webapps/portal.war`` con la nueva versión. De nuevo, si Tomcat está arrancado y funcionando, el portal
+se actualizará automáticamente en unos instantes.
 
 PostgreSQL
 -----------
