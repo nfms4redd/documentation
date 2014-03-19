@@ -2,6 +2,19 @@
 *Scripts* de administración
 ===========================
 
+.. note::
+
+	=================  ================================================
+	Fecha              Autores
+	=================  ================================================             
+	19 Marzo 2014		* Fernando González (fernando.gonzalez@fao.org)
+	19 Marzo 2014		* Víctor González (victor.gonzalez@geomati.co)
+	=================  ================================================	
+
+	©2014 FAO Forestry
+	
+	Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : Creative Commons (Creative Commons - Attribution - Share Alike: http://creativecommons.org/licenses/by-sa/3.0/deed.es)
+
 Los *scripts* de administración se ejecutan desde la línea de comandos y sirven para:
 
 * Cargar ficheros *.shp* como tablas en PostGIS.
@@ -112,17 +125,19 @@ Por su parte, los *scripts* de *Python* se utilizan exclusivamente para administ
 
 	MAP LAYER ORDER
 	===============
-	1. blue-marble
-	2. forestClassification
+	1. provinces
+	2. countryBoundaries
 	3. forest_mask
-	4. countryBoundaries
-	5. provinces
+	4. forestClassification
+	5. blue-marble
 
 Como vemos, el árbol de capas tiene tres grupos *base*, *admin* y *landcover*. Es importante destacar que estos grupos tienen como padre a *root* que es el grupo que contiene todo, pero que no se mostrará en el portal. Cada grupo a su vez puede contener grupos, como *base*, que contiene *innerbase* y *innerforest*. Por último, los grupos contienen capas, que se muestran de la siguiente forma::
 
 	<capa_de_portal> (<capa_de_mapa 1>, <capa_de_mapa 2>, ...)
 
 De esta manera es fácil distinguir las capas de portal de los grupos porque las capas siempre son las hojas del árbol y llevan las capas de mapa especificadas entre paréntesis.
+
+Además, el script ``portal-layer-tree.py`` muestra el orden de las capas tal y como se mostrarán en el mapa. Así, en el ejemplo anterior la capa de provincias (*provinces*) se mostrará por encima de todas las demás, mientras que la capa base *blue-marble* estará debajo de todas las demás.
 
 Por otro lado, existen *scripts* para gestionar los grupos de capas:
 
@@ -147,6 +162,9 @@ Por último, existen ciertos casos avanzados en los que se desea asociar más de
 
 Ejemplo
 -------
+
+Carga de datos
+..............
 
 En primer lugar, ya que la base de datos de PostGIS está vacía, hay que cargar ficheros *.shp*::
 
@@ -178,28 +196,162 @@ Además de introducir las tablas de manera interactiva, es posible también aña
 
 	$ add-all-layers.sh
 
-Una vez se ha configurado la base de datos y GeoServer, podemos pasar a administrar las capas del portal. En primer lugar podemos añadir grupos de capas, como por ejemplo un nuevo grupo *extra* dentro de *base*::
+Configuración del portal
+........................
 
-	$ portal-add-group.py --id extra --label "Extra" --parent base
+Una vez se han añadido los datos que necesitamos a la base de datos y GeoServer, podemos pasar a administrar las capas del portal. El caso más común es que ya exista un árbol de capas, bien porque sea el que viene por defecto como ejemplo cuando se despliega el portal, o bien porque esté ahí de una instalación anterior.
 
-Para añadir un nuevo grupo en el nivel más externo, basta con especificar *root* como padre::
+En cualquier caso, lo primero que haremos será mostrarlo para ver en qué estado tenemos las capas y grupos de nuestro portal. Esto lo haremos con el comando ``portal-layer-tree.py``::
 
-	$ portal-add-group.py --id extra --label "Extra" --parent root
+	$ portal-layer-tree.py
+	LAYER TREE
+	==========
+	root
+		base
+			innerbase
+				blue-marble (blue-marble)
+			innerforest
+				forestClassification (forestClassification)
+		admin
+			countryBoundaries (countryBoundaries)
+			provinces (provinces)
+		landcover
+			forest_mask (forest_mask)
 
-En el caso de las capas, se pueden añadir nuevas capas de portal de la siguiente manera::
 
-	$ portal-add-layer.py --id <id_capa> --url <ruta_al_wms_de_geoserver> --wmsname <nombre_del_wms> --label <etiqueta> --group base
+	MAP LAYER ORDER
+	===============
+	1. provinces
+	2. countryBoundaries
+	3. forest_mask
+	4. forestClassification
+	5. blue-marble
 
-Como resultado, se creará una capa de portal y una capa de mapa asociada con los valores especificados.
+Para este ejemplo supondremos que la única capa que nos es útil es *blue-marble* y que la queremos en el grupo *base*. Así que lo primero que haremos será eliminar todas las demás con el comando ``portal-rm-layer.py`` y volver a mostrar el árbol de capas::
 
-También es posible modificar grupos y capas que ya existan::
+	$ portal-rm-layer.py --id forestClassification
+	$ portal-rm-layer.py --id countryBoundaries
+	$ portal-rm-layer.py --id provinces
+	$ portal-rm-layer.py --id forest_masl
+	$ portal-layer-tree.py
+	LAYER TREE
+	==========
+	root
+		base
+			innerbase
+				blue-marble (blue-marble)
+			innerforest
+		admin
+		landcover
 
-	$ portal-set-group.py --id g1 --label admin
-	$ portal-set-layer.py --id layer1 --label mi_otra_capa
 
-o eliminar capas y grupos::
+	MAP LAYER ORDER
+	===============
+	1. blue-marble
 
-	$ portal-rm-layer.py --id layer1
-	$ portal-rm-group.py --id g1
+Como podemos observar, al eliminar las capas se han quedado grupos vacíos que no vamos a necesitar. Estos grupos los eliminaremos con ``portal-rm-group.py``::
 
-Es importante recordar que para eliminar un grupo es necesario que el grupo esté vacío.
+	$ portal-rm-group.py --id innerforest
+	$ portal-rm-group.py --id admin
+	$ portal-rm-group.py --id landcover
+	$ portal-layer-tree.py
+	LAYER TREE
+	==========
+	root
+		base
+			innerbase
+				blue-marble (blue-marble)
+
+
+	MAP LAYER ORDER
+	===============
+	1. blue-marble
+
+Ahora podemos mover la capa *blue-marble* al grupo *base* y eliminar el grupo *innerbase*. Puesto que en este caso estamos modificando la capa (el grupo al que pertenece), utilizaremos el comando ``portal-set-layer.py``::
+
+	$ portal-set-layer.py --id blue-marble --group base
+	$ portal-rm-group.py --id innerbase
+	$ portal-layer-tree.py
+	LAYER TREE
+	==========
+	root
+		base
+			blue-marble (blue-marble)
+
+
+	MAP LAYER ORDER
+	===============
+	1. blue-marble
+
+Ahora que ya tenemos únicamente una capa base en el grupo que queríamos, podemos empezar a añadir nuevos grupos y capas para los datos que tenemos. Para empezar añadiremos dos grupos, uno para divisiones territoriales (*territoriales*) y otro para datos forestales (*forestales*). Esto lo haremos con el *script* ``portal-add-group.py``::
+
+	$ portal-add-group.py --id territoriales --parent root --label "Divisiones territoriales"
+	$ portal-add-group.py --id forestales --parent root --label "Datos forestales"
+	$ portal-layer-tree.py --id
+	LAYER TREE
+	==========
+	root
+		base
+			blue-marble (blue-marble)
+		territoriales
+		forestales
+
+
+	MAP LAYER ORDER
+	===============
+	1. blue-marble
+
+Por último, podemos añadir capas a los grupos. Supondremos que anteriormente hemos añadido tres capas a GeoServer, dos con divisiones territoriales (provincias y municipios) y otro con datos de cobertura forestal. Añadiremos estas capas con ``portal-add-layer.py``::
+
+	$ portal-add-layer.py --id provincias --url <url> --wmsName provincias --label "Provincias" --group territoriales
+	$ portal-add-layer.py --id municipios --url <url> --wmsName municipios --label "Municipios" --group territoriales
+	$ portal-add-layer.py --id cobertura --url <url> --wmsName cobertura --label "Cobertura forestal" --group forestales
+	$ portal-layer-tree.py
+	LAYER TREE
+	==========
+	root
+		base
+			blue-marble (blue-marble)
+		territoriales
+			provincias (map-provincias)
+			municipios (map-municipios)
+		forestales
+			cobertura (map-cobertura)
+
+
+	MAP LAYER ORDER
+	===============
+	1. map-cobertura
+	2. map-municipios
+	3. map-provincias
+	4. blue-marble
+
+donde *<url>* es la URL del servicio WMS. Esta URL puede ser la URL de GeoServer en nuestro servidor (por ejemplo, ``http://<servidor>/geoserver/nfms/wms``) o la URL de un servicio WMS externo.
+
+Además, es importante destacar que cuando se añade una capa, se añade tanto una capa para el portal que se mostrará en el árbol de capas, como una capa para el mapa. Como se ha comentado anteriormente, las capas de portal van seguidas de las capas de mapa entre paréntesis. Además, para distinguirlas todavía más fácilmente, las nuevas capas del mapa se crean con el prefijo *map-*, como se puede ver arriba.
+
+En este punto podemos querer cambiar el orden en que se mostrarán las capas. Por ejemplo, para hacer que la capa de provincias se muestre por encima de la de municipios podemos utilizar el comando ``portal-set-map-layer.py``::
+
+	$ portal-set-map-layer.py --id map-provincias --order 2
+	$ portal-layer-tree.py
+	LAYER TREE
+	==========
+	root
+		base
+			blue-marble (blue-marble)
+		territoriales
+			provincias (map-provincias)
+			municipios (map-municipios)
+		forestales
+			cobertura (map-cobertura)
+
+
+	MAP LAYER ORDER
+	===============
+	1. map-cobertura
+	2. map-provincias
+	3. map-municipios
+	4. blue-marble
+
+Existen muchos más parámetros que se pueden configurar o cambiar tanto para las capas como para los grupos. Para ello podemos utilizar los *scripts* ``portal-set-group.py``, ``portal-set-layer.py`` y ``portal-set-map-layer.py``. Se recomienda ejecutar todos ellos con la opción ``--help`` para ver qué opciones admite y cómo utilizarlos.
+
