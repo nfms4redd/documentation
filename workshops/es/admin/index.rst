@@ -18,3 +18,4 @@ Contents:
    geotalleres/geoserver-raster/geoserver_raster
    portal_raster_config
    admin-scripts
+   security
