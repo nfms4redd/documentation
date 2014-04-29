@@ -1,5 +1,5 @@
-Seguridad
-=========
+Autenticación
+=============
 
 .. note::
 
