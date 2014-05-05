@@ -8,52 +8,47 @@ Architecture general
 
 * PostGIS + Tomcat que contiene (GeoServer + frontend + backend)
 
-* Repaso por los componentes
+* Repaso por los componentes en la máquina virtual
 	- echar un vistazo al directorio de tomcat
 	- ver el directorio de datos de geoserver
 	- conectar a la base de datos de postgresql
 
-* Comentar que en este caso vamos a tener otra instancia de tomcat para realizar los desarrollos (es una configuración especial del curso, normalmente se desarrollará en una máquina en local)
-
-Instalación frontend (demo, porque ya está instalado)
+Instalación frontend en eclipse
 -----------------------------------------------------------
 
-Comentar dónde está instalado y hacer una demo de cómo se hace. Se utiliza git y maven
+Tecnologías implicadas:
 
-- GIT es como subversion pero mucho más potente. En un futuro podemos hacer un pequeño curso de GIT.
+	- GIT. Podemos descargar un ZIP de GitHub.
+	- Maven. Vistazo al pom.xml, dependencias, explicar lifecycle, estructura típica de un proyecto y su uso desde eclipse.
 
-- Maven tiene un objetivo parecido a Ant, pero la aproximación es distinta.
+Demo generación war y copia a máquina virtual.
 
-- Demo
-
-	* Descarga e instalación de Eclipse IDE for Java EE Developers
-	
 	* Arrancar eclipse
 	
 	* Clonado del proyecto e importación en eclipse.
 	
-	Right click - import - git - specify 
-	
-		url: git@github.com:nfms4redd/nfms.git
-		Protocol: https
-	
-	Local destination: The one of the repository
-	
-	(Mientras descarga explicar: Dónde está tomcat, dónde está geoserver, conexión a postgis e introducción a Maven)
-	
-	Use the New Project wizard -> Cancel
-	
-	New Project - Import existing maven project and select the cloned repository (may require installation of some plugins on eclipse that are not necessary for the development of the portal and are done automatically (no es grave si fallan))
-	
-	Team - Switch to - New branch (simplification)
-	
-	Cerrar el proyecto raíz
+		Right click - import - git - specify 
+		
+			url: git@github.com:nfms4redd/nfms.git
+			Protocol: https
+		
+		Local destination: The one of the repository
+		
+		Use the New Project wizard -> Cancel
+		
+		New Project - Import existing maven project and select the cloned repository (may require installation of some plugins on eclipse that are not necessary for the development of the portal and are done automatically (no es grave si fallan))
+		
+		Team - Switch to - New branch (simplification)
+		
+		Cerrar el proyecto raíz
 
-* Ejecución
+	* Ejecución
 
-Botón derecho en "portal" -> Debug on server -> Apache Tomcat
+		Botón derecho en "portal" -> Debug on server -> Apache Tomcat
 
-Open firefox to take a look
+		Open firefox to take a look
+		
+	* Generación del war
 
 Arquitectura del frontend
 -----------------------------
@@ -65,6 +60,11 @@ Ejemplo: Carga de la aplicación con FireBug y observación en consola de las ll
 	Advertencia: El contenido de las llamadas o incluso las llamadas pueden cambiar porque el proyecto está en desarrollo, lo importante es entender la arquitectura y las llamadas utilizadas.
 
 Vamos a ver el código del servidor. ¿dónde podemos ver qué clase es la que implementa config.js? -> web.xml
+	Context Listener
+	Lang filter: procesa el parametro "lang" de cualquier petición y lo transforma en el atributo "locale" de la request.
+	Indicators: Devuelve los indicadores que hay en el sistema para una capa dada.
+	Error management: Veremos con más detalle cómo utilizarlo. Servlet para gestionar los errores.
+	Proxy: Lo veremos cuando veamos OpenLayers.
 
 Vemos también la llamada a los indicadores (hacemos notar la excepción).
 
@@ -74,34 +74,38 @@ Vemos también la llamada a los indicadores (hacemos notar la excepción).
 
 	RequireJS
 	
-	modules
+	modules. En general, un módulo se compone de:
+		- dependencias (nombre y variable con el valor de retorno)
+		- variables locales del módulo
+		- funciones privadas
+		- inicialización
+		- valor de retorno
 	
 	index.html referencia a main.js y a partir de este momento, la aplicación cliente se compone sólo de módulos javascript.
 	
 	La configuración de módulos en requirejs referencia el directorio "modules"
 	
-	Dentro de este directorio va a haber un conjunto de módulos que cuyas dependencias de unos en otros forman un grafo. Algunos los hemos desarrollado nosotros y otros son librerías externas. Se puede ver en la configuración que hay que especificarle dónde están las librerías externas
+	Dentro de este directorio va a haber un conjunto de módulos cuyas dependencias de unos en otros forman un grafo. Algunos los hemos desarrollado nosotros y otros son librerías externas. Se puede ver en la configuración que hay que especificarle dónde están las librerías externas
 	
 	La configuración se sigue de una serie de llamadas "require" que lo que hacen es cargar módulos. Veremos en la parte del cliente cómo se cargan y definen estos módulos.
 	
-Estructura del proyecto
-------------------------
-
-	Explicación de los distintos proyectos
+	Módulos:
+		- Show toolbar initializing graphic components and listening for add-layer events
+		- Show map creating the component and listening for events that other components will send
+		- Show layout creating the HTML and returning an object
+		- Show layer-list reacting to the add-layer event
+		- Show main asking the server for the layers and triggering add-layer events
+		- Show communication adding the "lang" parameter to every call and managing the errors
+		
+	- secuencia de inicialización
 	
-	Explicación de la arquitectura típica de un proyecto maven
+	- ficheros de configuración
 
-(Si fuera necesario) Introducción a maven
-------------------------------------------
+Ejemplo MousePosition
+......................
 
-Ejercicio: Crear un proyecto maven
-
-Ejercicio: Usar una dependencia
-
-Ejercicio: Instalar la plataforma
-
-Intro JQuery (a caballo entre lunes y martes)
-----------------------------------------------------
+Intro JQuery 
+-------------
 
 (El objetivo es que se entienda, no aprender a usarlo. Se aprenderá a utilizar durante el curso viendo muchos ejemplos. Es importante que si algo se olvida durante el curso se comente para poder seguir durante el mismo entendiendo los ejemplos.)
 
@@ -162,35 +166,6 @@ Ejemplo "ajax": Nos permite realizar llamadas al servidor y obtener la respuesta
 Tuesday 2.5 + 2.5
 ==================
 
-Repaso interactivo día anterior
----------------------------------
-
-* Exploración del resto de web.xml
-	Context Listener
-	Lang filter: procesa el parametro "lang" de cualquier petición y lo transforma en el atributo "locale" de la request.
-	Indicators: Devuelve los indicadores que hay en el sistema para una capa dada.
-	Error management: Veremos con más detalle cómo utilizarlo. Servlet para gestionar los errores.
-	Proxy: Lo veremos cuando veamos OpenLayers.
-
-* Repaso módulos
-
-	En general, un módulo se compone de:
-		- dependencias (nombre y variable con el valor de retorno)
-		- variables locales del módulo
-		- funciones privadas
-		- inicialización
-		- valor de retorno
-	
-	Ejemplos
-		- Show toolbar initializing graphic components and listening for add-layer events
-		- Show map creating the component and listening for events that other components will send
-		- Show layout creating the HTML and returning an object
-		- Show layer-list reacting to the add-layer event
-		- Show main asking the server for the layers and triggering add-layer events
-		- Show communication adding the "lang" parameter to every call and managing the errors
-
-* Repaso jquery
-
 Intro OpenLayers (dar tiempo a ver requirejs y poder así repasarlo el miércoles)
 -----------------------------------------------------------------------------------
 
@@ -242,58 +217,55 @@ Ejercicio: add the layers of ecuador and focus on Ecuador: http://www.geoportali
 	
 9) Custom click con temperatura
 
-Más información: 
-
-	- Web de OpenLayers
-	- http://xeoinquedos.wordpress.com/2011/05/20/material-para-el-curso-de-openlayers/
-
 Wednesday and Thursday 2.5 + 2.5 + 2.5 + 2.5
 ==============================================
-
-El primer día va desde el cliente al servidor y el segundo al revés.
 
 Modulo en el cliente
 ---------------------
 
 Intro a requirejs y al event bus
 ................................
-
-Vamos a mover los componentes que hemos programado en OpenLayers a una aplicación modular similar a la que se está desarrollando en FAO.
-
-Ejemplo "base": Ejercicio ol1 pero creando los dos divs con un módulo main
-
-Variante -jquery: Cargamos jquery y creamos los módulos a continuación
-
-Variante -layout: Dejamos sólo la configuración en main y el layout se mete en el mapa
-
-Ejemplo "mapa": Creamos un módulo que crea un mapa con una capa
-
-Ejercicio: qué pasa si alguien cambia en layour el id del mapa? -> Hacerlo!
-
-	Solución: layout puede devolver un valor -> mapa-id
 	
-Resumen: Nuevo módulo = crear fichero y añadirlo en la instrucción require de "main"
-
-Ejercicio: Añadir un módulo con los controles de navegación (mapa-nav)
-
-Ejercicio: Añadir un módulo que centre en Ecuador (mapa-center)
-
-Event-bus demo (se puede hacer como ejercicio si hay tiempo)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Ejercicio: Añadir un módulo que ponga en el div de información los controles para añadir una capa (url y nombre) (nueva-capa)
-
-Ejercicio: Añadir un módulo que liste las capas que hay en el mapa (nueva-capa-lista)
-
-Ejercicio: Añadir un control que alerte cuando se añadan más de 3 capas (nueva-capa-limite)
-
-Ejemplo de simplificación con message-bus (nueva-capa-bus)
-
-	- Ejercicio: MOdificar la lista de capas para que ponga el nombre del servidor entre paréntesis
-
-	- ¿Qué ficheros tenemos que modificar si queremos quitar la lista de capas? 
-
-	- Ejemplo: añadimos otro mapa 
+	Explicación teórica de RequireJS (ver teoría)
+	
+	Ejercicios (en caso necesario)
+	
+		Vamos a mover los componentes que hemos programado en OpenLayers a una aplicación modular similar a la que se está desarrollando en FAO.
+		
+		Ejemplo "base": Ejercicio ol1 pero creando los dos divs con un módulo main
+		
+		Variante -jquery: Cargamos jquery y creamos los módulos a continuación
+		
+		Variante -layout: Dejamos sólo la configuración en main y el layout se mete en el mapa
+		
+		Ejemplo "mapa": Creamos un módulo que crea un mapa con una capa
+		
+		Ejercicio: qué pasa si alguien cambia en layour el id del mapa? -> Hacerlo!
+		
+			Solución: layout puede devolver un valor -> mapa-id
+			
+		Resumen: Nuevo módulo = crear fichero y añadirlo en la instrucción require de "main"
+		
+		Ejercicio: Añadir un módulo con los controles de navegación (mapa-nav)
+		
+		Ejercicio: Añadir un módulo que centre en Ecuador (mapa-center)
+		
+		Event-bus demo (se puede hacer como ejercicio si hay tiempo)
+		^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+		
+		Ejercicio: Añadir un módulo que ponga en el div de información los controles para añadir una capa (url y nombre) (nueva-capa)
+		
+		Ejercicio: Añadir un módulo que liste las capas que hay en el mapa (nueva-capa-lista)
+		
+		Ejercicio: Añadir un control que alerte cuando se añadan más de 3 capas (nueva-capa-limite)
+		
+		Ejemplo de simplificación con message-bus (nueva-capa-bus)
+		
+			- Ejercicio: MOdificar la lista de capas para que ponga el nombre del servidor entre paréntesis
+		
+			- ¿Qué ficheros tenemos que modificar si queremos quitar la lista de capas? 
+		
+			- Ejemplo: añadimos otro mapa 
 
 Creación de módulos en el portal
 ......................................
@@ -311,17 +283,18 @@ Explicación de los módulos actuales
 Ejemplo: Creación de un módulo que añada la posición del mapa.
 
 Ejercicio: 
+
 - Creación de un módulo que añada la escala
 
 Ejemplo: Creación de un módulo que instala un botón que abre un diálogo con una URL, un nombre de capa y un grupo en el que añadir la capa.
 
 Ejercicio:
+
 * Creación de un botón que instalar una capa fija creando un grupo fijo
 
 Ejercicio:
 
 * Un módulo que instala una herramienta para obtener la temperatura de la API: http://openweathermap.org/api
-	- Preguntar si es a esto a lo que se refieren con sensores
 
 Módulo en el servidor
 ----------------------
@@ -336,62 +309,39 @@ Comentar los objetos que tenemos en el ambiente del servidor
 	- Servlets: Manejo de las llamadas.
 	- ContextListeners: Inicialización y liberación de recursos.
 
-- Ejemplo filtro: lang + communication on the client side
+Ejercicios
 
-- Ejercicio filtro: sysout logging filter
+    - servlet hola mundo
+
+    - servlet que devuelva algo en json
+    
+    - usarlo desde el cliente
+    
+    - gestionar el error convenientemente (por ejemplo poniendo mal la URL que usa el servlet, que simula que el servicio se ha caído).
+    
+    - usarlo con el communication -> También podemos poner un "relojito".
+    
+    - Enviar los contenidos de una capa al servidor (¿esto no es el WFS?)
+
+	- Ejemplo filtro: lang + communication on the client side
+	- Ejercicio filtro: sysout logging filter
 	(request.getRemoteAddr() + " está accediendo a " + ((HttpServletRequest) request).getRequestURL().toString())
 
-- Servlet: Listado de módulos
-	Comentar al final que esto lo hace ya el ConfigServlet
+	- Servlet: Listado de módulos
+		Comentar al final que esto lo hace ya el ConfigServlet
 
-- Servlet: Eliminación de un módulo (modificando el Config para que refresque)
+	- Servlet: Eliminación de un módulo (modificando el Config para que refresque)
 
-- Ejercicio: Poner una capa no "active" por defecto.
+	- Ejercicio: Poner una capa no "active" por defecto.
+	
+	Pregunta: ¿Cómo desplegaríamos todo esto en el servidor? -> Crear un proyecto aparte, empaquetarlo y desplegarlo.
 
-Pregunta: ¿Cómo desplegaríamos todo esto en el servidor? -> Crear un proyecto aaparte, empaquetarlo y desplegarlo.
+	- Servlet Context: Visualizar la configuración actual.
 
-- Servlet Context: Visualizar la configuración actual.
+	- Creación de un proyecto maven war en eclipse con todos los ejercicios y despliegue en el servidor
 
-- Creación de un proyecto maven war en eclipse con todos los ejercicios y despliegue en el servidor
+Friday
+=======
 
-Friday 2.5 + 1.5
-================
-
-Ejercicios completos
---------------------
-
-Personalización de indicadores
-................................
-
-Creación de un indicador HTML
-
-Creación de un indicador dinámico
-...................................
-
-Creación de un servicio que saca información de la base de datos y muestra algúnos datos
-
-Alertas tala fuera de licencias
-................................
-
-Creación de herramienta para notificar tala
-
-Validación vía QGIS
-
-Creación de la vista con las alertas de las talas fuera de las zonas de licencias que han sido validadas
-
-Creación de la vista con las alertas por validar que están fuera de una zona de licencia
-
-Carga de las vistas en el sistema
-
-Consulta de estadísticas en el evento mouse over
-
-Conclusiones
-=============
-
-¿Cómo seguimos?
-
- - Soporte técnico desde Roma por skype
- - Demos online con los últimos avances de la plataforma
- - ¿Interesados en hacer algunos componentes generales?
-
+Casos prácticos
 

@@ -190,5 +190,14 @@ A continuación se presenta una plantilla que puede ser útil para la creación 
 		// // inicialización
 		
 		// // valor de retorno
-		// return null;
+		// return {
+			
+			// propiedades públicas
+			miPropiedadPublica : ...,
+			
+			// Funciones públicas
+			miFuncionPublica : function() {
+			}
+			
+		};
 	});
