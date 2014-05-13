@@ -173,8 +173,10 @@ Es posible definir funciones privadas dentro del módulo. Para ello basta con de
 
 En el ejemplo anterior se define una función ``createLayer`` y a continuación se le invoca un par de veces para instanciar las capas WMS que se añaden al mapa.
 
-Modulo modelo
----------------
+.. _plantillamodelo:
+
+Plantilla módulo
+----------------
 
 A continuación se presenta una plantilla que puede ser útil para la creación de nuevos módulos::
 
