@@ -251,21 +251,20 @@ Intro a requirejs y al event bus
 		Ejercicio: Añadir un módulo que centre en Ecuador (mapa-center)
 		
 		Event-bus demo (se puede hacer como ejercicio si hay tiempo)
-		^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+	
+			Ejercicio: Añadir un módulo que ponga en el div de información los controles para añadir una capa (url y nombre) (nueva-capa)
+			
+			Ejercicio: Añadir un módulo que liste las capas que hay en el mapa (nueva-capa-lista)
 		
-		Ejercicio: Añadir un módulo que ponga en el div de información los controles para añadir una capa (url y nombre) (nueva-capa)
+			Ejercicio: Añadir un control que alerte cuando se añadan más de 3 capas (nueva-capa-limite)
 		
-		Ejercicio: Añadir un módulo que liste las capas que hay en el mapa (nueva-capa-lista)
+			Ejemplo de simplificación con message-bus (nueva-capa-bus)
 		
-		Ejercicio: Añadir un control que alerte cuando se añadan más de 3 capas (nueva-capa-limite)
-		
-		Ejemplo de simplificación con message-bus (nueva-capa-bus)
-		
-			- Ejercicio: MOdificar la lista de capas para que ponga el nombre del servidor entre paréntesis
-		
-			- ¿Qué ficheros tenemos que modificar si queremos quitar la lista de capas? 
-		
-			- Ejemplo: añadimos otro mapa 
+				- Ejercicio: MOdificar la lista de capas para que ponga el nombre del servidor entre paréntesis
+			
+				- ¿Qué ficheros tenemos que modificar si queremos quitar la lista de capas? 
+			
+				- Ejemplo: añadimos otro mapa 
 
 Creación de módulos en el portal
 ......................................
