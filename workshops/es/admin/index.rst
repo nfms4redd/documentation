@@ -19,3 +19,4 @@ Contents:
    portal_raster_config
    admin-scripts
    authentication
+   backups
