@@ -15,3 +15,4 @@ Contents:
    server-plugins
    advanced-topics
    fuentes
+   howtos/index
