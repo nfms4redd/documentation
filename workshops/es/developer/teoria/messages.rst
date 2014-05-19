@@ -241,16 +241,22 @@ Parámetros: Un objeto con las siguientes propiedades:
 
 * id: id de la capa
 * groupId: id del grupo en el que se debe añadir la capa
-* url: URL del servidor WMS que sirve la capa
-* wmsName: Nombre de la capa en el servicio WMS
-* name: Nombre de la capa a usar en el portal
-* infoLink: URL con información de la capa
-* queryable: Si se pretende ofrecer información de la capa o no
-* visible: Si la capa está inicialmente visible o no
-* legendURL: La ruta de una imagen con la leyenda de la capa
-* sourceLink: Enlace externo al organismo productor de los datos
-* sourceLabel: Etiqueta a mostrar en el enlace ``sourceLink``
-* timestamps: Array con los instantes de tiempo en ISO8601 para los que la capa tiene información
+* label: Texto con el nombre de la capa a usar en el portal
+* infoFile: Nombre del fichero HTML con información sobre la capa. El fichero se accede en static/loc/{lang}/html
+* inlineLegendUrl: URL con una imagen pequeña que situar al lado del nombre de la capa en el árbol de capas
+* queryable: Si se pretende ofrecer herramienta de información para la capa o no
+* active: Si la capa está inicialmente visible o no
+* wmsLayers: Array con la información de las distintas capas WMS que se accederán desde esta capa. El caso más habitual es que se acceda sólo a una, pero es posible configurar varias. Los objetos de este array tienen la siguiente estructura:
+
+  * baseUrl: URL del servidor WMS que sirve la capa
+  * wmsName: Nombre de la capa en el servicio WMS
+  * imageFormat: Formato de imagen a utilizar en las llamadas WMS
+  * zIndex: Posición en la pila de dibujado
+  * legend: Nombre del fichero imagen con la leyenda de la capa. Estos ficheros se acceden en static/loc/{lang}/images
+  * label: Título de la leyenda
+  * sourceLink: URL del proveedor de los datos
+  * sourceLabel: Texto con el que presentar el enlace especificado en sourceLink
+  * timestamps: Array con los instantes de tiempo en ISO8601 para los que la capa tiene información
 
 Ejemplo de uso::
 

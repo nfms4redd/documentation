@@ -6,7 +6,7 @@ define([ "message-bus", "layout", "jquery", "toolbar" ], function(bus, layout, $
 		groups.push(groupData);
 	});
 
-	var btnNewLayer = $("<a href='#'/>").html("Nueva capa").appendTo($("#" + layout.toolbarId));
+	var btnNewLayer = $("<a href='#'/>").html("Nueva capa").appendTo(layout.toolbar);
 	btnNewLayer.attr("id", "new-layer-button");
 	btnNewLayer.addClass("blue_button lang_button");
 	btnNewLayer.click(function() {
@@ -44,10 +44,12 @@ define([ "message-bus", "layout", "jquery", "toolbar" ], function(bus, layout, $
 					bus.send("add-layer", {
 						"id" : "unique-id-" + (new Date()).getTime(),
 						"groupId" : cmbGroups.val(),
-						"url" : txtURL.val(),
-						"wmsName" : txtWMSName.val(),
-						"name" : txtLayerName.val(),
-						"visible" : "true"
+						"label" : txtLayerName.val(),
+						"active" : "true",
+						"wmsLayers" : [ {
+							"baseUrl" : txtURL.val(),
+							"wmsName" : txtWMSName.val()
+						} ]
 					});
 					$(this).dialog("close");
 				},
