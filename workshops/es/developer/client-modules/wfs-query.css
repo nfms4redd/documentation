@@ -1,0 +1,9 @@
+#dataFilter_tbl {
+	border: 1px solid;
+	width: 100%;
+	border-collapse: collapse;
+}
+
+#dataFilter_tbl td {
+	border: 1px solid;
+}
