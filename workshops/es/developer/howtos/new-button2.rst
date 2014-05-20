@@ -6,7 +6,7 @@ Este manual pretende añadir un botón al portal creando un módulo botonera que
 Así pues, el proceso será similar, con la diferencia que en lugar de añadir un botón, vamos a añadir un objeto div::
 
 	define([ "jquery", "layout" ], function($, layout) {
-		var botonera = $("<div/>").attr("style", "position:absolute;top:0; left:7em; z-index:2000");
+		var botonera = $("<div/>").attr("style", "position:absolute;top:6px; left:7em; z-index:2000");
 		botonera.appendTo(layout["map"]);
 
 	});
@@ -44,7 +44,7 @@ define([ "botonera" ], function(botonera) {
 Por último, queda implementar el código de la función ``newButton``, que debe tomar al menos un texto y una función ``callback`` que se invocará cuando se pinche en el botón::
 
  	define([ "jquery", "layout" ], function($, layout) {
-		var botonera = $("<div/>").attr("style", "position:absolute;top:0; left:7em; z-index:2000");
+		var botonera = $("<div/>").attr("style", "position:absolute;top:6px; left:7em; z-index:2000");
 		botonera.appendTo(layout["map"]);
 	  	return {
 			newButton : function(text, callback) {
