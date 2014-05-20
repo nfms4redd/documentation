@@ -8,3 +8,4 @@ Las siguientes secciones incluyen manuales para la creación de las tareas de de
 
    hello-world
    new-button
+   new-button2

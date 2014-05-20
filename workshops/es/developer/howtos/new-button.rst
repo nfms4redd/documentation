@@ -1,5 +1,7 @@
-New button
-============
+.. _newbutton:
+
+Añadir un botón
+================
 
 Se crea el módulo de la forma habitual, creando el fichero en el directorio de módulos y añadiendo el módulo a la propiedad ``client.modules`` del fichero portal.properties.
 
