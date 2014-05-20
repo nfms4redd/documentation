@@ -9,3 +9,4 @@ La arquitectura del cliente web viene definida principalmente por el uso del pro
    requirejs/index.rst
    message-bus/index.rst
    openlayers/index.rst
+   app-structure/index.rst
