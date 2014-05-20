@@ -16,6 +16,15 @@ Para ello es necesario cargar la librería RequireJS en el código HTML de la p�
 
 En el tag de carga se especifica el módulo inicial que RequireJS cargará y ejecutará. En el ejemplo "modules/main.js".
 
+
+Módulos RequireJS
+-------------------
+
+Un módulo RequireJS consiste en:
+
+- Unas dependencias
+- Un código de inicialización que devuelve opcionalmente un valor y que se ejecuta cuando las dependencias han sido a su vez inicializadas
+
 Árbol de dependencias
 ----------------------
 

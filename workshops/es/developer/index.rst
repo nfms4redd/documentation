@@ -7,6 +7,9 @@ Contents:
    :maxdepth: 2
 
    prerequisites
+   jquery
+   openlayers
+   requirejs
    client-architecture
    important-modules
    messages
