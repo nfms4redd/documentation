@@ -7,6 +7,9 @@ Las siguientes secciones incluyen manuales para la creación de las tareas de de
    :maxdepth: 2
 
    hello-world
-   new-button
-   new-button2
+   new-ui-component
+   botonera
+   events
    map-reference
+   hello-world-service
+   

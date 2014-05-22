@@ -1,5 +1,5 @@
-Añadir un botón (con botonera)
-================================
+Añadir una botonera
+===================
 
 Este manual pretende añadir un botón al portal creando un módulo botonera que facilite la tarea en lo sucesivo.
 
