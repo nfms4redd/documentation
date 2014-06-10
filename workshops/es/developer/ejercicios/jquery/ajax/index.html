@@ -7,18 +7,18 @@
 	src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 <script>
 	$(document).ready(function() {
-		var get = $("<div/>");
-		get.html("Pincha aquí para hacer una llamada al servidor").appendTo("body");
-		get.click(function() {
+		var clickdiv = $("<div/>");
+		clickdiv.html("Pincha aquí para hacer una llamada al servidor").appendTo("body");
+		clickdiv.click(function() {
 			$.ajax({
-				url : "/unredd-portal/layers",
+				url : "http://geoportal.ambiente.gob.ec:8095/portal/indicators?layerId=unredd:drc_boundary",
 				// parametros
 				data : {},
 				// El tipo de datos que esperamos de retorno
 				contentType : "application/json",
 				// funcion a ejecutar en caso de éxito
 				success : function(data) {
-					var resultDiv = $("<div/>").html("Hay " + data.portalLayers.length + " capas en el sistema");
+					var resultDiv = $("<div/>").html("Hay " + data.length + " elementos en el array");
 					$("body").append(resultDiv);
 				},
 				// funcion a ejecutar en caso de fallo

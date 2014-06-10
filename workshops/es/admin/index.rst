@@ -11,6 +11,7 @@ Contents:
    winscp
    putty
    geotalleres/linux/linux
+   geotalleres/servicios-web/servicios-web.rst
    geotalleres/postgresql/postgresql
    geotalleres/geoserver-intro/geoserver_intro
    geotalleres/geoserver-vector/geoserver_vector

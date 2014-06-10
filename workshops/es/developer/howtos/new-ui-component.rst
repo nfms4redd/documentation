@@ -34,7 +34,7 @@ Si hemos hecho todos los pasos correctamente, veremos que la barra de herramient
 
 Lo único que queda por hacer es reemplazar el código de prueba anterior por otro que cree un botón. Esto lo podemos hacer creando un tag ``<button>`` con jQuery::
 
-	define([ "layout" ], function(layout) {
+	define([ "layout", "jquery" ], function(layout, $) {
 		var aButton = $("<button/>").attr("id", "miboton").html("púlsame");
 		aButton.appendTo(layout.toolbar);
 		aButton.click(function() {

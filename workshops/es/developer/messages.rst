@@ -260,14 +260,16 @@ Parámetros: Un objeto con las siguientes propiedades:
 
 Ejemplo de uso::
 
-		bus.send("add-layer", {
-			"id" : "meteo-eeuu",
-			"groupId" : "meteo",
-			"url" : "http://mesonet.agron.iastate.edu/cgi-bin/wms/nexrad/n0r-t.cgi",
-			"wmsName" : "nexrad-n0r-wmst",
-			"name" : "EEUU",
-			"visible" : "true"
-		});
+	bus.send("add-layer", {
+		"id" : "meteo-eeuu",
+		"groupId" : "landcover",
+		"label" : "Radar EEUU",
+		"active" : "true",
+		"wmsLayers" : [ {
+			"baseUrl" : "http://mesonet.agron.iastate.edu/cgi-bin/wms/nexrad/n0r-t.cgi",
+			"wmsName" : "nexrad-n0r-wmst"
+		} ]
+	});
 
 Más información:
 
@@ -279,7 +281,7 @@ Cambia la visibilidad de una capa
 
 Parámetros:
 
-* objeto con la información de la capa
+* id de la capa portal
 * valor de visibilidad
 
 Ejemplo de uso::

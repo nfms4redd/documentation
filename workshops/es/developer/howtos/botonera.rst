@@ -29,17 +29,17 @@ Para ello el módulo deberá devolver un objeto ``{}`` con una propiedad que sea
 
 Para utilizar esta funcionalidad, es necesario crear un nuevo módulo que importe el módulo ``botonera``::
 
-define([ "botonera" ], function(botonera) {
-
-});
+	define([ "botonera" ], function(botonera) {
+	
+	});
 
 En este código, la variable ``botonera`` recibida en la función de inicialización del módulo es el valor de retorno de la inicialización del módulo ``botonera``, por lo que es posible hacer llamadas a la propiedad ``newButton`` de esta variable::
 
-define([ "botonera" ], function(botonera) {
-	botonera.newButton("hola mundo", function() {
-		alert('hola mundo');
+	define([ "botonera" ], function(botonera) {
+		botonera.newButton("hola mundo", function() {
+			alert('hola mundo');
+		});
 	});
-});
 
 Por último, queda implementar el código de la función ``newButton``, que debe tomar al menos un texto y una función ``callback`` que se invocará cuando se pinche en el botón::
 

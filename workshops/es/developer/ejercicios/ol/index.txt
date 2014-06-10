@@ -29,8 +29,12 @@ ol5: Mostrar coordenadas
 
 ol6: Mostrar las coordenadas en latitud y longitud
 
+Cargar las capas del IGM	
+
 ol7: Algunos controles adicionales
 
 ol8: Control para consultar la información de la capa y mostrarla por consola. Intento de acceder a un servidor distinto de aquel del que nos hemos descargado la página da fallo (en firefox no hay mensaje de error, la llamada se ignora). Se llama al servidor que alberga la capa (distinto a aquél del que aloja la página html) a través de un proxy en "/proxy?url=@". Se puede usar el del portal copiando el fichero al directorio "webapp"
 
 ol9: Control personalizado que responde al evento "click" y consulta la temperatura
+
+ola: Carga de una capa OSM
