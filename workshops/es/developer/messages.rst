@@ -218,7 +218,7 @@ Parámetros: Un objeto con las siguientes propiedades:
 * id: identificador del grupo
 * parentId: Opcional, para grupos dentro de otros grupos hace referencia al grupo contenedor
 * name: nombre del grupo
-* infoFile: Ruta de la página HTML con información sobre el grupo
+* infoLink: Ruta de la página HTML con información sobre el grupo
 
 Ejemplo de uso::
 
@@ -242,7 +242,7 @@ Parámetros: Un objeto con las siguientes propiedades:
 * id: id de la capa
 * groupId: id del grupo en el que se debe añadir la capa
 * label: Texto con el nombre de la capa a usar en el portal
-* infoFile: Nombre del fichero HTML con información sobre la capa. El fichero se accede en static/loc/{lang}/html
+* infoLink: Ruta de la página HTML con información sobre la capa
 * inlineLegendUrl: URL con una imagen pequeña que situar al lado del nombre de la capa en el árbol de capas
 * queryable: Si se pretende ofrecer herramienta de información para la capa o no
 * active: Si la capa está inicialmente visible o no
