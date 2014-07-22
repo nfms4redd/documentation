@@ -106,7 +106,7 @@ Más información:
 
 **zoom-to**
 
-Mueve el encuadre al objeto OpenLayers.Bounds que se pasa como parámetro
+Mueve el encuadre al objeto OpenLayers.Bounds que se pasa como parámetro. El objeto bounds debe estar en el sistema de referencia del mapa (EPSG:900913)
 
 Parámetros: OpenLayers.Bounds con el extent deseado
 
@@ -115,6 +115,10 @@ Ejemplo de uso::
 	var bounds = new OpenLayers.Bounds();
 	bounds.extend(new OpenLayers.LonLat(0,42));
 	bounds.extend(new OpenLayers.LonLat(10,52));
+	
+	bounds.transform( new OpenLayers.Projection("EPSG:4326"),
+		 new OpenLayers.Projection("EPSG:900913"));
+
 	bus.send("zoom-to", bounds);
 
 Más información:
@@ -223,7 +227,7 @@ Parámetros: Un objeto con las siguientes propiedades:
 Ejemplo de uso::
 
 	bus.send("add-group", [ {
-		id:0, 
+		id:"grupo_admin",, 
 		name:"Límites administrativos"
 	}]);
 
@@ -289,22 +293,6 @@ Ejemplo de uso::
 	bus.send("layer-visibility", ["provincias", false]);
 
 Más información:
-
-
-
-**maplayer-added**
-
-Lanzado cuando el mapa ha añadido una capa
-
-Parámetros:
-
-* Objeto OpenLayers.Layer.WMS con la capa que se ha añadido
-* Objeto con la información del evento ``add-layer`` que originó la creación de la capa
-
-Ejemplo de uso:
-
-Más información:
-
 
 
 **time-slider.selection**
