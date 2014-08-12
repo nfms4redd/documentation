@@ -5,6 +5,5 @@ Arquitectura servidor
    :maxdepth: 2
 
    filters-servlets-contexts
-   error-management
-   context-attributes
-   request-attributes
+   web-fragments
+   reference

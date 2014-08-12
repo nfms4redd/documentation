@@ -10,12 +10,9 @@ Contents:
    jquery
    openlayers
    requirejs
-   client-architecture
+   architecture/index
    important-modules
    messages
-   server
-   client-plugins
-   server-plugins
    advanced-topics
    fuentes
    howtos/index
