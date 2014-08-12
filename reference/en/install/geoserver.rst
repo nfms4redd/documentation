@@ -26,11 +26,11 @@ Copy the GeoServer data directory that is expanded from the war file into /var/g
 
   $ sudo cp -R /var/tomcat/webapps/geoserver/data /var/geoserver
 
-As geoserver is an application run by tomcat, it is necessary that the user ``tomcat6`` has write access to this folder so the easiest is to change the folder owner to belong to ``tomcat6``::
+As geoserver is an application run by tomcat, it is necessary that the user ``tomcat7`` has write access to this folder so the easiest is to change the folder owner to belong to ``tomcat7``::
 
-  $ sudo chown -R tomcat6: /var/geoserver/data
+  $ sudo chown -R tomcat7: /var/geoserver/data
   
-After this, it is necessary to restart the ``tomcat6`` service to make Geoserver reinitialize and access its new data folder.
+After this, it is necessary to restart the ``tomcat7`` service to make Geoserver reinitialize and access its new data folder.
 
 The directory structure inside is as follows:
 
