@@ -18,9 +18,19 @@ From the point of view of the client, the application has the following structur
 Project structure
 -------------------
 
-This single application is actually implemented by several projects. Any of these projects can contribute content to any of the elements seen in the previous point: styles, modules, services, etc. 
+This single application is actually implemented by several projects. Any of these projects can contribute content to any of the points seen in the previous point: styles, modules, services, etc. 
 
-TODO: How to include contents for each folder.
+TODO: How to include contents for each client folder
+
+TODO: Mapping summary
+
+TODO: How to include services
+
+The code in the RequireJS modules may perform requests to services installed by the application. Estos servicios Java consisten en una serie de *Servlets*, *Filters* y *ApplicationContexts* definidos en ficheros ``WEB-INF/web.xml`` del espacio web, es decir en ``src/main/webapp/WEB-INF/web.xml``.
+
+En la especificación j2EE, el directorio ``WEB-INF`` debe estar en la raíz de la aplicación (``src/main/webapp/``) pero su contenido no es accesible a través del contenedor de aplicaciones (Tomcat).
+
+TODO: Project structure
 
 El portal es una aplicación JEE (Java Enterprise Edition). Utiliza Maven como herramienta de compilación, adaptándose a la estructura por defecto que por convención tienen los proyectos Maven:
 
@@ -30,14 +40,8 @@ El portal es una aplicación JEE (Java Enterprise Edition). Utiliza Maven como h
 - src/main/webapp: Raíz de la aplicación web
 - pom.xml: Descriptor del proyecto Maven.
 
-La aplicación tiene una arquitectura cliente servidor, en la que la parte cliente, en Javascript, se comunica mediante llamadas AJAX con los servicios web implementados en Java.
 
-Servicios Java
----------------
-
-The code in the RequireJS modules may perform requests to services installed by the application. Estos servicios Java consisten en una serie de *Servlets*, *Filters* y *ApplicationContexts* definidos en ficheros ``WEB-INF/web.xml`` del espacio web, es decir en ``src/main/webapp/WEB-INF/web.xml``.
-
-En la especificación j2EE, el directorio ``WEB-INF`` debe estar en la raíz de la aplicación (``src/main/webapp/``) pero su contenido no es accesible a través del contenedor de aplicaciones (Tomcat).
+TODO Configuration directory (additionally to the overriding folders (modules, styles, etc. there is this)
 
 Dentro de ``WEB-INF`` podemos ver además un directorio ``default_config``, que es una copia inicial del directorio de configuración utilizado por la aplicación. En él podemos encontrar:
 
@@ -51,24 +55,6 @@ Dentro de ``WEB-INF`` podemos ver además un directorio ``default_config``, que 
 * portal.properties: Propiedades generales del sistema
 
 
-
-Servicios Java
----------------
-
-Los servicios Java consisten en una serie de *Servlets*, *Filters* y *ApplicationContexts* definidos en el fichero ``WEB-INF/web.xml`` del espacio web, es decir en ``src/main/webapp/WEB-INF/web.xml``.
-
-En la especificación j2EE, el directorio ``WEB-INF`` debe estar en la raíz de la aplicación (``src/main/webapp/``) pero su contenido no es accesible a través del contenedor de aplicaciones (Tomcat).
-
-Dentro de ``WEB-INF`` podemos ver además un directorio ``default_config``, que es una copia inicial del directorio de configuración utilizado por la aplicación. En él podemos encontrar:
-
-* indicators: Datos para la presentación de gráficas (experimental)
-* messages: Ficheros .properties con las traducciones para las distintas cadenas utilizadas en la aplicación
-* modules: Módulos particulares de la instalación. Equivalente al ``modules`` de ``src/main/webapp/`` pero con mayor prioridad en caso de que haya dos módulos con el mismo nombre. Una vez la aplicación se despliega en Tomcat es muy importante no realizar modificaciones en los directorios de la aplicación ya que cada vez que se despliegue una nueva versión todas las modificaciones son borradas. Así, en lugar de realizar modificaciones a los módulos en ``src/main/webapp/`` es conveniente hacerlo en este directorio ``modules``, que estará ubicado en ``/var/portal/`` y no es afectado por nuevos despliegues de la aplicación.
-* static: Contenidos estáticos
-* static/overrides.css: última hoja CSS cargada, ideal para sobreescribir otros estilos
-* static/loc: Recursos clasificados por idioma
-* layers.json: Configuración de las capas.
-* portal.properties: Propiedades generales del sistema
 
 portal.properties
 .................
