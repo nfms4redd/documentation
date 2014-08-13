@@ -4,46 +4,80 @@ Estructura de la aplicación
 Client perspective
 --------------------
 
-El cliente Javascript es una aplicación modular basada en RequireJS que se comunica medainte llamadas AJAX con los servicios web.
+El cliente Javascript es una aplicación modular basada en RequireJS que se comunica mediante llamadas AJAX con los servicios web.
 
-From the point of view of the client, the application has the following structure::
+Desde el punto de vista del cliente, la aplicación tiene la siguiente estructura::
 
 	unredd-portal
-		|- modules/		-> RequireJS modules and their styles
-		|- jslib/		-> Javascript libraries used by the modules: OpenLayers, RequireJS, etc.
-		|- styles/ 		-> General CSS styles (from JQuery UI, etc.)
-		|- ...			-> Java services (can be named in any way, e.g.: indicators/ -> returns a list of the indicators available for a given object in a layer)
-		\- index.html	-> HTML document for the application
+	 |- modules/	-> RequireJS modulos y sus estilos
+	 |- jslib/	-> Librerías Javascript usadas por los módulos: OpenLayers, RequireJS, etc.
+	 |- styles/ 	-> Hojas CSS generales (de JQuery UI, etc.)
+	 |- ...		-> Servicios Java (pueden ser llamados de cualquier manera, e.g.: indicators/ -> devuelve una lista con información de los indicadores de un objeto en una capa)
+	 \- index.html	-> Documento HTML de la aplicación
 
-Project structure
--------------------
+Estructura del proyecto
+-------------------------
 
-This single application is actually implemented by several projects. Any of these projects can contribute content to any of the points seen in the previous point: styles, modules, services, etc. 
+La aplicación es implementada por varios proyectos Java estructurados de la siguiente manera::
 
-TODO: How to include contents for each client folder
+	portal
+	 |- core/		-> Librería que contiene los componentes que forman el núcleo del sistema, tales como manejo de errores, carga de capas, etc.
+	 |- base/		-> Librería que contiene los componentes básicos de la aplicación, tales como el árbol de capas, panel de leyenda, mapa, etc. 
+	 |- demo/		-> WAR que incluye todos los componentes de core y base.
+	 |- ...
+	 |- argentina/		-> WARs específicos para cada país que contiene componentes específicos 	e incluyen core y base. 
 
-TODO: Mapping summary
+Programación del cliente
+-------------------------
 
-TODO: How to include services
+Cada uno de estos proyectos puede contribuir contenidos a cualquier punto de la estructura del punto anterior: styles, modules, services, etc. Esto se hace incluyendo los recursos en el classpath (``src/main/resources``), en el paquete ``nfms``::
 
-The code in the RequireJS modules may perform requests to services installed by the application. Estos servicios Java consisten en una serie de *Servlets*, *Filters* y *ApplicationContexts* definidos en ficheros ``WEB-INF/web.xml`` del espacio web, es decir en ``src/main/webapp/WEB-INF/web.xml``.
+	nfms
+	 |- modules
+	 |- jslib
+	 \- styles
 
-En la especificación j2EE, el directorio ``WEB-INF`` debe estar en la raíz de la aplicación (``src/main/webapp/``) pero su contenido no es accesible a través del contenedor de aplicaciones (Tomcat).
+Bastará con que dicha estructura esté presente dentro de uno de los JARs en ``WEB-INF/lib`` para que sus directorios ``modules``, ``jslib`` y ``styles`` sean accesibles via HTTP.
 
-TODO: Project structure
+Por ejemplo, en el proyecto ``core`` existe el directorio ``src/main/resources`` que contiene ``nfms/modules/main.js`` y ``nfms/jslib/require.js``, entre otros. Cuando este proyecto es incluido como dependencia en un proyecto, por ejemplo ``demo``, aparecerá como JAR en ``WEB-INF/lib`` y por tanto estos recursos serán accesibles en las urls ``http://localhost:8080/unredd-portal/modules/main.js`` y ``http://localhost:8080/unredd-portal/jslib/require.js``. Lo mismo sucede para cualquier recurso existente en ``nfms/modules/``, ``nfms/jslib/`` y ``nfms/styles/``.
 
-El portal es una aplicación JEE (Java Enterprise Edition). Utiliza Maven como herramienta de compilación, adaptándose a la estructura por defecto que por convención tienen los proyectos Maven:
+**Escaneado**
+
+Además de ser accesibles via HTTP, los paquetes ``modules`` y ``styles`` son escaneados en busca de módulos javascript y estilos::  
+
+	nfms
+	 |- modules (escaneado en busca de .js y .css)
+	 |- jslib
+	 \- styles (escaneado en busca de .css)
+
+De esta manera, cualquier fichero .css existente en cualquier de los dos paquetes será importado al cargar la aplicación. Igualmente, todo fichero .js existente en ``modules`` será cargado inicialmente por RequireJS al iniciar la aplicación.
+
+Programación de los servicios
+------------------------------
+
+El código en los módulos RequireJS puede realizar peticiones a los servicios de la aplicación. De igual modo que en la parte cliente, cualquiera de los proyectos puede contribuir con servicios a la aplicación final símplemente incluyéndolo como dependencia.
+
+La implementación de estos servicios se basa en la especificación Java Servlet 3.0 y consistirá en la implementación de uno o más *Servlets* definidos en el descriptor de despliegue. Este puede encontrarse en dos ficheros.
+
+El primero es ``WEB-INF/web.xml`` del espacio web, es decir en ``src/main/webapp/WEB-INF/web.xml``. Este fichero es el descriptor de despliegue propiamente dicho, y en él se pueden definir todos los servlets necesarios en aquellos proyectos que sean de tipo WAR, como ``demo``.
+
+Sin embargo, core y base no son proyectos web sino simples librerías. En tal caso, la especificación Servlet 3.0 define que las librerías usadas por una aplicación WAR (como ``demo``) pueden contribuir al descriptor de despliegue mediante un fichero ``META-INF/web-fragment``. Es el caso por ejemplo de la librería ``core`` que incluye distintos servlets para gestión de errores, secuencia de inicio de la aplicación, etc. y que serán ofrecidos por cualquier aplicación que incluya el JAR de ``core`` en ``WEB-INF/lib`` (obviamente, en un contenedor JEE que implemente la especificación Servlet 3.0, como Tomcat 7).
+
+Estructura del código fuente
+------------------------------
+
+Todos los proyectos del portal utilizan Maven como herramienta de compilación, adaptándose a la estructura por defecto que por convención tienen los proyectos Maven:
 
 - src/main/java: Código fuente Java
 - src/main/resources: Recursos usados por el código Java
 - src/test/java y src/test/resources: Tests automatizados
-- src/main/webapp: Raíz de la aplicación web
 - pom.xml: Descriptor del proyecto Maven.
 
+Adicionalmente a estos directorios, las aplicaciones JEE como ``demo`` incorporan un directorio adicional:
 
-TODO Configuration directory (additionally to the overriding folders (modules, styles, etc. there is this)
+- src/main/webapp: Raíz de la aplicación web
 
-Dentro de ``WEB-INF`` podemos ver además un directorio ``default_config``, que es una copia inicial del directorio de configuración utilizado por la aplicación. En él podemos encontrar:
+Este directorio contendrá todos los recursos que se ofrecerán via HTTP y que son específicos del proyecto ``demo``. Además incluye el directorio ``WEB-INF`` con el descriptor de despliegue y un directorio ``default_config``, que es una copia inicial del directorio de configuración utilizado por la aplicación. En él podemos encontrar:
 
 * indicators: Datos para la presentación de gráficas (experimental)
 * messages: Ficheros .properties con las traducciones para las distintas cadenas utilizadas en la aplicación
@@ -53,8 +87,6 @@ Dentro de ``WEB-INF`` podemos ver además un directorio ``default_config``, que 
 * static/loc: Recursos clasificados por idioma
 * layers.json: Configuración de las capas.
 * portal.properties: Propiedades generales del sistema
-
-
 
 portal.properties
 .................
