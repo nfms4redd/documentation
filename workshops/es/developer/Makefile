@@ -43,7 +43,7 @@ clean:
 
 html:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
-	tar -czvf $(BUILDDIR)/html/ejercicios.tgz ejercicios
+	tar -czf $(BUILDDIR)/html/ejercicios.tgz ejercicios
 	cp -R ejercicios $(BUILDDIR)/html
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
