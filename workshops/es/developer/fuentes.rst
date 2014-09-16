@@ -48,3 +48,17 @@ Si lo que se pretende es exclusivamente obtener el fichero .war, es posible obvi
  	$ mvn -DskipTests package
 
 tras el cual el fichero target/unredd-portal.war habrá aparecido. Dicho fichero se puede desplegar en el directorio ``webapps`` de Tomcat para poder usar la aplicación recién compilada.
+
+Generación del unredd-portal.war desde eclipse
+------------------------------------------------
+
+Desde eclipse, se podría generar el war clicando con el botón derecho del ratón en el proyecto -> Run as -> Maven Build.
+
+En la ventana que aparece, escribir "package" en el texto Goals:
+
+.. image:: images/mvn-package-eclipse.png
+	:scale: 75%
+	:align: center
+
+Y pinchar en el botón Run, tras lo cual te aparecerá un fichero unredd-portal.war en el directorio target.
+
