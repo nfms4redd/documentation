@@ -60,5 +60,11 @@ En la ventana que aparece, escribir "package" en el texto Goals:
 	:scale: 75%
 	:align: center
 
-Y pinchar en el botón Run, tras lo cual te aparecerá un fichero unredd-portal.war en el directorio target.
+y seleccionar la casilla "Skip Tests". Tras pinchar en el botón Run se iniciará la ejecución. Si hacia el final aparece el texto::
+
+	[INFO] ------------------------------------------------------------------------
+	[INFO] BUILD SUCCESS
+	[INFO] ------------------------------------------------------------------------
+
+todo estará correcto y aparecerá un fichero unredd-portal.war en el directorio target.
 
