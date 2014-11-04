@@ -1,3 +1,5 @@
+.. _servlet3:
+
 Arquitectura servidor
 ======================
 

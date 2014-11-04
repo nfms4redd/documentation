@@ -36,31 +36,193 @@ El directorio de configuración (:file:`/var/portal`) tiene la siguiente estruct
 	  /var/portal
 	    |- portal.properties
 	    |- layers.json
-	    |- header.tpl
-	    |- footer.tpl
-	    |- messages/...
+	    |- messages/
+	    |- modules/
 	    \- static/
-	        |- unredd.css
-	        |- custom.js
-	        |- img/...
+	        |- overrides.css
+	        |- img/
 	        \- loc/
 	            |- en/
-	            │   |- documents/...
-	            │   |- html/...
-	            │   \- images...
+	            │   |- documents/
+	            │   |- html/
+	            │   \- images/
 	            \- es
-	                |- documents/...
-	                |- html/...
-	                \- images/...
+	                |- documents/
+	                |- html/
+	                \- images/
 
 Los ficheros principales son:
 
  * ``portal.properties``, contiene parámetros generales del portal, como por ejemplo los idiomas soportados.
  * ``layers.json``, probablemente el fichero más importante, contiene la configuración de las capas de datos a mostrar.
- * ``headers.tpl`` y ``footer.tpl``, plantillas para configurar la cabecera y el pie de la página.
  * ``messages/`` contiene los textos de la aplicación traducidos a varios idiomas.
- * ``static/`` contiene el resto de recursos: estilos css, código javascript personalizado, y otros recursos estáticos como documentos o imágenes. 
+ * ``modules/`` permite añadir modulos Javascript a la aplicación.
+ * ``static/`` contiene recursos estáticos. 
+ * ``static/loc``: recursos clasificados por idioma
+ * ``static/overrides.css``: última hoja CSS cargada, ideal para sobreescribir otros estilos
 
+portal.properties
+------------------
+
+* languages = {"en": "English", "fr": "Fran\u00e7ais", "es": "Espa\u00f1ol"}
+
+  Elemento JSON con los idiomas que soporta la aplicación
+  
+* languages.default = en
+
+  Idioma por defecto.
+  
+* layers.rootFolder=/tmp
+
+  Raíz de la configuración de estadísticas (experimental)
+  
+* info.layerUrl=http://demo1.geo-solutions.it/diss_geoserver/gwc/service/wms
+
+  URL de las capas ``queryable``
+
+* info.queryUrl=http://demo1.geo-solutions.it/diss_geoserver/wms
+  
+  URL de las capas ``queryable`` contra la que hacer la petición GetFeatureInfo
+  
+* client.modules=wfs-query,mouse-position,measure,layer-tree,layers,communication,iso8601,error-management,map,banner,toolbar,time-slider,layer-list,info-control,info-dialog,center,zoom-bar,layer-list-selector,active-layer-list,legend-button,legend-panel
+
+  Lista de módulos a cargar en la aplicación
+  
+* map.centerLonLat=24, -4
+
+  Longitud y latitud del centro inicial del mapa
+  
+* map.initialZoomLevel=5
+
+  Nivel de zoom inicial
+
+layers.json
+------------
+
+Define la estructura de capas del proyecto. Consiste en un elemento JSON con tres propiedades::
+
+	{
+		"wmsLayers" : [],
+	
+		"portalLayers" : [],
+	
+		"groups" : []
+	}
+
+* ``wmsLayers`` define las capas WMS que tendrá el mapa. El orden en el que estas capas aparecen en el array ``wmsLayers`` define el orden de las capas en el dibujado del mapa. Cada capa consistirá en un elemento con las siguientes propiedades:
+
+	* id: Identificado de la capa
+	* baseUrl: URL del servidor WMS que sirve la capa
+	* wmsName: Nombre de la capa en el servicio WMS
+	* imageFormat: Formato de imagen a utilizar en las llamadas WMS
+	* visible: Si la capa es utilizada para visualizarse en el mapa o sólo para otras cosas (petición de información, por ejemplo).
+	* queryable: Si se pretende ofrecer herramienta de información para la capa o no
+	* zIndex: Posición en la pila de dibujado
+	* legend: Nombre del fichero imagen con la leyenda de la capa. Estos ficheros se acceden en static/loc/{lang}/images
+	* label: Título de la leyenda
+	* sourceLink: URL del proveedor de los datos
+	* sourceLabel: Texto con el que presentar el enlace especificado en sourceLink
+	* wmsTime: Instantes de tiempo en ISO8601 separados por comas
+	
+	Por ejemplo::
+		
+		{
+			"wmsLayers" : [
+				{
+					"id" : "provinces",
+					"baseUrl" : "http://demo1.geo-solutions.it/diss_geoserver/wms",
+					"wmsName" : "unredd:drc_provinces",
+					"imageFormat" : "image/png8",
+					"visible" : true,
+					"sourceLink" : "http://www.wri.org/publication/interactive-forest-atlas-democratic-republic-of-congo",
+					"sourceLabel" : "WRI",
+					"queryable" : true,
+					"wmsTime" : "2007-03-01T00:00,2008-05-11T00:00,2005-03-01T00:00"
+				}
+			],
+			...
+		}
+
+* ``portalLayers`` define las capas que aparecen visibles al usuario. Una ``portalLayer`` puede contener varias ``wmsLayers``. Cada ``portalLayer`` puede contener los siguientes elementos:
+
+	* id: id de la capa
+	* label: Texto con el nombre de la capa a usar en el portal. Si se especifica entre ${ }, se intentará obtener la traducción de los ficheros .properties existentes en el directorio ``messages`` del  directorio de configuración del portal.
+	* infoFile: Nombre del fichero HTML con información sobre la capa. El fichero se accede en static/loc/{lang}/html. En la interfaz gráfica se representa con un botón de información al lado del nombre de la capa 
+	* inlineLegendUrl: URL con una imagen pequeña que situar al lado del nombre de la capa en el árbol de capas
+	* active: Si la capa está inicialmente visible o no
+	* layers: Array con los identificadores de las ``wmsLayers`` a las que se accede a través de esta capa
+	
+	Por ejemplo::
+		
+		{
+			"wmsLayers" : [
+				{
+					"id" : "wms_provinces",
+					"baseUrl" : "http://demo1.geo-solutions.it/diss_geoserver/wms",
+					"wmsName" : "unredd:drc_provinces",
+					"imageFormat" : "image/png8",
+					"visible" : true,
+					"sourceLink" : "http://www.wri.org/publication/interactive-forest-atlas-democratic-republic-of-congo",
+					"sourceLabel" : "WRI",
+					"queryable" : true,
+					"wmsTime" : "2007-03-01T00:00,2008-05-11T00:00,2005-03-01T00:00"
+				}
+			],
+			"portalLayers" : [
+				{
+					"id" : "provinces",
+					"active" : true,
+					"infoFile" : "provinces_def.html",
+					"label" : "${provinces}",
+					"layers" : [ "wms_provinces" ],
+					"inlineLegendUrl" : "http://demo1.geo-solutions.it/diss_geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=unredd:drc_provinces&TRANSPARENT=true"
+				}
+			],
+			...
+		}
+	
+* ``groups`` define la estructura final de las capas en el árbol de capas de la aplicación. Cada elemento de ``groups`` contiene:
+
+	* id: id del grupo
+	* label: Igual que en ``portalLayer``
+	* infoFile: Igual que en ``portalLayer``
+	* items. Array de otros grupos, con la misma estructura que este elemento (recursivo).
+	
+	Por ejemplo::
+		
+		{
+			"wmsLayers" : [
+				{
+					"id" : "wms_provinces",
+					"baseUrl" : "http://demo1.geo-solutions.it/diss_geoserver/wms",
+					"wmsName" : "unredd:drc_provinces",
+					"imageFormat" : "image/png8",
+					"visible" : true,
+					"sourceLink" : "http://www.wri.org/publication/interactive-forest-atlas-democratic-republic-of-congo",
+					"sourceLabel" : "WRI",
+					"queryable" : true,
+					"wmsTime" : "2007-03-01T00:00,2008-05-11T00:00,2005-03-01T00:00"
+				}
+			],
+			"portalLayers" : [
+				{
+					"id" : "provinces",
+					"active" : true,
+					"infoFile" : "provinces_def.html",
+					"label" : "${provinces}",
+					"layers" : [ "wms_provinces" ],
+					"inlineLegendUrl" : "http://demo1.geo-solutions.it/diss_geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=unredd:drc_provinces&TRANSPARENT=true"
+				}
+			],
+			"groups" : [
+				{
+					"id" : "base",
+					"label" : "${base_layers}",
+					"infoFile": "base_layers.html",
+					"items" : ["provinces"]
+				}
+			]
+		}
 
 Adaptación del aspecto gráfico
 ------------------------------
