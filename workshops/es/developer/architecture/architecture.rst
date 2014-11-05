@@ -1,6 +1,6 @@
 .. _project_architecture:
 
-Estructura de la aplicación
+Estructura del repositorio
 ============================
 
 Cliente ligero
