@@ -16,5 +16,7 @@ Las siguientes secciones incluyen manuales para la creación de las tareas de de
    configuration-service-1
    configuration-service-2
    database-connection
+   new-plugin
+   new-application
    
    

@@ -130,7 +130,7 @@ Finalmente el servlet quedaría así::
 Nótese que no se devuelve ningún contenido pero que en cualquier caso, cuando el código del servlet se ejecuta sin error, al cliente le llegará un código HTML "200 OK" indicando que la operación fue satisfactoria.
 
 Comunicación con el cliente
-============================
+------------------------------
 
 El servlet anterior parte de la base de que las peticiones que se hagan van a ser satisfactorias, se va a eliminar el módulo, etc. Pero en la realidad esto no es la norma general. ¿Qué sucede si la petición no incluye el parámetro ``moduleName``? ¿Y si el valor no se corresponde con ninguno de los módulos existentes? ¿Qué pasa si el fichero portal.properties ha sido eliminado?
 
