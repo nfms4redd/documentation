@@ -63,12 +63,19 @@ Adicionalmente a estos directorios, las aplicaciones como ``demo`` incorporan un
 
 Todos los recursos que se sitúen aquí se ofrecerán via HTTP en la raíz de la aplicación por lo que es el lugar ideal para los contenidos estáticos y específicos de la aplicación. Además, incluye el directorio ``WEB-INF`` específico de aplicaciones Java, con el descriptor de despliegue ``web.xml``
 
-Desarrollo del cliente
---------------------------
+.. _plugin_project_structure:
+
+Estructura proyectos plugin
+............................
+
+Los proyectos plugin constan de los siguientes artefactos:
+
+Desarrollos parte cliente
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Si los proyectos de los que estamos hablando son Java ¿cómo se incluyen artefactos del cliente (módulos RequireJS, CSS, etc.)?
 
-Un plugin, como ``base``, agrupa artefactos del cliente incluyéndolos en el classpath, en el paquete ``nfms``, siguiendo esta estructura::
+Las funcionalidades para la parte cliente se encuentran en el directorio ``nfms`` dentro de ``src/main/resources``. Estas funcionalidades consisten en módulos RequireJS, hojas de estilo CSS, librerías Javascript, etc. organizados siguiendo esta estructura::
 
 	nfms
 	 |- xxx-conf.json (descriptor del plugin. xxx es el nombre del plugin. E.g.: base-conf.json)
@@ -76,37 +83,14 @@ Un plugin, como ``base``, agrupa artefactos del cliente incluyéndolos en el cla
 	 |- jslib/ (librerías Javascript utilizadas)
 	 \- styles/ (hojas de estilo CSS)
 
-Como el portal sigue la estructura por defecto de Maven, el lugar más apropiado para meter estos recursos no-java en el classpath es ``src/main/resources``, ya que al empaquetar el proyecto se incluirán automáticamente los contenidos de dicho directorio en el fichero JAR que se genere.
+Este directorio se encuentra en ``src/main/resources`` porque Maven por defecto incluirá todo lo que haya ahí en el JAR que genere al empaquetar.
 
-Por ejemplo, en el proyecto ``base`` existe el directorio ``src/main/resources`` que contiene ``nfms/modules/layer-list.js`` y ``nfms/jslib/OpenLayers/OpenLayers.unredd.js``, entre otros.
+Por ejemplo, en el proyecto ``base`` existe el directorio ``src/main/resources`` que contiene ``nfms/modules/layer-list.js`` y ``nfms/jslib/OpenLayers/OpenLayers.unredd.js``, entre otros. Cuando Maven genere el JAR, el directorio ``nfms`` aparecerá en la raíz de los contenidos del JAR.
 
-.. _cargador_plugins:
+Descriptor parte cliente
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Cargador de plugins
---------------------
-
-Para desplegar la aplicación se genera un WAR (Web application ARchive) que contendrá los ficheros JAR pertenecientes a los plugins y sus dependencias.
-
-Cuando este WAR se despliega y se inicia la aplicación, se analizan todos los JARs existentes dentro del WAR en busca de módulos RequireJS, estilos y librerías externas.
-
-* los paquetes ``modules`` y ``styles`` son escaneados en busca de módulos javascript y estilos::  
-
-	nfms
-	 |- xxx-conf.json
-	 |- modules/ (escaneado en busca de .js y .css)
-	 |- jslib/
-	 \- styles/ (escaneado en busca de .css)
-
-  De esta manera, cualquier fichero .css existente en cualquier de los dos paquetes será importado al cargar la aplicación. Igualmente, todo fichero .js existente en ``modules`` será cargado inicialmente por RequireJS al iniciar la aplicación.
-
-* el descriptor del plugin es analizado.
-
-Tras este proceso, todos estos recursos encontrados serán accesibles via HTTP.
-
-Descriptor del plugin
-.......................
-
-El descriptor del plugin es un fichero compuesto por el nombre del plugin y "-conf.json" que reside en la raíz del directorio ``nfms`` y que contiene información sobre las dependencias entre las librerías que el plugin proporciona en ``jslib``. Esta información es necesaria para que RequireJS cargue las librerías en el orden correcto.
+Es un fichero compuesto por el nombre del plugin y "-conf.json" que reside en la raíz del directorio ``nfms`` y que contiene información descriptiva sobre el plugin. Actualmente el fichero sólo contiene información sobre las librerías de terceros que utiliza el plugin y sus dependencias. Esta información es necesaria para que RequireJS cargue las librerías en el orden correcto.
 
 El formato del fichero es el siguiente::
 
@@ -139,6 +123,43 @@ Ejemplo::
 			},
 		}
 	}
+
+Parte servidora
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+El descriptor de la parte servidora es ``META-INF/web-fragment.xml`` y se encuentra en ``src/main/resources``. Sigue el estándar Servlet3 de Java y contiene referencia a las clases Java que implementan los servicios en él declarados.
+
+La implementación de los servicios estará en ``src/main/java``.
+
+Estructura proyectos aplicación
+..................................
+
+Los proyectos aplicación constan de los siguientes artefactos.
+
+TODO 
+
+.. _cargador_plugins:
+
+Cargador de plugins
+--------------------
+
+Para desplegar la aplicación se genera un WAR (Web application ARchive) que contendrá los ficheros JAR pertenecientes a los plugins y sus dependencias.
+
+Cuando este WAR se despliega y se inicia la aplicación, se analizan todos los JARs existentes dentro del WAR en busca de módulos RequireJS, estilos y librerías externas.
+
+* los paquetes ``modules`` y ``styles`` son escaneados en busca de módulos javascript y estilos::  
+
+	nfms
+	 |- xxx-conf.json
+	 |- modules/ (escaneado en busca de .js y .css)
+	 |- jslib/
+	 \- styles/ (escaneado en busca de .css)
+
+  De esta manera, cualquier fichero .css existente en cualquier de los dos paquetes será importado al cargar la aplicación. Igualmente, todo fichero .js existente en ``modules`` será cargado inicialmente por RequireJS al iniciar la aplicación.
+
+* el descriptor del plugin es analizado.
+
+Tras este proceso, todos estos recursos encontrados serán accesibles via HTTP.
 
 Despliegue
 -----------
@@ -228,6 +249,8 @@ Y ahora con la variable MINIFIED_JS = true::
 		</html>
 
 Podemos observar cómo en lugar de cargarse todos los CSS de forma separada, se carga un único CSS en ``optimized/portal`` y que el modulo ``main`` se mapea a ``optimized/portal.js``
+
+.. _funcionalidades_servidor::
 
 Programación de servicios
 ------------------------------

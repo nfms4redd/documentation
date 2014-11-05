@@ -14,5 +14,7 @@ Las siguientes secciones incluyen manuales para la creación de las tareas de de
    hello-world-service
    configuration-service-1
    configuration-service-2
+   new-plugin
+   new-application
    
    
