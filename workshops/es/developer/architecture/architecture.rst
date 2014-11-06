@@ -131,6 +131,8 @@ El descriptor de la parte servidora es ``META-INF/web-fragment.xml`` y se encuen
 
 La implementación de los servicios estará en ``src/main/java``.
 
+.. _application_project_structure:
+
 Estructura proyectos aplicación
 ..................................
 
