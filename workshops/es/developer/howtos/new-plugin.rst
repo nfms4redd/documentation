@@ -3,6 +3,8 @@ Cómo crear un nuevo plugin
 
 Cuando queremos realizar una implementación que se pueda utilizar fácilmente en portales existentes hay que empaquetar las funcionalidades en cuestión en un plugin.
 
+.. _maven_plugin_project_creation:
+
 Creación del proyecto para el plugin
 --------------------------------------
 
@@ -61,6 +63,8 @@ Por último nos pedirá confirmación. Pulsaremos INTRO de nuevo::
 
 Tras este proceso, Maven nos reporta BUILD SUCCESS, que quiere decir que el proyecto fue creado con éxito y está en un directorio con el mismo nombre que el ``artifactId``, es decir, "holamundo".
 
+.. _maven_plugin_project_eclipse_import:
+
 Configuración en Eclipse
 -------------------------
 
@@ -84,6 +88,8 @@ Ahora que tenemos el proyecto en Eclipse podemos crear un módulo hola mundo. Lo
 .. image:: images/plugin-hello-world-module.png
 	:scale: 75%
 	:align: center
+
+.. _plugin_project_dependency:
 
 Reutilización del módulo
 -------------------------

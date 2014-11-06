@@ -39,6 +39,8 @@ Como se ve en la imagen, seleccionaremos todos menos el proyecto raíz y haremos
 
 	El repositorio del portal contiene varios proyectos correspondientes a la aplicación del portal, plugins, herramientas, etc. Para más información sobre cómo están organizados los proyectos dentro del repositorio ver :ref:`project_architecture`  
 
+.. _app_execution_eclipse:
+
 Ejecución del portal en tomcat desde Eclipse
 ------------------------------------------------
 
