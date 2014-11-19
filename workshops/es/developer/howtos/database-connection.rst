@@ -66,14 +66,14 @@ Configuración conexión en el descriptor de despliegue
 
 Para evitar crear una conexión cada vez, tendremos que configurar el contenedor de aplicaciones, Tomcat en este ejemplo, para que gestione las conexiones por nosotros. Para ello, tenemos que darle a Tomcat la información necesaria para conectar modificando dos ficheros.
 
-El primero es el fichero context.xml que existe en el directorio de configuración del servidor ``conf``. Ahí declararemos un recurso llamado "jdbc/mi-conexion" que incluirá todos los datos necesarios para conectar: url, usuario, etc.::
+El primero es el fichero context.xml que existe en el directorio de configuración del servidor ``conf``. Ahí declararemos un recurso llamado "jdbc/mis-conexiones" que incluirá todos los datos necesarios para conectar: url, usuario, etc.::
 
 	<Resource name="jdbc/mis-conexiones" auth="Container" type="javax.sql.DataSource"
 		driverClassName="org.postgresql.Driver" url="jdbc:postgresql://192.168.0.18:5432/geoserverdata"
 		username="nfms" password="unr3dd" maxActive="20" maxIdle="10"
 		maxWait="-1" />
 
-El otro fichero a modificar es el descriptor de despliegue ``web.xml`` de nuestra aplicación, donde añadiremos una referencia al recurso anterior, "jdbc/mi-conexion"::
+El otro fichero a modificar es el descriptor de despliegue ``web-fragment.xml`` del plugin que estamos desarrollando (ver :ref:`plugin_project_structure`), donde añadiremos una referencia al recurso anterior, "jdbc/mis-conexiones"::
 
 	<resource-ref>
 		<description>Application database</description>
@@ -176,6 +176,77 @@ Si sutituímos la línea que contiene los puntos suspensivos por código que hag
 		}
 	
 	}
+
+La clase DBUtils
+-------------------
+
+Conexiones existentes
+-----------------------
+
+Como se puede ver en `http://nfms4redd.org/tmp/ref/install/portal.html`, el portal incorpora ya una conexión a una base de datos que se deberá configurar a nivel del contenedor de aplicaciones (Tomcat).
+
+La referencia a esa conexión está configurada en el ``web-fragment.xml`` de ``core``, que todo plugin debe incluir como dependencia (y por tanto, todo plugin puede utilizar)::
+
+	<resource-ref>
+		<description>Application database</description>
+		<res-ref-name>jdbc/unredd-portal</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+	</resource-ref>
+
+Como se puede observar, el nombre es "jdbc/unredd-portal" por lo que con esta información, y usando la clase DBUtils vista anteriormente, sería posible reescribir el servlet anterior de la siguiente manera y sin tocar ningún fichero de configuración::
+
+	package org.fao.unredd.portal;
+	
+	import java.io.IOException;
+	import java.sql.Connection;
+	import java.sql.ResultSet;
+	import java.sql.SQLException;
+	import java.sql.Statement;
+	import java.util.ArrayList;
+	
+	import javax.naming.InitialContext;
+	import javax.naming.NamingException;
+	import javax.servlet.ServletException;
+	import javax.servlet.http.HttpServlet;
+	import javax.servlet.http.HttpServletRequest;
+	import javax.servlet.http.HttpServletResponse;
+	import javax.sql.DataSource;
+	
+	import net.sf.json.JSONSerializer;
+	
+	public class ExampleDBServlet extends HttpServlet {
+		private static final long serialVersionUID = 1L;
+	
+		@Override
+		protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+				throws ServletException, IOException {
+
+			final ArrayList<String> provincias = new ArrayList<String>();
+
+			try {			
+				DBUtils.processConnection("unredd-portal", new DBUtils.DBProcessor() {
+		
+					@Override
+					public void process(Connection connection) throws SQLException {
+						Statement statement = connection.createStatement();
+						ResultSet result = statement
+								.executeQuery("SELECT name_1 FROM gis.arg_adm1");
+						while (result.next()) {
+							provincias.add(result.getString("name_1"));
+						}
+					}
+				});
+			} catch (PersistenceException e) {
+				throw new ServletException("No se pudo obtener una conexión", e);
+			}
+	
+			resp.setContentType("application/json");
+			JSONSerializer.toJSON(provincias).write(resp.getWriter());
+		}
+	
+	}
+
 
 
 
