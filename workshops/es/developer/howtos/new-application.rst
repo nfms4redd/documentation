@@ -13,20 +13,122 @@ La configuración de dicho proyecto en Eclipse es también realizada de forma id
 Selección de los plugins que componen la aplicación
 ------------------------------------------------------
 
-Una vez el proyecto está creado, es necesario especificar los plugins que van a utilizarse en la aplicación. Esto se hará de la misma manera que se hizo cuando se incluyó el plugin en la aplicación ``demo``, sólo que esta vez tenemos que incluir también la librería ``core``, que contiene el cargador de plugins:
+Una vez el proyecto está creado, es necesario especificar los plugins que van a utilizarse en la aplicación. Para ello habrá que modificar el fichero pom.xml incluyendo los elementos ``<dependency>`` de ``core``, el cargador de plugins, y de ``base``, plugin principal::
 
-.. image:: images/app-pom.png
-	:scale: 75%
-	:align: center
+		<dependency>
+			<groupId>org.fao.unredd</groupId>
+			<artifactId>core</artifactId>
+			<version>3.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.fao.unredd</groupId>
+			<artifactId>base</artifactId>
+			<version>3.1-SNAPSHOT</version>
+		</dependency>
 
-En la imagen anterior, se puede observar cómo la sección de dependencias contiene la librería ``core``, el plugin ``base`` y el plugin que se creó en el manual anterior, ``holamundo``.
+Además, para que Maven pueda descargar estas dependencias, hay que especificar algunos repositorios de librerías::
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>nfms4redd</id>
+			<name>nfms4redd maven repository</name>
+			<url>http://maven.nfms4redd.org/</url>
+		</pluginRepository>
+	</pluginRepositories>
+	<repositories>
+		<repository>
+			<id>osgeo</id>
+			<name>Open Source Geospatial Foundation Repository</name>
+			<url>http://download.osgeo.org/webdav/geotools/</url>
+		</repository>
+		<repository>
+			<id>nfms4redd</id>
+			<name>nfms4redd maven repository</name>
+			<url>http://maven.nfms4redd.org/</url>
+		</repository>
+		<repository>
+			<id>EclipseLink</id>
+			<url>http://download.eclipse.org/rt/eclipselink/maven.repo</url>
+		</repository>
+		<repository>
+			<id>geosolutions</id>
+			<name>GeoSolutions public maven repository</name>
+			<url>http://maven.geo-solutions.it/</url>
+		</repository>
+	</repositories>
+
+El fichero pom.xml quedaría de la siguiente manera::
+
+	<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+		<modelVersion>4.0.0</modelVersion>
+	
+		<groupId>org.fao.unredd</groupId>
+		<artifactId>mi-app</artifactId>
+		<version>1.0-SNAPSHOT</version>
+		<packaging>war</packaging>
+	
+		<name>mi-app</name>
+		<url>http://maven.apache.org</url>
+	
+		<properties>
+			<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		</properties>
+		<pluginRepositories>
+			<pluginRepository>
+				<id>nfms4redd</id>
+				<name>nfms4redd maven repository</name>
+				<url>http://maven.nfms4redd.org/</url>
+			</pluginRepository>
+		</pluginRepositories>
+		<repositories>
+			<repository>
+				<id>osgeo</id>
+				<name>Open Source Geospatial Foundation Repository</name>
+				<url>http://download.osgeo.org/webdav/geotools/</url>
+			</repository>
+			<repository>
+				<id>nfms4redd</id>
+				<name>nfms4redd maven repository</name>
+				<url>http://maven.nfms4redd.org/</url>
+			</repository>
+			<repository>
+				<id>EclipseLink</id>
+				<url>http://download.eclipse.org/rt/eclipselink/maven.repo</url>
+			</repository>
+			<repository>
+				<id>geosolutions</id>
+				<name>GeoSolutions public maven repository</name>
+				<url>http://maven.geo-solutions.it/</url>
+			</repository>
+		</repositories>
+	
+		<dependencies>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>3.8.1</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.fao.unredd</groupId>
+				<artifactId>core</artifactId>
+				<version>3.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.fao.unredd</groupId>
+				<artifactId>base</artifactId>
+				<version>3.1-SNAPSHOT</version>
+			</dependency>
+		</dependencies>
+	</project>
 
 Ejecución de la aplicación desde eclipse
 ------------------------------------------
 
 Para la ejecución del proyecto como aplicación web dentro de Eclipse tenemos que realizar dos configuraciones adicionales.
 
-Lo primero es configurar el proyecto para que Eclipse entienda que es una aplicación web. Para ello hay que modificar el elemento ``packaging`` del fichero ``mi-app/pom.xml`` como se muestra en la imagen anterior, estableciendo el valor a "war". Tras editar el fichero abrá que clicar en el proyecto con botón derecho y seleccionar Maven > Update project.
+Lo primero es configurar el proyecto para que Eclipse entienda que es una aplicación web. Para ello hay que modificar el elemento ``packaging`` del fichero ``mi-app/pom.xml`` como se puede ver en el listado anterior correspondiente al pom.xml, estableciendo el valor a "war". Tras editar el fichero habrá que clicar en el proyecto con botón derecho y seleccionar Maven > Update project.
 
 A continuación es necesario proporcionar a la aplicación un directorio de configuración, que proporciona a la aplicación información sobre las capas del mapa, etc. Podemos tomar el que hay en ``demo/src/main/webapp/WEB-INF/default_config`` y copiarlo en ``mi-app/src/main/webapp/WEB-INF/default_config``.
 

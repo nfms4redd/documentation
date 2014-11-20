@@ -106,7 +106,9 @@ Ahora sólo queda ejecutar ``demo`` en un servidor Tomcat y ver el resultado:
 	:scale: 75%
 	:align: center
 
+.. warning::
 
+	Es posible que el plugin no aparezca inicialmente por problemas de refresco, se recomienda clicar con el botón derecho uno de los proyectos y seleccionar Maven > Update project **seleccionando en el diálogo que aparece todos los proyectos implicados (plugins y aplicación)**.
 
 
 
