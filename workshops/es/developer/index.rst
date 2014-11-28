@@ -15,4 +15,5 @@ Contents:
    messages
    advanced-topics
    fuentes
+   integration-tests
    howtos/index

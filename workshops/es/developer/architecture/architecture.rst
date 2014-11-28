@@ -11,12 +11,12 @@ El cliente Javascript es una aplicación modular que se comunica mediante llamad
 Desde el punto de vista del navegador, la aplicación tiene la siguiente estructura::
 
 	unredd-portal
-	 |- modules/	-> RequireJS modulos y sus estilos
-	 |- jslib/	-> Librerías Javascript usadas por los módulos: OpenLayers, RequireJS, etc.
-	 |- styles/ 	-> Hojas CSS generales (de JQuery UI, etc.)
-	 |- indicators	-> Devuelve una lista con información de los indicadores de un objeto en una capa
-	 |- ...			-> Otros servicios
-	 \- index.html	-> Documento HTML de la aplicación
+	 |- modules/   -> RequireJS modulos y sus estilos
+	 |- jslib/     -> Librerías Javascript usadas por los módulos: OpenLayers, RequireJS, etc.
+	 |- styles/    -> Hojas CSS generales (de JQuery UI, etc.)
+	 |- indicators -> Devuelve una lista con información de los indicadores de un objeto en una capa
+	 |- ...        -> Otros servicios
+	 \- index.html -> Documento HTML de la aplicación
 
 Así, si tubiéramos que añadir una nueva funcionalidad en el cliente, tendríamos que meter los módulos en el directorio ``modules``, las hojas de estilos en ``styles`` o en ``modules`` y las librerías que se utilicen en ``jslib``.
 
@@ -41,9 +41,12 @@ Estructura del código fuente
 La aplicación es implementada por varios proyectos Java estructurados de la siguiente manera::
 
 	portal
-	 |- core/		-> Librería que contiene el cargador de plugins y algunas funcionalidades básicas como el manejo de errores.
-	 |- base/		-> Plugin que contiene la funcionalidad básica de la aplicación: árbol de capas, panel de leyenda, mapa, etc. 
-	 \- demo/		-> Aplicación incluye el plugin base.
+	 |- core/               -> Librería que contiene el cargador de plugins y algunas funcionalidades básicas como el manejo de errores.
+	 |- base/               -> Plugin que contiene la funcionalidad básica de la aplicación: árbol de capas, panel de leyenda, mapa, etc.
+	 |- feedback/           -> Plugin que contiene la funcionalidad de feedback
+	 |- layer-time-sliders/ -> Plugin que muestra una barra temporal por cada capa, para cambiar la instancia temporal mostrada de forma independiente.
+	 |- geoexplorer-reader/ -> Plugin que lee una base de datos de GeoExplorer para añadir las capas al mapa.
+	 \- demo/               -> Aplicación incluye todos los plugins anteriores.
 
 El proyecto ``base`` contendrá los módulos RequireJS, librerías Javascript y estilos CSS necesarios para tener todas las funcionalidades del portal, mientras que el proyecto ``demo`` especificará de alguna manera que quiere incluir ``base``. 
 
@@ -90,17 +93,21 @@ Por ejemplo, en el proyecto ``base`` existe el directorio ``src/main/resources``
 Descriptor parte cliente
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Es un fichero compuesto por el nombre del plugin y "-conf.json" que reside en la raíz del directorio ``nfms`` y que contiene información descriptiva sobre el plugin. Actualmente el fichero sólo contiene información sobre las librerías de terceros que utiliza el plugin y sus dependencias. Esta información es necesaria para que RequireJS cargue las librerías en el orden correcto.
+Es un fichero compuesto por el nombre del plugin y "-conf.json" que reside en la raíz del directorio ``nfms`` y que contiene información descriptiva sobre el plugin, como la configuracion por defecto de los plugins (ver :ref:`plugin_configuration`) o las librerías de terceros que utiliza el plugin y sus dependencias. Esta última información es necesaria para que RequireJS cargue las librerías en el orden correcto.
 
 El formato del fichero es el siguiente::
 
 	 {
-		requirejs: {
-			paths : {
+		"default-conf" : {
+			"<nombre-modulo>" : <configuracion-por-defecto-modulo>
+			...
+		},
+		"requirejs": {
+			"paths" : {
 				"<id-libreria>" : "<ruta relativa a 'modules'>",
 				...
 			},
-			shim : {
+			"shim" : {
 				"<id-libreria>" : [ "<id-dependencia1>", "<id-dependencia2>", ... ],
 				...
 			},
@@ -110,14 +117,19 @@ El formato del fichero es el siguiente::
 Ejemplo::
 
 	 {
-		requirejs: {
-			paths : {
+		"default-conf" : {
+			"banner" : {
+				"hide" : false
+			}
+		},
+		"requirejs": {
+			"paths" : {
 				"jquery-ui" : "../jslib/jquery-ui-1.10.4.custom",
 				"fancy-box": "../jslib/jquery.fancybox.pack",
 				"openlayers": "../jslib/OpenLayers/OpenLayers.unredd",
 				"mustache": "../jslib/jquery.mustache"
 			},
-			shim : {
+			"shim" : {
 				"fancy-box": [ "jquery" ],
 				"mustache": [ "jquery" ]
 			},
@@ -139,6 +151,48 @@ Estructura proyectos aplicación
 Los proyectos aplicación constan de los siguientes artefactos.
 
 TODO 
+
+.. _plugin_configuration:
+
+Configuración de los plugins
+-----------------------------
+
+Con anterioridad se ha comentado que el descriptor del plugin "xxx-conf.json" incluye un elemento para la configuración de los distintos modulos RequireJS que forman el plugin.
+
+La configuración que se especifica en dichos elementos queda accesible a los módulos RequireJS mediante el método ``config()`` meta-modulo ``module``. Por ejemplo, si tuviéramos el siguiente descriptor de plugin::
+
+	 {
+		"default-conf" : {
+			"mi-modulo" : {
+				"mensaje" : "hola mundo"
+			}
+		}
+	}
+
+el siguiente módulo, definido en "mi-modulo.js" podría acceder a su configuración así:: 
+
+	define([ "module" ], function(module) {
+		alert(module.config());
+	});
+
+mostrando por pantalla el valor de su configuración, es decir el mensaje "hola mundo".
+
+Modificación de la configuración en tiempo de ejecución
+.........................................................
+
+Ahora bien, esta configuración está definida en el plugin de forma fija y sólo se puede cambiar por programación. ¿Cómo se puede cambiar la configuración de un plugin de la aplicación una vez ésta está desplegada y ejecutándose en el servidor?
+
+La manera más sencilla consiste en modificar el fichero ``plugin-conf.json`` que se encuentra en el directorio de configuración del portal. Este fichero tiene la misma estructura que el descriptor del plugin con la única diferencia de que es usado sólo para sobreescribir la configuración por defecto de los distintos módulos. Así, podríamos editar el fichero para dejarlo de esta manera::
+
+	 {
+		"default-conf" : {
+			"mi-modulo" : {
+				"ejemplo" : "hola a todo el mundo"
+			}
+		}
+	}
+
+Y al cargar el módulo ``mi-modulo`` aparecerá por la pantalla "hola a todo el mundo", en lugar de "hola mundo".
 
 .. _cargador_plugins:
 
@@ -169,6 +223,8 @@ Despliegue
 Como visto en el punto :ref:`cargador_plugins`, todos los JARs incluídos en la aplicación son analizados en busca de módulos, librerías, estilos, etc. Así, para componer una aplicación que incluya los plugins que nos interesan basta con especificar en el pom.xml la dependencia al proyecto del plugin.
 
 Cuando este proyecto es incluido como dependencia en un proyecto, por ejemplo ``demo``, aparecerá como JAR dentro del WAR y sus contenidos serán analizados y accesibles via HTTP.
+
+.. _client_optimization:
 
 Optimización
 ---------------

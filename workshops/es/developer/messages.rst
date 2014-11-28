@@ -227,7 +227,7 @@ Parámetros: Un objeto con las siguientes propiedades:
 Ejemplo de uso::
 
 	bus.send("add-group", [ {
-		id:"grupo_admin",, 
+		id:"grupo_admin", 
 		name:"Límites administrativos"
 	}]);
 

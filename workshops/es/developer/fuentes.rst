@@ -59,7 +59,7 @@ Generación del unredd-portal.war
 
 Si lo que se pretende es exclusivamente obtener el fichero .war, es posible obviar Eclipse y utilizar directamente Maven desde línea de comandos::
 
- 	$ mvn -DskipTests package
+ 	$ mvn package
 
 tras el cual el fichero demo/target/unredd-portal.war habrá aparecido. Dicho fichero se puede desplegar en el directorio ``webapps`` de Tomcat para poder usar la aplicación recién compilada.
 
@@ -81,4 +81,27 @@ y seleccionar la casilla "Skip Tests". Tras pinchar en el botón Run se iniciar�
 	[INFO] ------------------------------------------------------------------------
 
 todo estará correcto y aparecerá un fichero unredd-portal.war en el directorio target.
+
+.. _build-special-features:
+
+Particularidades de la construcción del proyecto
+------------------------------------------------------
+
+Maven tiene un método estandarizado para la construcción de proyectos en Java. Este método sigue una secuencia de actividades o ciclo de vida (explicado `aquí <https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#Lifecycle_Reference>`_) que define que primero se realiza la compilación, luego un testeo, el empaquetado, etc. y que es común para todos los proyectos Maven.
+
+Sin embargo, a la hora de construir el portal, hay algunas particularidades que hay que tener en cuenta.
+
+Optimización
+.............
+
+Por una parte, durante la construcción del proyecto se realizan una optimización de los recursos del cliente (ver :ref:`client_optimization`) que puede tomar bastante tiempo. En algunos casos es posible que esta optimización no sea necesaria.
+
+Para solucionar esto, Maven proporciona perfiles, que son configuraciones que se pueden activar y desactivar. Así, la optimización está configurada en un perfil "optimize" que está activo por defecto pero se puede desactivar con el parámetro -P, seguida del nombre del perfil con un signo de exclamación delante (para desactivar)::
+
+	mvn -P \!optimize package
+
+Tests de integración
+......................
+
+Por otra parte, una vez se construye el WAR en la fase ``package`` de Maven, se llega a la fase ``integration-test``. En el caso del portal, se testean las conexiones a bases de datos, etc. por lo que se requiere levantar determinados servicios externos para que la fase se pase con éxito. Para más información ver :ref:`integration-tests`
 
