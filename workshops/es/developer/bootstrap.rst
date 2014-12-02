@@ -15,6 +15,6 @@ El módulo ``customization`` obtiene la lista de módulos de la configuración y
 
 #. ``customization`` hace una llamada a ``require`` para cargar los módulos.
 #. una vez cargados, se lanza el mensaje :ref:`modules-loaded<modules-loaded>`
-#. el evento es escuchado por el módulo ``layers`` que fue cargado en el primer paso. ``layers`` lanza procesa el árbol de capas y lanza los mensajes :ref:`add-group<add-group>` y :ref:`add-layer<add-layer>` correspondientes.
+#. el evento es escuchado por el módulo ``layers`` que fue cargado en el primer paso. ``layers`` lanza el evento :ref:`before-adding-layers` y a continuación procesa el árbol de capas y lanza los mensajes :ref:`add-group` y :ref:`add-layer` correspondientes.
 #. ``layers`` lanza el mensaje :ref:`layers-loaded<layers-loaded>`
 

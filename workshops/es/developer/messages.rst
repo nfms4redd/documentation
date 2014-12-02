@@ -3,7 +3,8 @@ Mensajes relevantes
 
 .. _modules-loaded:
 
-**modules-loaded**
+modules-loaded
+-----------------------------
 
 Enviado una vez el módulo ``customization`` ha cargado todos los módulos especificados por el servidor.
 
@@ -17,9 +18,25 @@ Más información:
 
 
 
+.. _before-adding-layers:
+
+before-adding-layers
+-----------------------------
+
+Enviado justo antes de que se empiecen a lanzar los eventos add-group y add-layer. Da la oportunidad a otros módulos de realizar operaciones previas a la carga de las capas.
+
+Parámetros: Ninguno.
+
+Más información:
+
+* :ref:`bootstrap`
+
+
+
 .. _layers-loaded:
 
-**layers-loaded**
+layers-loaded
+-----------------------------
 
 Enviado una vez el módulo ``layers`` ha lanzado los eventos ``add-layer`` y ``add-group`` correspondientes a la configuración de capas existente en el servidor.
 
@@ -34,7 +51,8 @@ Más información:
 
 
 
-**ajax**
+ajax
+-----------------------------
 
 Escuchado por el módulo communication para realizar llamadas a servicios.
 
@@ -50,7 +68,8 @@ Ejemplo de uso:
 
 
 
-**error**
+error
+-----------------------------
 
 Escuchado por el módulo ``error``, que muestra un mensaje de error al usuario:
 
@@ -62,7 +81,8 @@ Ejemplo de uso::
 
 
 
-**info-features**
+info-features
+-----------------------------
 
 Parámetros:
 
@@ -76,7 +96,8 @@ Más información:
 
 
 
-**zoom-in**
+zoom-in
+-----------------------------
 
 Mueve la escala al nivel inmediatamente mayor
 
@@ -90,7 +111,8 @@ Más información:
 
 
 
-**zoom-out**
+zoom-out
+-----------------------------
 
 Mueve la escala al nivel inmediatamente menor
 
@@ -104,7 +126,8 @@ Más información:
 
 
 
-**zoom-to**
+zoom-to
+-----------------------------
 
 Mueve el encuadre al objeto OpenLayers.Bounds que se pasa como parámetro. El objeto bounds debe estar en el sistema de referencia del mapa (EPSG:900913)
 
@@ -125,7 +148,8 @@ Más información:
 
 
 
-**initial-zoom**
+initial-zoom
+-----------------------------
 
 Situa el mapa en la posición inicial
 
@@ -139,7 +163,8 @@ Más información:
 
 
 
-**set-default-exclusive-control**
+set-default-exclusive-control
+-----------------------------
 
 Establece el control exclusivo por defecto para el mapa. Sólo un módulo exclusivo está activado en cada momento.
 
@@ -156,7 +181,8 @@ Más información:
 
 
 
-**activate-default-exclusive-control**
+activate-default-exclusive-control
+----------------------------------------------------------
 
 Activar el control establecido por defecto mediante el mensaje ``set-default-exclusive-control``
 
@@ -170,7 +196,8 @@ Más información:
 
 
 
-**activate-exclusive-control**
+activate-exclusive-control
+-----------------------------
 
 Pide la activación exclusiva del control que se pasa como parámetro y la desactivación del control exclusivo que estuviera activado en el momento de lanzar el mensaje 
 
@@ -187,7 +214,8 @@ Más información:
 
 
 
-**highlight-feature**
+highlight-feature
+-----------------------------
 
 Indica que se debe resaltar la feature que se pasa como parámetro
 
@@ -199,7 +227,8 @@ Más información:
 
 
 
-**clear-highlighted-features**
+clear-highlighted-features
+-----------------------------
 
 Indica que se deben de eliminar todos los resaltes establecidos mediante ``highlight-feature``
 
@@ -213,7 +242,8 @@ Más información:
 
 .. _add-group:
 
-**add-group**
+add-group
+-----------------------------
 
 Indica que se debe añadir un grupo al árbol de capas
 
@@ -237,7 +267,8 @@ Más información:
 
 .. _add-layer:
 
-**add-layer**
+add-layer
+-----------------------------
 
 Indica que se debe añadir una capa a la aplicación
 
@@ -279,7 +310,8 @@ Más información:
 
 
 
-**layer-visibility**
+layer-visibility
+-----------------------------
 
 Cambia la visibilidad de una capa
 
@@ -295,7 +327,8 @@ Ejemplo de uso::
 Más información:
 
 
-**time-slider.selection**
+time-slider.selection
+-----------------------------
 
 Lanzado cuando el usuario selecciona un instante temporal distinto al actual. Generalmente se actualiza el mapa con la información de esa fecha.
 
@@ -310,7 +343,8 @@ Más información:
 
 
 
-**toggle-legend**
+toggle-legend
+-----------------------------
 
 Escuchado por el módulo ``legend-panel`` para mostrar u ocultar el panel con la leyenda.
 
@@ -322,14 +356,36 @@ Ejemplo de uso::
 
 Más información:
 
+register-layer-action
+-----------------------------
 
+Escuchado por la lista de capas. Instala un botón a la derecha de las capas que realizará una acción al ser pulsado.
 
-**evento**
+Parámetros: Función que devuelve el objeto jQuery que se mostará a modo de botón. Esta función toma como parámetro el mismo objeto que se lanza en el evento :ref:`add-layer`.  
 
-Parámetros:
+Ejemplo de uso (botón de información)::
 
-Ejemplo de uso:
+	bus.listen("before-adding-layers", function() {
+
+		var showInfoAction = function(portalLayer) {
+			if (portalLayer.hasOwnProperty("infoFile")) {
+				aLink = $("<a/>").attr("href", portalLayer.infoFile);
+				aLink.addClass("layer_info_button");
+				aLink.fancybox({
+					"closeBtn" : "true",
+					"openEffect" : "elastic",
+					"closeEffect" : "elastic",
+					"type" : "iframe",
+					"overlayOpacity" : 0.5
+				});
+				return aLink;
+			} else {
+				return null;
+			}
+		};
+
+		bus.send("register-layer-action", showInfoAction);
+
+	});
 
 Más información:
-
-

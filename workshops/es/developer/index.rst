@@ -11,6 +11,7 @@ Contents:
    openlayers
    requirejs
    architecture/index
+   plugin-configuration
    important-modules
    messages
    advanced-topics

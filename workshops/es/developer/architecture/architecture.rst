@@ -45,6 +45,8 @@ La aplicación es implementada por varios proyectos Java estructurados de la sig
 	 |- base/               -> Plugin que contiene la funcionalidad básica de la aplicación: árbol de capas, panel de leyenda, mapa, etc.
 	 |- feedback/           -> Plugin que contiene la funcionalidad de feedback
 	 |- layer-time-sliders/ -> Plugin que muestra una barra temporal por cada capa, para cambiar la instancia temporal mostrada de forma independiente.
+	 |- time-slider/        -> Plugin que muestra la barra temporal que se instala en la barra de herramientas bajo el banner.
+	 |- language-buttons/   -> Plugin que muestra los botones para cambiar de idioma.
 	 |- geoexplorer-reader/ -> Plugin que lee una base de datos de GeoExplorer para añadir las capas al mapa.
 	 \- demo/               -> Aplicación incluye todos los plugins anteriores.
 
@@ -151,48 +153,6 @@ Estructura proyectos aplicación
 Los proyectos aplicación constan de los siguientes artefactos.
 
 TODO 
-
-.. _plugin_configuration:
-
-Configuración de los plugins
------------------------------
-
-Con anterioridad se ha comentado que el descriptor del plugin "xxx-conf.json" incluye un elemento para la configuración de los distintos modulos RequireJS que forman el plugin.
-
-La configuración que se especifica en dichos elementos queda accesible a los módulos RequireJS mediante el método ``config()`` meta-modulo ``module``. Por ejemplo, si tuviéramos el siguiente descriptor de plugin::
-
-	 {
-		"default-conf" : {
-			"mi-modulo" : {
-				"mensaje" : "hola mundo"
-			}
-		}
-	}
-
-el siguiente módulo, definido en "mi-modulo.js" podría acceder a su configuración así:: 
-
-	define([ "module" ], function(module) {
-		alert(module.config());
-	});
-
-mostrando por pantalla el valor de su configuración, es decir el mensaje "hola mundo".
-
-Modificación de la configuración en tiempo de ejecución
-.........................................................
-
-Ahora bien, esta configuración está definida en el plugin de forma fija y sólo se puede cambiar por programación. ¿Cómo se puede cambiar la configuración de un plugin de la aplicación una vez ésta está desplegada y ejecutándose en el servidor?
-
-La manera más sencilla consiste en modificar el fichero ``plugin-conf.json`` que se encuentra en el directorio de configuración del portal. Este fichero tiene la misma estructura que el descriptor del plugin con la única diferencia de que es usado sólo para sobreescribir la configuración por defecto de los distintos módulos. Así, podríamos editar el fichero para dejarlo de esta manera::
-
-	 {
-		"default-conf" : {
-			"mi-modulo" : {
-				"ejemplo" : "hola a todo el mundo"
-			}
-		}
-	}
-
-Y al cargar el módulo ``mi-modulo`` aparecerá por la pantalla "hola a todo el mundo", en lugar de "hola mundo".
 
 .. _cargador_plugins:
 
