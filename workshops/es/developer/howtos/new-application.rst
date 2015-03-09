@@ -13,7 +13,9 @@ La configuración de dicho proyecto en Eclipse es también realizada de forma id
 Selección de los plugins que componen la aplicación
 ------------------------------------------------------
 
-Una vez el proyecto está creado, es necesario especificar los plugins que van a utilizarse en la aplicación. Para ello habrá que modificar el fichero pom.xml incluyendo los elementos ``<dependency>`` de ``core``, el cargador de plugins, y de ``base``, plugin principal::
+Una vez el proyecto está creado, es necesario especificar los plugins que van a utilizarse en la aplicación. Para ello habrá que modificar el fichero pom.xml incluyendo los elementos ``<dependency>`` de ``core``, el cargador de plugins, y de ``base``, plugin principal:
+
+.. code-block:: xml
 
 		<dependency>
 			<groupId>org.fao.unredd</groupId>
@@ -26,7 +28,9 @@ Una vez el proyecto está creado, es necesario especificar los plugins que van a
 			<version>3.1-SNAPSHOT</version>
 		</dependency>
 
-Además, para que Maven pueda descargar estas dependencias, hay que especificar algunos repositorios de librerías::
+Además, para que Maven pueda descargar estas dependencias, hay que especificar algunos repositorios de librerías:
+
+.. code-block:: xml
 
 	<pluginRepositories>
 		<pluginRepository>
@@ -57,7 +61,9 @@ Además, para que Maven pueda descargar estas dependencias, hay que especificar 
 		</repository>
 	</repositories>
 
-El fichero pom.xml quedaría de la siguiente manera::
+El fichero pom.xml quedaría de la siguiente manera:
+
+.. code-block:: xml
 
 	<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -139,12 +145,15 @@ Empaquetado
 
 .. warning::
 
-	Para que el proceso funcione es necesario que exista el descriptor de despliegue de aplicaciones JEE, el fichero ``src/main/webapp/WEB-INF/web.xml``. Bastaría con crear ese fichero con el siguiente contenido::
+	Para que el proceso funcione es necesario que exista el descriptor de despliegue de aplicaciones JEE, el fichero ``src/main/webapp/WEB-INF/web.xml``. Bastaría con crear ese fichero con el siguiente contenido:
+	
+	.. code-block:: xml
 	
 		<?xml version="1.0" encoding="UTF-8"?>
-		<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+		<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
 			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-			xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+			xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+			
 		</web-app>
 
 Para realizar el empaquetado tenemos que ejecutar el comando ``mvn package`` en el directorio ``mi-app``. Esto también se puede hacer desde Eclipse haciendo clic con el botón derecho en el proyecto ``mi-app`` y seleccionando Run As > Maven Build. En la ventana que aparece hay que especificar "package" en "Goals", como se puede ver en la siguiente imagen:
@@ -183,7 +192,9 @@ Empaquetado con optimización
 
 Cuando una aplicación tiene muchos módulos y librerías Javascript, hojas de estilo CSS, etc. la carga puede ser un poco lenta. Para acelerar esto se puede configurar Maven para que realice un proceso de optimización y combine todos estos ficheros en uno sólo.
 
-Primero, hay que introducir la siguiente sección en el ``pom.xml`` de ``mi-app`` tras la sección ``<dependencies></dependencies>``::
+Primero, hay que introducir la siguiente sección en el ``pom.xml`` de ``mi-app`` tras la sección ``<dependencies></dependencies>``:
+
+.. code-block:: xml
 
 	<build>
 		<plugins>
@@ -248,7 +259,7 @@ Primero, hay que introducir la siguiente sección en el ``pom.xml`` de ``mi-app`
 			<plugin>
 				<groupId>com.github.bringking</groupId>
 				<artifactId>requirejs-maven-plugin</artifactId>
-				<version>2.0.5-SNAPSHOT</version>
+				<version>2.0.4</version>
 				<executions>
 					<execution>
 						<phase>prepare-package</phase>
@@ -296,7 +307,9 @@ Esta configuración hace referencia a dos ficheros existentes en el directorio `
 	preProcessors=cssDataUri,cssImport,semicolonAppender,cssMinJawr
 	postProcessors=
 
-Mientras que para ``wro.xml`` pondremos::
+Mientras que para ``wro.xml`` pondremos:
+
+.. code-block:: xml
 	
 	<?xml version="1.0" encoding="UTF-8"?>
 	<groups xmlns="http://www.isdc.ro/wro"
