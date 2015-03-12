@@ -109,23 +109,30 @@ Define la estructura de capas del proyecto. Consiste en un elemento JSON con tre
 		"groups" : []
 	}
 
-* ``wmsLayers`` define las capas WMS que tendrá el mapa. El orden en el que estas capas aparecen en el array ``wmsLayers`` define el orden de las capas en el dibujado del mapa. Cada capa consistirá en un elemento con las siguientes propiedades:
+* ``wmsLayers`` define las capas WMS que tendrá el mapa. El orden en el que estas capas aparecen en el array ``wmsLayers`` define el orden de las capas en el dibujado del mapa. Cada capa consistirá en un elemento que puede ser de tres tipos. El tipo por defecto es WMS y tiene las siguientes propiedades:
 
 	* id: Identificado de la capa
-	* baseUrl: URL del servidor WMS que sirve la capa
-	* wmsName: Nombre de la capa en el servicio WMS
-	* imageFormat: Formato de imagen a utilizar en las llamadas WMS
+	* type: Tipo de la capa: WMS, Open Street Map, Google maps, respectivamente "wms", "osm" o "gmaps". Por defecto se tomará type:"wms"
 	* visible: Si la capa es utilizada para visualizarse en el mapa o sólo para otras cosas (petición de información, por ejemplo).
-	* queryable: Si se pretende ofrecer herramienta de información para la capa o no
 	* zIndex: Posición en la pila de dibujado
 	* legend: Nombre del fichero imagen con la leyenda de la capa. Estos ficheros se acceden en static/loc/{lang}/images
 	* label: Título de la leyenda
 	* sourceLink: URL del proveedor de los datos
 	* sourceLabel: Texto con el que presentar el enlace especificado en sourceLink
-	* wmsTime: Instantes de tiempo en ISO8601 separados por comas
+
+	En función del tipo de la capa se especificarán además otras propiedades
 	
-	Por ejemplo::
+  * WMS:
+	
+	* baseUrl: URL del servidor WMS que sirve la capa
+	* wmsName: Nombre de la capa en el servicio WMS
+	* imageFormat: Formato de imagen a utilizar en las llamadas WMS
+	* queryable: Si se pretende ofrecer herramienta de información para la capa o no
+	    
+	Por ejemplo:
 		
+	.. code-block:: javascript
+			
 		{
 			"wmsLayers" : [
 				{
@@ -136,12 +143,54 @@ Define la estructura de capas del proyecto. Consiste en un elemento JSON con tre
 					"visible" : true,
 					"sourceLink" : "http://www.wri.org/publication/interactive-forest-atlas-democratic-republic-of-congo",
 					"sourceLabel" : "WRI",
-					"queryable" : true,
-					"wmsTime" : "2007-03-01T00:00,2008-05-11T00:00,2005-03-01T00:00"
+					"queryable" : true
 				}
 			],
 			...
 		}
+
+  * Open Street Map:
+    
+	* osmUrls: lista de las URL de los tiles. Usando ${x}, ${y} y ${z} como variables.
+    
+	Por ejemplo:
+ 		
+    .. code-block:: javascript
+
+		{
+			"wmsLayers" : [
+				{
+					"id" : "openstreetmap",
+					"type" : "osm",
+					"osmUrls" : [
+						"http://a.tile.openstreetmap.org/${z}/${x}/${y}.png",
+						"http://b.tile.openstreetmap.org/${z}/${x}/${y}.png",
+						"http://c.tile.openstreetmap.org/${z}/${x}/${y}.png"
+					]
+				}			
+			],
+			...
+		}
+    
+  * Google:
+    
+	* gmaps-type: Tipo de capa Google: ROADMAP, SATELLITE, HYBRID o TERRAIN
+      
+	Por ejemplo:
+	
+    .. code-block:: javascript
+      
+		{
+			"wmsLayers" : [
+				{
+					"id" : "google-maps",
+					"type" : "gmaps",
+					"gmaps-type" : "SATELLITE"
+				}
+			],
+			...
+		}
+	
 
 * ``portalLayers`` define las capas que aparecen visibles al usuario. Una ``portalLayer`` puede contener varias ``wmsLayers``. Cada ``portalLayer`` puede contener los siguientes elementos:
 
@@ -151,6 +200,7 @@ Define la estructura de capas del proyecto. Consiste en un elemento JSON con tre
 	* inlineLegendUrl: URL con una imagen pequeña que situar al lado del nombre de la capa en el árbol de capas
 	* active: Si la capa está inicialmente visible o no
 	* layers: Array con los identificadores de las ``wmsLayers`` a las que se accede a través de esta capa
+	* timeInstances: Instantes de tiempo en ISO8601 separados por comas
 	
 	Por ejemplo::
 		
@@ -164,8 +214,7 @@ Define la estructura de capas del proyecto. Consiste en un elemento JSON con tre
 					"visible" : true,
 					"sourceLink" : "http://www.wri.org/publication/interactive-forest-atlas-democratic-republic-of-congo",
 					"sourceLabel" : "WRI",
-					"queryable" : true,
-					"wmsTime" : "2007-03-01T00:00,2008-05-11T00:00,2005-03-01T00:00"
+					"queryable" : true
 				}
 			],
 			"portalLayers" : [
@@ -175,7 +224,8 @@ Define la estructura de capas del proyecto. Consiste en un elemento JSON con tre
 					"infoFile" : "provinces_def.html",
 					"label" : "${provinces}",
 					"layers" : [ "wms_provinces" ],
-					"inlineLegendUrl" : "http://demo1.geo-solutions.it/diss_geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=unredd:drc_provinces&TRANSPARENT=true"
+					"inlineLegendUrl" : "http://demo1.geo-solutions.it/diss_geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=unredd:drc_provinces&TRANSPARENT=true",
+					"timeInstances" : "2007-03-01T00:00,2008-05-11T00:00,2005-03-01T00:00"
 				}
 			],
 			...
