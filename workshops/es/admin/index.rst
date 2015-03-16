@@ -19,6 +19,7 @@ Contents:
    portal_configuration
    geotalleres/geoserver-raster/geoserver_raster
    portal_raster_config
+   portal_temporal
    admin-scripts
    authentication
    backups
