@@ -28,6 +28,8 @@ La preparación consistirá en introducir una columna de tipo fecha con la fecha
 
 La publicación en GeoServer se hace exactamente igual al de cualquier otra capa y la diferencia es que una vez la capa está publicada, hay que ir a la pestaña "Dimensiones" de la capa en cuestión y habilitar el checkbox para Tiempo. En el combo que aparece como "Atributo" hay que seleccionar el campo fecha añadido anteriormente, y para "Presentación" hay que seleccionar "List". Una vez esta configuración se guarda, la capa ya está preparada para servirse en distintas instancias temporales.
 
+.. image::  _static/vector_temporal.png
+
 Configuración de la capa en el portal
 ----------------------------------------------------
 
