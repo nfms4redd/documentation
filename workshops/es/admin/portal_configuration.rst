@@ -201,6 +201,7 @@ Define la estructura de capas del proyecto. Consiste en un elemento JSON con tre
 	* active: Si la capa está inicialmente visible o no
 	* layers: Array con los identificadores de las ``wmsLayers`` a las que se accede a través de esta capa
 	* timeInstances: Instantes de tiempo en ISO8601 separados por comas
+	* date-format: Formato de la fecha para cada capa. Según la librería Moment (http://momentjs.com/docs/#/displaying/). Por ejempo: "DD-MM-YYYY". Por defecto sólo el año (YYYY).
 	
 	Por ejemplo::
 		
@@ -225,7 +226,8 @@ Define la estructura de capas del proyecto. Consiste en un elemento JSON con tre
 					"label" : "${provinces}",
 					"layers" : [ "wms_provinces" ],
 					"inlineLegendUrl" : "http://demo1.geo-solutions.it/diss_geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=unredd:drc_provinces&TRANSPARENT=true",
-					"timeInstances" : "2007-03-01T00:00,2008-05-11T00:00,2005-03-01T00:00"
+					"timeInstances" : "2007-03-01T00:00,2008-05-11T00:00,2005-03-01T00:00",
+					"date-format" : "DD-MM-YYYY"
 				}
 			],
 			...
