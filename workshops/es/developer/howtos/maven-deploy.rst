@@ -10,7 +10,21 @@ Un repositorio Maven es una estructura de directorios que contiene los plugins y
 
 Si hemos desarrollado un plugin, seguro que tenemos Maven ya configurado para que se descargue las dependencias del portal del repositorio de FAO. Pero ahora habrá que configurarlo para que, además de descargar los plugins, pueda subirlos.
 
-Para subir los plugins al repositorio de FAO hay que utilizar el servicio ``ftp://maven.nfms4redd.org/repo``. Esto se configura en el pom.xml de nuestro plugin:
+Para subir los plugins al repositorio de FAO hay que utilizar el servicio ``ftp://maven.nfms4redd.org/repo``. Esto se configura en el pom.xml de nuestro plugin mediante dos elementos. El primero es un elemento dentro de ``<build>`` que dice a Maven que vamos a acceder por FTP:
+
+.. code-block:: xml
+
+	<build>
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ftp</artifactId>
+				<version>2.3</version>
+			</extension>
+		</extensions>
+	</build>
+
+El segundo le dice a Maven la URL del servidor:
 
 .. code-block:: xml
 
@@ -22,7 +36,7 @@ Para subir los plugins al repositorio de FAO hay que utilizar el servicio ``ftp:
 		</repository>
 	</distributionManagement>
 
-Como no queremos poner en nuestro plugin el usuario y contraseña para acceder al FTP del servidor de FAO, lo que hacemos es especificar un identificador, en este caso ``nfms4redd``. Para decirle a Maven qué usuario y contraseña utilizar hay que editar el fichero ``settings.xml`` que se encuentra en el directorio ``.m2`` del "HOME" del usuario:
+Como no queremos compartir el usuario y contraseña para acceder al FTP, lo que hacemos es especificar sólo un identificador, en este caso ``nfms4redd``, al que haremos referencia desde el fichero de configuración de Maven ``settings.xml`` para asignar a ese id el usuario y contraseña. El fichero ``settings.xml`` se encuentra en el directorio ``.m2`` del "HOME" del usuario:
 
 .. image:: images/settings.xml.png
 	:align: center
