@@ -36,10 +36,10 @@ Ejecución de los tests
 
 Una vez los componentes externos están levantados y el portal configurado, sólo queda ejecutar los tests de integración::
 
-	mvn integration-test
+	mvn verify
 
 Sin embargo, pasaremos por la fase ``package`` que incluye una operación de optimización. Éstas se pueden evitar desactivando el perfil ``optimize``::
 
-	mvn -P \!optimize integration-test
+	mvn -P \!optimize verify
 
 Para más información sobre el uso de Maven ver :ref:`build-special-features`.

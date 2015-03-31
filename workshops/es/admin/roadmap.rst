@@ -19,7 +19,7 @@ Los pasos a seguir serían los siguientes:
 
 #. Configuración de las capas publicadas por GeoServer en el portal.
 
-#. Configuración de la simbología de las capas.
+#. Configuración de la simbología de las capas. Configuración de metatileado para etiquetado de forma correcta.
 
 #. Configuración del aspecto temporal: habilitación de la dimensión temporal en GeoServer, configuración en el portal.
 
@@ -34,4 +34,4 @@ Los pasos a seguir serían los siguientes:
 
 #. Programación de copias de seguridad 
 
-#. Robustecimiento. Herramientas de monitoreo, scripts whatchdog.
+#. Robustecimiento del servicio. Herramientas de monitoreo, scripts whatchdog.

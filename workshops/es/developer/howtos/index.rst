@@ -18,5 +18,7 @@ Las siguientes secciones incluyen manuales para la creación de las tareas de de
    database-connection
    new-plugin
    new-application
+   licensing
+   maven-deploy
    
    
