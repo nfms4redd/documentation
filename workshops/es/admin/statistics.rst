@@ -212,13 +212,13 @@ Y produciendo:
 Instalación
 ...............
 
-El motor de cálculo puede descargarse `aquí<_static/statistics/redd_stats_calculator.sql>`_. Para su instalación es necesario ejecutarlo en un intérprete de PostGIS, por ejemplo en línea de comandos::
+El motor de cálculo puede descargarse `aquí <_static/statistics/redd_stats_calculator.sql>`_. Para su instalación es necesario ejecutarlo en un intérprete de PostGIS, por ejemplo en línea de comandos::
 
 	$ psql -U spatial_user -d spatialdata -f redd_stats_calculator.sql
 
-Esta ejecución instalará dos funciones, ``redd_stats_calculo`` y ``redd_stats_run``. Esta última se utilizará para iniciar el motor de cálculo.
+Esta ejecución instalará dos funciones, ``redd_stats_calculo`` y ``redd_stats_run``. Esta última es la que se utilizará para iniciar el motor de cálculo.
 
-Además de las funciones, el motor espera encontrar en el mismo esquema donde se encuentra la tabla de metadatos una tabla con las fajas en proyección EPSG:4326. Esta tabla deberá tener un campo ``geom`` con la geometria y un campo ``srid`` de tipo ``integer`` con el código SRID al que pertenece esa faja. Se puede ver en el caso práctico más abajo un ejemplo.
+Además de las funciones, el motor espera encontrar en el mismo esquema donde se encuentra la tabla de metadatos una tabla con las fajas en proyección EPSG:4326. Esta tabla deberá tener un campo ``geom`` con la geometria y un campo ``srid`` de tipo ``integer`` con el código SRID al que pertenece cada faja. Se puede ver un ejemplo en el caso práctico más abajo.
 
 Una vez las funciones están instaladas y la tabla ``redd_stats_fajas`` está creada, podemos empezar a utilizarlo. Para hacerlo funcionar habrá que realizar dos pasos, 1) configurar la tabla de metadatos especificando esta vez TODOS los campos campos y 2) invocar al motor para que genere los gráficos.
 
