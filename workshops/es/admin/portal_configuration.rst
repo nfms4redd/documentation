@@ -71,6 +71,14 @@ portal.properties
 * languages.default = en
 
   Idioma por defecto.
+
+* highlight-bounds=true
+
+  Si cuando se pide información sobre un objeto, al pasar el ratón sobre la tabla de atributos se resalta sólo el encuadre (bounds) del objeto y no el contorno. 
+
+* db-schema=portal_redd
+
+  Nombre del esquema donde están las tablas necesarias para las distintas funcionalidades como estadísticas y feedback
   
 * layers.rootFolder=/tmp
 
@@ -83,11 +91,7 @@ portal.properties
 * info.queryUrl=http://demo1.geo-solutions.it/diss_geoserver/wms
   
   URL de las capas ``queryable`` contra la que hacer la petición GetFeatureInfo
-  
-* client.modules=wfs-query,mouse-position,measure,layer-tree,layers,communication,iso8601,error-management,map,banner,toolbar,time-slider,layer-list,info-control,info-dialog,center,zoom-bar,layer-list-selector,active-layer-list,legend-button,legend-panel
 
-  Lista de módulos a cargar en la aplicación
-  
 * map.centerLonLat=24, -4
 
   Longitud y latitud del centro inicial del mapa
