@@ -40,7 +40,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Capacitación Portal del Sistema Nacional de Monitoreo de Bosques'
+project = u'Referencia administradores'
 copyright = u'Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : Creative Commons (Creative Commons - Attribution - Share Alike: http://creativecommons.org/licenses/by-sa/3.0/deed.es)'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -183,7 +183,7 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'training_guide.tex', u'Capacitación portal NFMS',
+  ('index', 'training_guide.tex', u'Referencia administradores',
    u'FAO Forestry & GeoSolutions', 'manual'),
 ]
 
@@ -213,7 +213,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'Capacitación portal NFMS', u'Capacitación portal NFMS',
+    ('index', 'Referencia administradores', u'Referencia administradores',
      [u'FAO Forestry & GeoSolutions'], 1)
 ]
 
@@ -227,7 +227,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'Capacitación portal NFMS', u'Capacitación portal NFMS',
+  ('index', 'Referencia administradores', u'Referencia administradores',
    u'FAO Forestry & GeoSolutions', 'training_guide', 'One line description of project.',
    'Miscellaneous'),
 ]

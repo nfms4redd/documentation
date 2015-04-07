@@ -1,5 +1,5 @@
-Capacitación Portal del Sistema Nacional de Monitoreo de Bosques
-=================================================================
+Referencia administradores portal REDD
+========================================
 
 Contents:
 
