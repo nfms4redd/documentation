@@ -1,3 +1,5 @@
+.. _portal_configuration:
+
 Portal: Configuración inicial 
 ======================================
 

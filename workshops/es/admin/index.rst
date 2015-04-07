@@ -7,6 +7,7 @@ Contents:
    :maxdepth: 2
 
    roadmap
+   installation
    architecture
    summary_admin
    winscp
