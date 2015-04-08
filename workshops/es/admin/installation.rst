@@ -28,7 +28,7 @@ Así, para configurar estas funcionalidades hay que seguir dos pasos:
 #. Crear las tablas de nombre conocido según la funcionalidad que se desee instalar. 
 
    * Servicio de estadísticas, ver :ref:`instalacion_servicio_estadisticas`
-   * Herramienta de feedback, ver :ref:`instalacion_herramienta_feedback`
+   * Herramienta de feedback, ver :ref:`configuracion_herramienta_feedback`
 
 Reinicio del portal
 --------------------

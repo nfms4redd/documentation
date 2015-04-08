@@ -22,6 +22,7 @@ Contents:
    portal_raster_config
    portal_temporal
    statistics
+   feedback
    admin-scripts
    authentication
    backups
