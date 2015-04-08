@@ -330,7 +330,7 @@ Más información:
 time-slider.selection
 -----------------------------
 
-Lanzado cuando el usuario selecciona un instante temporal distinto al actual. Generalmente se actualiza el mapa con la información de esa fecha.
+Lanzado cuando el usuario selecciona un instante temporal global distinto al actual. Generalmente se actualiza el mapa con la información de esa fecha.
 
 Parámetros: objeto Date con el instante temporal seleccionado
 
@@ -338,6 +338,37 @@ Ejemplo de uso::
 
 	var d = new Date();
 	bus.send("time-slider.selection", d);
+
+Más información:
+
+
+layer-time-slider.selection
+-----------------------------
+
+Lanzado cuando el usuario selecciona un instante temporal específico para una capa (a diferencia del ``time-slider.selection`` cuyo instante es global para todas las capas). 
+
+Parámetros:
+
+* id de la portalLayer que ha determinado su instante temporal.
+* objeto Date con el instante temporal seleccionado
+
+Ejemplo de uso::
+
+	var d = new Date();
+	bus.send("layer-time-slider.selection", ["mi-portal-layer", date]);
+
+Más información:
+
+
+layer-timestamp-selected
+-----------------------------
+
+Una capa ha escuchado uno de los eventos de selección temporal y ha determinado qué instancia temporal es la que más se ajusta a esa. La capa selecciona la última instancia temporal que es menor o igual al instante seleccionado o la primera instancia si el instante seleccionado es anterior a todas sus instancias.
+
+Parámetros:
+
+* id de la portalLayer que ha determinado su instante temporal.
+* objeto Date con el instante temporal seleccionado
 
 Más información:
 
@@ -389,3 +420,24 @@ Ejemplo de uso (botón de información)::
 	});
 
 Más información:
+
+show-layer-panel
+-----------------
+
+Activa el panel de capas indicado.
+
+Parámetros: identificado del panel a activar. La lista de paneles puede variar en función de los plugins que haya activados. La lista completa de ids es:
+
+* all_layers_selector
+* layers_transparency_selector
+* layer_slider_selector (sólo con el plugin ``layer-time-sliders``)
+
+Ejemplo de uso::
+
+	bus.send("show-layer-panel", [ "layers_transparency_selector" ]);
+
+Más información:
+	
+	
+	
+	
