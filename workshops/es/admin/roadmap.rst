@@ -11,6 +11,14 @@ Se parte de los siguientes requisitos:
 
 Los pasos a seguir serían los siguientes:
 
+#. Inventario de los datos a publicar. Listado de capas indicando para cada capa:
+
+	* formato: raster o vector, geotiff, ecw, shapefile, etc.
+	* número de instancias temporales. Por ejemplo: 2005, 2007, 2011. Otro ejemplo: Diario desde 2002.
+	* Tamaño aproximado de cada instancia. 1Mb, 10Mb, 100Mb, 1Gb, 10Gb, ... 
+	* periodicidad de la actualización: Diario, mensual, anual, cada años.
+	* ¿se debe publicar con una leyenda específica? Sí / No. En caso afirmativo indicar el formato en que se puede exportar la leyenda: SLD, QGIS, ArcMap, etc.
+
 #. Instalación del servidor: PostgreSQL, GeoServer y portal. Incluye la configuración del portal para las distintas herramientas, como feedback, estadísticas, etc.
 
 #. Carga de los datos en PostgreSQL. Transferencia de los ficheros al servidor en un directorio temporal para su carga inmediata en PostgreSQL. Una vez cargados, los fichero se eliminan del servidor ya que sólo se accederá a la copia existente en la base de datos.
