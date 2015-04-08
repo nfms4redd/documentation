@@ -135,7 +135,7 @@ Define la estructura de capas del proyecto. Consiste en un elemento JSON con tre
 	* baseUrl: URL del servidor WMS que sirve la capa
 	* wmsName: Nombre de la capa en el servicio WMS
 	* imageFormat: Formato de imagen a utilizar en las llamadas WMS
-	* queryable: Si se pretende ofrecer herramienta de información para la capa o no
+	* queryable: Si se pretende ofrecer herramienta de información para la capa o no. La herramienta de información sólo tiene en cuenta la instancia temporal general, no la específica de la capa que puede darse cuando se instala el plugin ``layer-time-sliders``. Esto sólo puede darse cuando se activa esta opción para capas con varias instancias temporales por lo que se recomienda evitar esta situación.
 	    
 	Por ejemplo:
 		
@@ -210,6 +210,7 @@ Define la estructura de capas del proyecto. Consiste en un elemento JSON con tre
 	* layers: Array con los identificadores de las ``wmsLayers`` a las que se accede a través de esta capa
 	* timeInstances: Instantes de tiempo en ISO8601 separados por comas
 	* date-format: Formato de la fecha para cada capa. Según la librería Moment (http://momentjs.com/docs/#/displaying/). Por ejempo: "DD-MM-YYYY". Por defecto sólo el año (YYYY).
+	* feedback: En el caso de que la herramienta de feedback esté instalada, si se quiere o no que la capa aparezca en dicha herramienta para permitir al usuario hacer comentarios sobre la capa.  
 	
 	Por ejemplo::
 		
