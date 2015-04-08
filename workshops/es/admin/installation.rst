@@ -17,10 +17,23 @@ Para la personalización del portal es necesario crear un directorio de configur
   $ sudo mkdir /var/portal
   $ sudo cp -R /var/tomcat/webapps/portal/WEB-INF/default_config/* /var/portal/
 
+Funcionalidades con acceso a base de datos
+-------------------------------------------
+
+Para algunas funcionalidades, como la herramienta de feedback o las estadísticas, el portal interactúa con una base de datos. Todas las funcionalidades que necesitan apoyo de la base de datos acceden a tablas con nombre conocido en un esquema que se configura en el fichero "portal.properties", situado en el directorio de configuración del portal, mediante la propiedad ``db-schema``.
+
+Así, para configurar estas funcionalidades hay que seguir dos pasos:
+
+#. Especificar el esquema con la propiedad db-schema. Ver :ref:`portal_properties_configuration`.
+#. Crear las tablas de nombre conocido según la funcionalidad que se desee instalar. 
+
+   * Servicio de estadísticas, ver :ref:`instalacion_servicio_estadisticas`
+   * Herramienta de feedback, ver :ref:`instalacion_herramienta_feedback`
+
 Reinicio del portal
 --------------------
 
-Tras haber realizado esta operación, es necesario reiniciar el portal. Esto se hace forzando a que Tomcat redespliegue la aplicación y puede hacerse copiando el fichero de nuevo en ``/var/tomcat/webapps/`` o, más simple, mediante el comando touch::
+Cuando se modifican datos relativos a la base de datos es necesario reiniciar el portal. Esto se hace forzando a que Tomcat redespliegue la aplicación y puede hacerse copiando el fichero de nuevo en ``/var/tomcat/webapps/`` o, más simple, mediante el comando touch::
 
   $ touch /var/tomcat/webapps/portal.war
 

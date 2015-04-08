@@ -13,6 +13,8 @@ Para ello es necesario configurar dos tablas en la base de datos:
 * Metadatos: tabla con la información sobre el gráfico: título, unidades, tipo de gráfico, nombre de la tabla de datos
 * Datos: tabla con las magnitudes a presentar para cada serie en el gráfico
 
+.. _instalacion_servicio_estadisticas:
+
 Instalación
 ...............
 

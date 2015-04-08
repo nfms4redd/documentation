@@ -63,6 +63,8 @@ Los ficheros principales son:
  * ``static/loc``: recursos clasificados por idioma
  * ``static/overrides.css``: última hoja CSS cargada, ideal para sobreescribir otros estilos
 
+.. _portal_properties_configuration:
+
 portal.properties
 ------------------
 
