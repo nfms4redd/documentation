@@ -6,6 +6,7 @@ Portal: Configuración de capas raster
 	=================  ================================================
 	Fecha              Autores
 	=================  ================================================             
+	1 Noviembre 2012    * Stefano Giaccio (Stefano.Giaccio@fao.org)
 	1 Diciembre 2012    * Oscar Fonts (oscar.fonts@geomati.co)
 	24 Junio 2013		* Fernando González (fernando.gonzalez@fao.org)
 	=================  ================================================	
