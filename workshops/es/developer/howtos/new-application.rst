@@ -274,9 +274,7 @@ Primero, hay que introducir la siguiente sección en el ``pom.xml`` de ``mi-app`
 					<!--/opt/nodejs/node -->
 					<!--</nodeExecutable> -->
 					<!-- path to optimizer json config file -->
-					<configFiles>
-						<configFile>${project.build.directory}/buildconfig.js</configFile>
-					</configFiles>
+					<configFile>${project.build.directory}/buildconfig.js</configFile>
 					<fillDepsFromFolder>${project.build.directory}/requirejs/nfms/modules</fillDepsFromFolder>
 					<!-- optional path to optimizer executable -->
 					<!--<optimizerFile> -->
