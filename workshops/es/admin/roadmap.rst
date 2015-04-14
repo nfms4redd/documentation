@@ -1,5 +1,5 @@
-Hoja de ruta para la publicación de datos en GeoServer
-========================================================
+Hoja de ruta para la publicación del portal de diseminación del SNMB
+====================================================================
 
 Esta hoja de ruta pretende ser una guía para la publicación de datos en el servidor prototipo para el portal de diseminación de datos del Sistema Nacional de Monitoreo de Bosques, que consiste básicamente en un servidor de bases de datos PostgreSQL y una instancia de GeoServer corriendo sobre Apache Tomcat.
 
