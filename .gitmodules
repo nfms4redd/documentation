@@ -1,0 +1,4 @@
+[submodule "geotalleres"]
+	path = workshops/es/admin/geotalleres
+	url = https://github.com/geotalleres/geotalleres.git
+
