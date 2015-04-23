@@ -80,6 +80,8 @@ Por último, todos los mensajes enviados al usuario se deben adaptar al idioma q
 	Feedback.no-geometries=Al menos se debe dibujar una geometr\u00eda
 	Feedback.verify_mail_sent=Se ha enviado un mensaje a la direcci\u00f3n de correo especificada para confirmar el comentario.
 	Feedback.submit_error=No se pudo realizar el env\u00edo.
+	Feedback.no_layer_visible=Ninguna de las capas habilitadas para feedback est\u00e1 visible
+	Feedback.no-layer-selected=No se ha seleccionado ninguna capa
 
 .. _feedback_workflow:
 
