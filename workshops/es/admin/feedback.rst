@@ -67,19 +67,19 @@ Por último, la notificación a los usuarios de que su comentario ha sido valida
  
 * feedback-validation-check-delay. Tiempo que el sistema espera antes de volver a releer la tabla de comentarios y notificar a los usuarios cuyo comentario ha sido validado por un técnico. Se expresa en milisegundos, por lo que un valor de 600000 correspondería a 10 minutos, valor recomendado.
 
-Por último, todos los mensajes enviados al usuario se deben adaptar al idioma que habla el usuario por lo que para personalizarlos es necesario establecer una serie de propiedades en los ficheros de mensajes que se pueden encontrar en el directorio ``messages`` del directorio de configuración de la aplicación. Las propiedades con sus valores iniciales es español son:
+Por último, todos los mensajes enviados al usuario se deben adaptar al idioma que habla el usuario por lo que para personalizarlos es necesario establecer una serie de propiedades en los ficheros de mensajes que se pueden encontrar en el directorio ``messages`` del directorio de configuración de la aplicación. Las propiedades con sus valores iniciales es español son::
 
-* Feedback.all_parameters_mandatory=Todos los par\u00e1metros son obligatorios: 
-* Feedback.error_sending_mail=Error enviando el correo: 
-* Feedback.the_message_has_been_validated=El comentario ha sido validado.
-* Feedback.comment_not_found=No se encontr\u00f3 ning\u00fan comentario con el c\u00f3digo
-* Feedback.mail-title=Comentario en el portal ONU-REDD
-* Feedback.verify-mail-text=Por favor, visite http://localhost:8080/unredd-portal/verify-comment?lang=$lang&verificationCode=$code para confirmar el envío.
-* Feedback.validated-mail-text=El comentario con c\u00f3digo de verificaci\u00f3n "$code", ha sido validado y puede consultarse en el portal.
-* Feedback.invalid-email-address=La direcci\u00f3n de correo especificada no es v\u00e1lida
-* Feedback.no-geometries=Al menos se debe dibujar una geometr\u00eda
-* Feedback.verify_mail_sent=Se ha enviado un mensaje a la direcci\u00f3n de correo especificada para confirmar el comentario.
-* Feedback.submit_error=No se pudo realizar el env\u00edo.
+	Feedback.all_parameters_mandatory=Todos los par\u00e1metros son obligatorios: 
+	Feedback.error_sending_mail=Error enviando el correo: 
+	Feedback.the_message_has_been_validated=El comentario ha sido validado.
+	Feedback.comment_not_found=No se encontr\u00f3 ning\u00fan comentario con el c\u00f3digo
+	Feedback.mail-title=Comentario en el portal ONU-REDD
+	Feedback.verify-mail-text=Por favor, visite http://localhost:8080/unredd-portal/verify-comment?lang=$lang&verificationCode=$code para confirmar el envío.
+	Feedback.validated-mail-text=El comentario con c\u00f3digo de verificaci\u00f3n "$code", ha sido validado y puede consultarse en el portal.
+	Feedback.invalid-email-address=La direcci\u00f3n de correo especificada no es v\u00e1lida
+	Feedback.no-geometries=Al menos se debe dibujar una geometr\u00eda
+	Feedback.verify_mail_sent=Se ha enviado un mensaje a la direcci\u00f3n de correo especificada para confirmar el comentario.
+	Feedback.submit_error=No se pudo realizar el env\u00edo.
 
 .. _feedback_workflow:
 
