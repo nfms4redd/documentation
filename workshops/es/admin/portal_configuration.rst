@@ -124,7 +124,7 @@ Define la estructura de capas del proyecto. Consiste en un elemento JSON con tre
 	* type: Tipo de la capa: WMS, Open Street Map, Google maps, respectivamente "wms", "osm" o "gmaps". Por defecto se tomará type:"wms"
 	* visible: Si la capa es utilizada para visualizarse en el mapa o sólo para otras cosas (petición de información, por ejemplo).
 	* zIndex: Posición en la pila de dibujado
-	* legend: Nombre del fichero imagen con la leyenda de la capa. Estos ficheros se acceden en static/loc/{lang}/images
+	* legend: Nombre del fichero imagen con la leyenda de la capa. Estos ficheros se acceden en static/loc/{lang}/images. También es posible poner la cadena de carácteres "auto" y el portal intentará obtener la imagen automáticamente de GeoServer usando la petición GetLegendGraphics de WMS.
 	* label: Título de la leyenda
 	* sourceLink: URL del proveedor de los datos
 	* sourceLabel: Texto con el que presentar el enlace especificado en sourceLink
@@ -206,7 +206,7 @@ Define la estructura de capas del proyecto. Consiste en un elemento JSON con tre
 	* id: id de la capa
 	* label: Texto con el nombre de la capa a usar en el portal. Si se especifica entre ${ }, se intentará obtener la traducción de los ficheros .properties existentes en el directorio ``messages`` del  directorio de configuración del portal.
 	* infoFile: Nombre del fichero HTML con información sobre la capa. El fichero se accede en static/loc/{lang}/html. En la interfaz gráfica se representa con un botón de información al lado del nombre de la capa 
-	* inlineLegendUrl: URL con una imagen pequeña que situar al lado del nombre de la capa en el árbol de capas
+	* inlineLegendUrl: URL con una imagen pequeña que situar al lado del nombre de la capa en el árbol de capas. También es posible poner la cadena de carácteres "auto" y el portal intentará obtener la imagen automáticamente de GeoServer usando la petición GetLegendGraphics de WMS.
 	* active: Si la capa está inicialmente visible o no
 	* layers: Array con los identificadores de las ``wmsLayers`` a las que se accede a través de esta capa
 	* timeInstances: Instantes de tiempo en ISO8601 separados por comas
