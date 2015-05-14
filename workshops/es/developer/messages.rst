@@ -426,7 +426,7 @@ show-layer-panel
 
 Activa el panel de capas indicado.
 
-Parámetros: identificado del panel a activar. La lista de paneles puede variar en función de los plugins que haya activados. La lista completa de ids es:
+Parámetros: identificador del panel a activar. La lista de paneles puede variar en función de los plugins que haya activados. La lista completa de ids es:
 
 * all_layers_selector
 * layers_transparency_selector
@@ -438,6 +438,23 @@ Ejemplo de uso::
 
 Más información:
 	
-	
+
+show-info
+-----------------
+
+Muestra una ventana emergente con determinada información que se pasa como parámetro.
+
+Parámetros:
+
+* title: Título de la ventana
+* link: Bien una url que apunta a la página que se pretende mostrar, o un objeto jquery que será mostrado en la ventana  
+* eventOptions: Opcional. Elemento con las opciones para la personalización de la ventana. Actualmente se utiliza FancyBox por lo que se puede añadir cualquier opción válida de este framework.
+
+Ejemplo de uso::
+
+	bus.send("show-info", [ "Mi info", "http://ambiente.gob.am/portal/static/loc/es/html/doc.html" ]);
+
+Más información:
+
 	
 	
