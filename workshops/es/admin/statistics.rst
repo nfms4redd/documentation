@@ -49,7 +49,8 @@ Para que el servicio de estadísticas funcione es necesario:
          division_field_id character varying,
          table_name_data character varying,
          data_table_id_field character varying,
-         data_table_date_field character varying
+         data_table_date_field character varying,
+         data_table_date_field_format character varying
       ) WITH ( OIDS=FALSE );
       
       CREATE TABLE redd_stats_variables (
@@ -84,6 +85,7 @@ Cada fila de la tabla de ``redd_stats_charts`` especificará un gráfico para lo
 - table_name_data: Nombre de la tabla con los datos.
 - data_table_id_field: Nombre del campo identificador en la tabla de datos ``table_name_data``.
 - data_table_date_field: Nombre del campo fecha en la tabla de datos ``table_name_data``.
+- data_table_date_field: Formato del campo fecha si no es de tipo ``date`` `según la función to_date de PostgreSQL <http://www.postgresql.org/docs/current/static/functions-formatting.html>`_ . NULL si el campo fecha es de tipo ``date``.
 
 Una vez el registro con el gráfico ha sido creado es necesario especificar cómo se presentan los datos en el gráfico en la tabla ``redd_stats_variables``:
 
@@ -169,7 +171,8 @@ Por último crearemos el registro en la tabla de metadatos que enlaza estos dato
 		'id_provinc', -- nombre del campo identificador de la capa
 		'estadisticas.cobertura_forestal_provincias', -- nombre de la tabla de datos
 		'id_provinc', -- nombre del campo id
-		'anio' -- nombre del campo fecha
+		'anio', -- nombre del campo fecha
+		NULL -- campo fecha de tipo date
 	);
 
 	INSERT INTO estadisticas.redd_stats_variables VALUES (
