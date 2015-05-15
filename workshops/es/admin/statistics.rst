@@ -85,7 +85,7 @@ Cada fila de la tabla de ``redd_stats_charts`` especificará un gráfico para lo
 - table_name_data: Nombre de la tabla con los datos.
 - data_table_id_field: Nombre del campo identificador en la tabla de datos ``table_name_data``.
 - data_table_date_field: Nombre del campo fecha en la tabla de datos ``table_name_data``.
-- data_table_date_field: Formato del campo fecha si no es de tipo ``date`` `según la función to_date de PostgreSQL <http://www.postgresql.org/docs/current/static/functions-formatting.html>`_ . NULL si el campo fecha es de tipo ``date``.
+- data_table_date_field_format: Formato del campo fecha si no es de tipo ``date`` `según la función to_date de PostgreSQL <http://www.postgresql.org/docs/current/static/functions-formatting.html>`_ . NULL si el campo fecha es de tipo ``date``.
 
 Una vez el registro con el gráfico ha sido creado es necesario especificar cómo se presentan los datos en el gráfico en la tabla ``redd_stats_variables``:
 
