@@ -206,6 +206,7 @@ Define la estructura de capas del proyecto. Consiste en un elemento JSON con tre
 	* id: id de la capa
 	* label: Texto con el nombre de la capa a usar en el portal. Si se especifica entre ${ }, se intentará obtener la traducción de los ficheros .properties existentes en el directorio ``messages`` del  directorio de configuración del portal.
 	* infoFile: Nombre del fichero HTML con información sobre la capa. El fichero se accede en static/loc/{lang}/html. En la interfaz gráfica se representa con un botón de información al lado del nombre de la capa 
+	* infoLink: Url con la información sobre la capa. Igual que infoFile pero especificando una ruta absoluta. infoFile tiene preferencia sobre infoLink, por lo que si se define el primero, infoLink se ignorará. 
 	* inlineLegendUrl: URL con una imagen pequeña que situar al lado del nombre de la capa en el árbol de capas. También es posible poner la cadena de carácteres "auto" y el portal intentará obtener la imagen automáticamente de GeoServer usando la petición GetLegendGraphics de WMS.
 	* active: Si la capa está inicialmente visible o no
 	* layers: Array con los identificadores de las ``wmsLayers`` a las que se accede a través de esta capa
@@ -250,6 +251,7 @@ Define la estructura de capas del proyecto. Consiste en un elemento JSON con tre
 	* id: id del grupo
 	* label: Igual que en ``portalLayer``
 	* infoFile: Igual que en ``portalLayer``
+	* infoLink: Igual que en ``portalLayer``
 	* items. Array de otros grupos, con la misma estructura que este elemento (recursivo).
 	
 	Por ejemplo::

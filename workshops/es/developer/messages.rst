@@ -421,6 +421,11 @@ Ejemplo de uso (botón de información)::
 
 Más información:
 
+register-group-action
+-----------------------------
+
+Igual que register-layer-action pero para grupos.
+
 show-layer-panel
 -----------------
 
@@ -456,5 +461,27 @@ Ejemplo de uso::
 
 Más información:
 
+
+show-layer-info
+-----------------
+
+Muestra la información asociada a una capa con su atributo infoLink o infoFile.
+
+Parámetros: identificador de la capa.
+
+Ejemplo de uso::
+
+	bus.send("show-layer-info", [ "provincias" ]);
+
+show-group-info
+-----------------
+
+Muestra la información asociada a un grupo con su atributo infoLink o infoFile.
+
+Parámetros: identificador del grupo
+
+Ejemplo de uso::
+
+	bus.send("show-group-info", [ "base" ]);
 	
 	
