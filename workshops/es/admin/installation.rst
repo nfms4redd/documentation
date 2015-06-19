@@ -20,7 +20,79 @@ Para la personalización del portal es necesario crear un directorio de configur
 Funcionalidades con acceso a base de datos
 -------------------------------------------
 
-Para algunas funcionalidades, como la herramienta de feedback o las estadísticas, el portal interactúa con una base de datos. Todas las funcionalidades que necesitan apoyo de la base de datos acceden a tablas con nombre conocido en un esquema que se configura en el fichero "portal.properties", situado en el directorio de configuración del portal, mediante la propiedad ``db-schema``.
+Para algunas funcionalidades, como la herramienta de feedback o las estadísticas, el portal interactúa con una base de datos. Para configurar el acceso a la base de datos será necesario configurar dos cosas: la conexión a la base de datos y el esquema en el que se meten las tablas que necesita el portal.
+
+Conexión
+.........
+
+La conexión se configura en un fichero ``META-INF/context.xml`` existente dentro del directorio de la aplicación, en ``webapps``, por ejemplo:
+
+.. code-block:: xml
+
+	<Context copyXML="true">
+	
+	    <!-- Default set of monitored resources -->
+	    <WatchedResource>WEB-INF/web.xml</WatchedResource>
+		
+	    <!-- Uncomment this to disable session persistence across Tomcat restarts -->
+	    <!--
+	    <Manager pathname="" />
+	    -->
+	
+	    <!-- Uncomment this to enable Comet connection tacking (provides events
+	         on session expiration as well as webapp lifecycle) -->
+	    <!--
+	    <Valve className="org.apache.catalina.valves.CometConnectionManagerValve" />
+	    -->
+	
+		<Resource name="jdbc/unredd-portal" auth="Container" type="javax.sql.DataSource"
+			driverClassName="org.postgresql.Driver" url="jdbc:postgresql://postgis.unredd:5432/spatialdata"
+			username="spatial_user" password="unr3dd" maxActive="20" maxIdle="10"
+			maxWait="-1" />
+	
+	</Context>
+
+En concreto en el elemento ``Resource``. Dicho elemento debe tener:
+
+* Un atributo ``name`` con valor "jdbc/unredd-portal", que es el que buscará el portal.
+* Un atributo ``url`` con la URL para conectar a la base de datos.
+* Atributos ``username`` y ``password`` con las credenciales para conectar a la URL anterior.
+
+Si se instala un .war genérico lo más probable es que este recurso no esté adaptado a la situación de nuestro servidor. Por ejemplo, si tenemos el servidor de base de datos en el mismo servidor que corre el portal, la URL deberá hacer referencia a 127.0.0.1, en lugar de "postgis.unredd". Para configurarlo correctamente tendremos que modificar este fichero. Sin embargo, no podemos modificarlo ahí porque cuando se despliegue un nuevo war, los contenidos que hay en el directorio ``webapps`` serán eliminados y reemplazados por los contenidos del nuevo .war. Es por esto que Tomcat copia ese fichero a ``/var/tomcat/conf/Catalina/localhost/portal.xml``, para poder modificarlo allí y que no se sobreescriba cada vez que se despliega un nuevo .war.
+
+Basta entonces con editar ese fichero y cambiar la URL, usuario y password a nuestras necesidades:
+
+.. code-block:: xml
+
+	<Context copyXML="true">
+	
+	    <!-- Default set of monitored resources -->
+	    <WatchedResource>WEB-INF/web.xml</WatchedResource>
+		
+	    <!-- Uncomment this to disable session persistence across Tomcat restarts -->
+	    <!--
+	    <Manager pathname="" />
+	    -->
+	
+	    <!-- Uncomment this to enable Comet connection tacking (provides events
+	         on session expiration as well as webapp lifecycle) -->
+	    <!--
+	    <Valve className="org.apache.catalina.valves.CometConnectionManagerValve" />
+	    -->
+	
+		<Resource name="jdbc/unredd-portal" auth="Container" type="javax.sql.DataSource"
+			driverClassName="org.postgresql.Driver" url="jdbc:postgresql://127.0.0.1:5432/mibasededatos"
+			username="miusuario" password="mipassword" maxActive="20" maxIdle="10"
+			maxWait="-1" />
+	
+	</Context>
+
+Una vez editado el fichero hay que reiniciar el portal como se explica aquí: :ref:`reinicio_portal`.
+
+Esquema
+.........
+
+Todas las funcionalidades que necesitan apoyo de la base de datos acceden a tablas con nombre conocido en un esquema que se configura en el fichero "portal.properties", situado en el directorio de configuración del portal, mediante la propiedad ``db-schema``.
 
 Así, para configurar estas funcionalidades hay que seguir dos pasos:
 
@@ -30,6 +102,8 @@ Así, para configurar estas funcionalidades hay que seguir dos pasos:
    * Servicio de estadísticas, ver :ref:`instalacion_servicio_estadisticas`
    * Herramienta de feedback, ver :ref:`configuracion_herramienta_feedback`
 
+.. _reinicio_portal:
+
 Reinicio del portal
 --------------------
 
@@ -38,6 +112,12 @@ Cuando se modifican datos relativos a la base de datos es necesario reiniciar el
   $ touch /var/tomcat/webapps/portal.war
 
 Este comando cambia la fecha y hora de última modificación del fichero, forzando así a Tomcat a que vuelva a desplegar el .war. A los pocos segundos el portal se habrá reiniciado.
+
+.. warning:: 
+
+	En algunos casos, sobre todo cuando la conexión a la base de datos apunta a algún servidor que no existe, el comando ``touch`` puede no ser efectivo. En tales casos, es necesario reiniciar Tomcat::
+	
+		sudo service tomcat7 restart 
 
 .. _consulta_logs_tomcat:
 
