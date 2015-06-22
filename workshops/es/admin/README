@@ -1,5 +1,37 @@
-This documentation references some sections in geotalleres. Therefore in order to build the documentation it is necessary first to clone the geotalleres repository in this same folder:
+This documentation references some sections in geotalleres as project submodules. Therefore in order to build the documentation it is necessary first to recursively fetch the project's submodules.
 
-$ git clone git@github.com:geotalleres/geotalleres.git
+Provided you've done a normal clone and accessed this folder:
 
-Afterwards it is possible to run make successfully
+    git clone git@github.com:nfms4redd/documentation.git
+    cd documentation/workshops/es/admin
+
+Run:
+
+    git submodule update --init --recursive
+
+Then you can build the docs:
+
+    make html
+
+Working into submodules
+-----------------------
+
+Before editing anything, checkout an explicit branch, so you don't end up in dettached mode:
+
+    cd geotalleres/
+    git checkout master
+
+Now edit the submodule's content. Once done, push the changes to the submodule's remote repo:
+
+    git add ...
+    git commit -m "..."
+    git push
+
+Do as many changes as needed. Changes will be reflected only in the submodule's remote repo.
+
+At the very end, remember to update the "parent" repo, so it links to the new submodule's version:
+
+    cd ..
+    git add geotalleres/
+    git commit -m "Updates to geotalleres submodule..."
+    git push
