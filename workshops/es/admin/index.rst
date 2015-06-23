@@ -18,8 +18,9 @@ Contents:
    geotalleres/postgis-indexacion-espacial/indexacion_espacial
    geotalleres/geoserver-intro/geoserver_intro
    geotalleres/geoserver-vector/geoserver_vector
-   portal_configuration
+   geotalleres/optimizacion-raster-gdal/optimizacion-raster-gdal
    geotalleres/geoserver-raster/geoserver_raster
+   portal_configuration
    portal_raster_config
    portal_temporal
    statistics
