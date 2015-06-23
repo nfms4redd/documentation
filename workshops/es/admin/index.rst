@@ -20,6 +20,7 @@ Contents:
    geotalleres/geoserver-vector/geoserver_vector
    geotalleres/optimizacion-raster-gdal/optimizacion-raster-gdal
    geotalleres/geoserver-raster/geoserver_raster
+   geotalleres/geowebcache/pregeneracion
    portal_configuration
    portal_raster_config
    portal_temporal
