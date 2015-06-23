@@ -15,6 +15,7 @@ Contents:
    geotalleres/linux/linux
    geotalleres/servicios-web/servicios-web.rst
    geotalleres/postgresql/postgresql
+   geotalleres/postgis-indexacion-espacial/indexacion_espacial
    geotalleres/geoserver-intro/geoserver_intro
    geotalleres/geoserver-vector/geoserver_vector
    portal_configuration
