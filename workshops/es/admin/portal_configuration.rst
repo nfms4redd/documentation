@@ -293,49 +293,22 @@ Define la estructura de capas del proyecto. Consiste en un elemento JSON con tre
 Adaptación del aspecto gráfico
 ------------------------------
 
-Cabecera y pie de página
-........................
+Cabecera de página
+..................
 
-Los elementos de la cabecera están descritos en ``header.tpl``, en formato HTML:
-
-.. code-block:: html
-
-	<div id="banner">
-	    <div id="flag"></div>
-	    <div id="logos"></div>
-	    <span id="title">${title}</span>
-	</div>
-
-En este fichero podemos ver tres elementos con identificador (atributo ``id``) ``flag``, ``logos`` y ``title`` que se corresponden a la bandera, título y logo de la derecha, señalados en rojo, azul y amarillo en la siguiente imagen:
+Veamos cómo modificar la imagen de fondo, bandera y título de la cabecera del portal:
 
 .. image :: _static/header.png
 
-El atributo ``id`` será utilizado desde la hoja de estilos ``unredd.css``, donde se asociará una imagen y otros parámetros de visualización. Como ejercicio:
+Partiendo del PORTAL_CONFIG_DIR (generalmente en /var/portal):
 
-* Abrir el fichero ``custom.css``, buscar los elementos "logos" y "flag" y cambiar la imagen.
+* **Imagen de fondo**: Se encuentra en `static/img/right.jpg`. Sustituir este fichero por otro de igual nombre y formato (jpeg), de 92 píxeles de alto. El ancho puede variar, aunque se recomienda que sea tan ancho como sea posible, hasta los 1920 px de una pantalla de alta definición. Para conseguir un mejor efecto junto con la bandera, se recomienda rellenar de contenido (logotipos, fotografía) la parte más a la derecha de la imagen, hasta un máximo de 500 px. Utilizar un color de fondo liso para el resto de la imagen, que ocupe toda la franja de la izquierda, y que se corresponda con el color de fondo de la bandera.
 
-Nótese que también dicho fichero especifica la imagen de fondo del banner completo, con id ``banner``. Como ejercicio:
+* **Bandera**: Se encuentra en `static/img/left.jpg`. Sustituir este fichero por otro de igual nombre y formato (jpeg), de 92 píxeles de alto. El ancho puede variar, aunque se recomienda alrededor de los 200 px. Utilizar un color de fondo liso, correspondiente con la parte izquierda de la imagen de fondo, para dar una sensación de continuidad.
 
-* Abrir el fichero ``custom.css``, buscar el element "banner" y cambiar la imagen.
+* **Título**: Se encuentra definido en los ficheros de mensajes, directorio `messages`, ficheros de nombre `messages_<lang>.properties`. Buscar la propiedad "title" en cada uno de los ficheros de idioma.
 
-.. note:: `Tutorial de CSS <http://www.csstutorial.net/>`_
 
-En caso de tener que añadir más de un logo, es posible eliminar la imagen de fondo del elemento ``logos`` y añadir dentro de dicho elemento un elemento por cada logo que se quiera añadir. Estos elementos pueden ser hyperenlaces ``<a>`` y llevar al usuario a la página del propietario del logo.
-
-La plantilla para el pie de página ``footer.tpl`` funciona de forma similar y ofrece un elemento con id ``footer_links`` en el que se puede poner todos los hiperenlaces que se quieran:
-
-.. code-block:: html
-
-	<div id="footer_links">
-	    <a id="notice_download" href="http://nfms4redd.org" target="_blank">${information_note}</a>
-	    <a id="user-group" href="http://groups.google.com/group/nfms4redd-users" target="_blank">Mailing list</a>
-	</div>
-
-* Ejercicio: Añadir un enlace a http://www.un-redd.org/ con el texto ``Programa ONU-REDD``
-
-Para aplicar los cambios, hace falta reiniciar de nuevo la aplicación::
-
-	$ sudo service tomcat6 restart
 
 *Favicon*
 .........
