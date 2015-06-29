@@ -108,15 +108,19 @@ portal.properties
 layers.json
 ------------
 
-Define la estructura de capas del proyecto. Consiste en un elemento JSON con tres propiedades::
+Define la estructura de capas del proyecto. Consiste en un elemento JSON con cuatro propiedades::
 
 	{
+		"default-server" : "http://demo1.geo-solutions.it",
+	
 		"wmsLayers" : [],
 	
 		"portalLayers" : [],
 	
 		"groups" : []
 	}
+
+* ``default-server`` define el servidor que se usará como base en caso de que la URL de las capas no incluyan servidor. Ver atributo ``baseUrl`` más abajo.
 
 * ``wmsLayers`` define las capas WMS que tendrá el mapa. El orden en el que estas capas aparecen en el array ``wmsLayers`` define el orden de las capas en el dibujado del mapa. Cada capa consistirá en un elemento que puede ser de tres tipos. El tipo por defecto es WMS y tiene las siguientes propiedades:
 
@@ -133,7 +137,7 @@ Define la estructura de capas del proyecto. Consiste en un elemento JSON con tre
 	
   * WMS:
 	
-	* baseUrl: URL del servidor WMS que sirve la capa
+	* baseUrl: URL del servidor WMS que sirve la capa. Si se especifica una URL sin servidor, por ejemplo "/diss_geoserver/gwc/service/wms", se usará ``default-server``.
 	* wmsName: Nombre de la capa en el servicio WMS
 	* imageFormat: Formato de imagen a utilizar en las llamadas WMS
 	* queryable: Si se pretende ofrecer herramienta de información para la capa o no. La herramienta de información sólo tiene en cuenta la instancia temporal general, no la específica de la capa que puede darse cuando se instala el plugin ``layer-time-sliders``. Esto sólo puede darse cuando se activa esta opción para capas con varias instancias temporales por lo que se recomienda evitar esta situación.
