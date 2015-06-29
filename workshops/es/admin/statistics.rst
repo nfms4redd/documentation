@@ -41,28 +41,31 @@ Para que el servicio de estadísticas funcione es necesario:
 
    .. code-block:: sql
       
-      CREATE TABLE redd_stats_charts (
-         id serial PRIMARY KEY,
-         title character varying,
-         subtitle character varying,
-         layer_name character varying,
-         division_field_id character varying,
-         table_name_data character varying,
-         data_table_id_field character varying,
-         data_table_date_field character varying,
-         data_table_date_field_format character varying
-      ) WITH ( OIDS=FALSE );
-      
-      CREATE TABLE redd_stats_variables (
-         id serial NOT NULL PRIMARY KEY,
-         chart_id integer,
-         y_label character varying,
-         units character varying,
-         tooltipsdecimals integer,
-         variable_name character varying,
-         data_table_variable_field character varying,
-         graphic_type character varying
-      );
+		CREATE TABLE redd_stats_charts (
+			id serial PRIMARY KEY,
+			title character varying,
+			subtitle character varying,
+			layer_name character varying,
+			division_field_id character varying,
+			division_field_name character varying,
+			table_name_data character varying,
+			data_table_id_field character varying,
+			data_table_date_field character varying,
+			data_table_date_field_format character varying,
+			data_table_date_field_output_format character varying
+		) WITH ( OIDS=FALSE );
+		
+		CREATE TABLE redd_stats_variables (
+			id serial NOT NULL PRIMARY KEY,
+			chart_id integer,
+			y_label character varying,
+			units character varying,
+			tooltipsdecimals integer,
+			variable_name character varying,
+			data_table_variable_field character varying,
+			graphic_type character varying,
+			priority integer
+		);
  
 #. Configurar el esquema en el ``portal.properties`` existente en el directorio de configuración del portal::
 
@@ -82,10 +85,12 @@ Cada fila de la tabla de ``redd_stats_charts`` especificará un gráfico para lo
 - subtitle: subtítulo del gráfico
 - layer_name: Nombre en GeoServer de la capa para la que se ofrecerá el gráfico, con la forma espaciodetrabajo:nombrecapa. Por ejemplo: bosques:provincias
 - division_field_id: Nombre del campo que identifica los objetos en la capa anterior. Es posible utilizar un campo que no es único si se desea tener el mismo gráfico para más de un objeto.
+- division_field_name: Nombre del campo con el nombre del objeto en la capa anterior. Se incluirá en el título del gráfico.
 - table_name_data: Nombre de la tabla con los datos.
 - data_table_id_field: Nombre del campo identificador en la tabla de datos ``table_name_data``.
 - data_table_date_field: Nombre del campo fecha en la tabla de datos ``table_name_data``.
 - data_table_date_field_format: Formato del campo fecha si no es de tipo ``date`` `según la función to_date de PostgreSQL <http://www.postgresql.org/docs/current/static/functions-formatting.html>`_ . NULL si el campo fecha es de tipo ``date``.
+- data_table_date_field_output_format: Formato de las fechas en el eje X de la gráfica `según la función to_date de PostgreSQL <http://www.postgresql.org/docs/current/static/functions-formatting.html>`_ . Si se deja a NULL se tomará DD-MM-YYYY (día-mes-año).
 
 Una vez el registro con el gráfico ha sido creado es necesario especificar cómo se presentan los datos en el gráfico en la tabla ``redd_stats_variables``:
 
@@ -97,6 +102,7 @@ Una vez el registro con el gráfico ha sido creado es necesario especificar cóm
 - variable_name: Nombre de la variable que aparecerá en el gráfico, por ejemplo  "bosque cultivado".
 - data_table_variable_field: Nombre del campo de la tabla de datos que contiene los valores de la variable anterior.
 - graphic_type: Tipo de gráfico. Puede ser `cualquier valor aceptado por la librería highcharts <http://api.highcharts.com/highcharts#plotOptions>`_
+- priority: Prioridad del eje. Para poder definir qué datos se presentan antes (p.ej.: líneas delante de gráfico de barras).
 
 Caso práctico
 ...............
@@ -172,7 +178,8 @@ Por último crearemos el registro en la tabla de metadatos que enlaza estos dato
 		'estadisticas.cobertura_forestal_provincias', -- nombre de la tabla de datos
 		'id_provinc', -- nombre del campo id
 		'anio', -- nombre del campo fecha
-		NULL -- campo fecha de tipo date
+		NULL, -- campo fecha de tipo date
+		'YYYY-MM-DD'
 	);
 
 	INSERT INTO estadisticas.redd_stats_variables VALUES (
@@ -183,7 +190,8 @@ Por último crearemos el registro en la tabla de metadatos que enlaza estos dato
 		2, -- número de decimales a presentar
 		'Bosque cultivado', -- Nombre de la variable
 		'sup_nativo', --nombre del campo
-		'line' --tipo de gráfico
+		'line', --tipo de gráfico
+		1 --prioridad
 	);
 	INSERT INTO estadisticas.redd_stats_variables VALUES (
 		DEFAULT, -- id generado automaticamente
@@ -193,7 +201,8 @@ Por último crearemos el registro en la tabla de metadatos que enlaza estos dato
 		2, -- número de decimales a presentar
 		'Bosque nativo', -- Nombre de la variable
 		'sup_cultivado', --nombre del campo
-		'bar' --tipo de gráfico
+		'column', --tipo de gráfico
+		2 --prioridad
 	);
 
 Ahora, cuando el usuario pinche en una de las provincias:
