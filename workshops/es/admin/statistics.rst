@@ -231,7 +231,7 @@ Y produciendo:
 Instalación
 ...............
 
-El motor de cálculo puede descargarse `aquí <_static/statistics/redd_stats_calculator.sql>`_. Para su instalación es necesario ejecutarlo en un intérprete de PostGIS, por ejemplo en línea de comandos::
+El motor de cálculo puede `descargarse aquí <_static/statistics/redd_stats_calculator.sql>`_. Para su instalación es necesario ejecutarlo en un intérprete de PostGIS, por ejemplo en línea de comandos::
 
 	$ psql -U spatial_user -d spatialdata -f redd_stats_calculator.sql
 
@@ -271,7 +271,7 @@ En este caso se parte de
   * un campo ``clasificac`` indicando el tipo de la clasificación
   * un campo ``fecha`` indicando el año de esa clasificación
 
-Es posible descargar los datos de ejemplo `aquí <_static/statistics/motor.zip>`_, para su carga en PostGIS y la realización del caso práctico con ellos.
+Es posible descargar los `datos de ejemplo aquí <_static/statistics/motor.zip>`_, para su carga en PostGIS y la realización del caso práctico con ellos.
 
 En este caso no creamos la tabla de datos, ya que ésta la creará el motor directamente, y pasamos directamente a añadir el registro en la tabla de metadatos:
 

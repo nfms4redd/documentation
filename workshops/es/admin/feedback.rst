@@ -1,17 +1,17 @@
 Herramienta de feedback
-========================
+=======================
 
 La herramienta de feedback permite al usuario del portal proporcionar comentarios sobre determinadas regiones de las capas del mapa.
 
 .. _configuracion_herramienta_feedback:
 
 Configuración
-------------
+-------------
 
 La creación y almacenamiento de estos comentarios requiere de 1) una tabla en la base de datos y 2) una cuenta de e-mail para el intercambio de mensajes entre el sistema, el usuario y el técnico que valida el comentario.
 
 Almacenamiento de los comentarios
-........................................
+.................................
 
 Para almacenar los comentarios se utilizará una tabla llamada ``redd_feedback`` que debe existir en el esquema definido por la propiedad ``db-schema`` en el fichero ``portal.properties``:
 
@@ -49,7 +49,7 @@ Esta tabla alojará un registro por cada comentario hecho por el usuario. En ell
 	* 3 -> Validación notificada al usuario creador del comentario.
 
 Comunicación
-................
+............
 
 Para la comunicación entre usuario y técnico es necesario primero configurar la cuenta de correo que se utilizará para realizar el intercambio. Esto se hace en el portal.properties mediante las siguientes propiedades:
 
@@ -86,7 +86,7 @@ Por último, todos los mensajes enviados al usuario se deben adaptar al idioma q
 .. _feedback_workflow:
 
 Flujo de trabajo de la herramienta Feedback
----------------------------------------------
+-------------------------------------------
 
 El flujo de trabajo habitual de la herramienta Feedback es el siguiente:
 
@@ -98,11 +98,10 @@ El flujo de trabajo habitual de la herramienta Feedback es el siguiente:
 #. El usuario recibe el mensaje indicándole que su entrada ha sido validada. Si se ha configurado en el portal una capa con los comentarios validados, el usuario podrá acceder al portal y ver su comentario allí.
 
 Recomendaciones
------------------
+---------------
 
 Una vez la funcionalidad de Feedback ha sido instalada y está en funcionamiento se recomienda:
 
 - Configurar la cuenta de correo en el cliente de correo habitual del técnico responsable. De esta manera se evitan los olvidos y los mensajes de nuevos comentarios siempre encontrarán alguien que los lea.
 
 - Crear una vista SQL que seleccione todos los comentarios con ``state`` igual a 2 y añadirla como capa en el portal. De esta manera, cuando el técnico valida una entrada, ésta se muestra automáticamente en el portal.
-

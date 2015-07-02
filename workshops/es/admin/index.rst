@@ -7,7 +7,8 @@ Contents:
    :maxdepth: 2
 
    roadmap
-   installation
+   geotalleres/geoserver-install/geoserver_install
+   portal_install
    architecture
    summary_admin
    winscp

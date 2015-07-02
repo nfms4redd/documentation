@@ -91,7 +91,7 @@ pygments_style = 'sphinx'
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'default'
+html_theme = 'classic'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -240,3 +240,16 @@ texinfo_documents = [
 
 # How to display URL addresses: 'footnote', 'no', or 'inline'.
 #texinfo_show_urls = 'footnote'
+
+# -- Substitutions Setup
+rst_prolog = u"""
+.. |jsanz|       replace:: Jorge Sanz `@xurxosanz`_ · jsanz@osgeo.org
+.. |pferrer|     replace:: Pedro-Juan Ferrer `@vehrka`_ · pferrer@osgeo.org
+.. |isanchez|    replace:: Iván Sanchez `@realivansanchez`_ · ivan@sanchezortega.es
+.. |stramoyeres| replace:: Santiago Tramoyeres `@santracraus`_
+
+.. _@vehrka: http://twitter.com/vehrka
+.. _@realivansanchez: http://twitter.com/realivansanchez
+.. _@xurxosanz: http://twitter.com/xurxosanz
+.. _@santracraus: http://twitter.com/santracraus
+"""
