@@ -29,4 +29,5 @@ Contents:
    feedback
    admin-scripts
    authentication
+   performance_checklist
    backups
