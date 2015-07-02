@@ -8,9 +8,7 @@ Pretende repasar las cuestiones básicas a tener en cuenta para un rendimiento a
 Esta lista se puede ir modificando o ampliando con todo aquello que se considere útil como buena práctica general. Los detalles sobre cómo realizar cada tarea están detallados a lo largo de este mismo manual.
 
 
-.. note:: Para casos específicos en que sea necesario profundizar:
-
-   * `GeoServer on Steroids <http://es.slideshare.net/geosolutions/gs-steroids-foss4ge2014>`_.
+.. note:: Para casos en que sea necesario profundizar: `GeoServer on Steroids <http://es.slideshare.net/geosolutions/gs-steroids-foss4ge2014>`_.
 
 
 Requisitos Hardware
@@ -18,7 +16,7 @@ Requisitos Hardware
 
 * Al menos 2 GB de RAM, hasta 4 si es posible.
 * 4 núcleos de procesador.
-* Si es posible, usar disco rápido (SSD) para GeoWebCache y GeoTIFFs para publicación.
+* Si es posible, usar un disco lo más rápido posible (SSD local) para almacenar los datos y especialmente la GeoWebCache.
 
 
 Sistema Operativo
@@ -51,6 +49,7 @@ Configuración GeoServer
 * Configurar el logging a "PRODUCTION_LOGGING".
 * Limitar el número de SRS del servicio WMS.
 * Habilitar la creación de cachés en EPSG:900913 por defecto, donde:
+
   * Las capas Raster se cachearán en JPEG.
   * Las capas Vectoriales se cachearán en PNG8.
   * Los grupos de capas se cachearán en ambos formatos (JPEG, PNG8).
@@ -76,6 +75,8 @@ Datos Vectoriales
 
 * Tras actualizar una capa vectorial, ejecutar un VACUUM ANALYZE. Para capas que se editen contínuamente, programar la ejecución periódica de VACUUM ANALYZE.
 
+.. warning :: Si GeoServer debe acceder a una Base de Datos PostGIS remota (alojada en otra máquina), asegurarse de que la conexión de red entre ambas máquinas es de excelente calidad, y si puede ser dedicada: la transferencia de datos va a ser masiva.
+
 
 Datos Raster
 ------------
@@ -86,3 +87,4 @@ Datos Raster
 * Cada fichero GeoTIFF debería rondar los 2 GB. Para mosaicos, trocear en caso de que pasen de 4 GB, o agrupar si quedan por debajo de 1 GB.
 * Para coberturas enormes (por ejemplo, ortofoto nacional de gran resolución), hay que aplicar técnicas excepcionales: compresión interna JPEG, ImagePyramid.
 
+.. warning :: No se recomienda que los datos raster (habitualmente GEOSERVER_DATA_DIR) estén en una unidad remota, puesto que la transferencia de datos para GeoTIFF sin comprimir es todavía más masiva que en el caso de datos vectoriales.
