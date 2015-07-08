@@ -25,6 +25,7 @@ Contents:
    portal_configuration
    portal_raster_config
    portal_temporal
+   metatileado
    statistics
    feedback
    admin-scripts
