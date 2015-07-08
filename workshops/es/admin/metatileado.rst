@@ -79,44 +79,44 @@ Para ello, mediante el uso de GeoServer, publicamos la capa y le aplicamos el si
     
 De esta manera, publicada la capa, podremos observar a través de la previsualización de capas, que el aspecto de la capa es el siguiente:
 
-.. image:: ../_static/metatiles/sin_tiled.png
+.. image:: _static/metatiles/sin_tiled.png
     :target: http://demo.geomati.co/geoserver/unredd-test/wms?service=WMS&version=1.1.0&request=GetMap&layers=unredd-test:provincias_inicial&styles=&bbox=-73.5777809999999,-55.06152999999995,-53.59183499999989,-21.778547999999944&width=461&height=768&srs=EPSG:4326&format=application/openlayers
 
 En este momento la capa se está sirviendo como una sola imagen. Esto lo podremos comprobar en la pestaña de ``Red`` de las herramientas de desarrollo de nuestro navegador (Google Chrome en este caso):
 
-.. image:: ../_static/metatiles/unique_petition.png
+.. image:: _static/metatiles/unique_petition.png
 
 Para conseguir una mejor experiencia de usuario, se usa las peticiones teseladas, que consiste en particionar la imagen total en varias de menor tamaño, tiles (teselas), y de esta manera la descarga de la imagen se realiza en multiples imagenes que unidas componen la imagen total. En nuestro caso, para definir el uso de las teselas, podremos, desde el previsualizador de capas, en los parámetros adicionales:
 
-.. image:: ../_static/metatiles/aditional_parameters.png
+.. image:: _static/metatiles/aditional_parameters.png
 
 Desde la barra de parámetros opcionales, podremos definir que nos devuelva la imagen teselada, para ello en la opción **Tilling**, seleccionamos **Tiled**. Podremos comprobar en la pestaña de ``Red`` de nuestras herramientas de desarrollo que ahora en vez de realizar una única petición, realiza varias, una por cada tesela, para componer la imagen total:
 
-.. image:: ../_static/metatiles/tiled.png
+.. image:: _static/metatiles/tiled.png
 
 La diferencia es que en este último caso, cada petición realizada por el cliente, se trata de una parte de la imagen global:
 
-.. image:: ../_static/metatiles/single_tile.png
+.. image:: _static/metatiles/single_tile.png
 
 El problema que aparece es que en algunas provincias, desaparecen las etiquetas con los nombres. Según variemos el zoom, podremos observar que estas etiquetas van apareciendo y desapareciendo de manera aleatoria.
 
-.. image:: ../_static/metatiles/missing.png
+.. image:: _static/metatiles/missing.png
 
 Esto es debido al proceso de creación de las teselas. Lo que sucede es que en el momento de definir la tesela, el servidor comprueba que la etiqueta esté completamente incluida en la tesela, y en caso contrario, delega la creación de la etiqueta en otra tesela, pero, si como en este caso, la etiqueta no vuelve a encajar dentro de otra tesela, esta etiqueta no será dibujada. Como se observa en la siguente figura, para la provincia por encima de Rio Negro y debajo de Mendoza, que aparece sin etiqueta, se puede ver como el límite de la tesela, coincide justo con la posición donde estaría la etiqueta.
 
-.. image:: ../_static/metatiles/tile_not_label.png
+.. image:: _static/metatiles/tile_not_label.png
 
 Solución 1: Metatileado
 ....................................
 
 Las metatiles son tiles creadas de la combinación de varias tiles. Su beneficio es que el servidor de mapas genera el contenido de las tiles a partir de una metatile creada anteriormente y que después se partirá en el número de tiles necesario.
 
-.. image:: ../_static/metatiles/metatile.png
+.. image:: _static/metatiles/metatile.png
 
 En la imagen anterior podemos observar una metatile 3x3, que está compuesta por 9 tiles. 
 Además de la composición en N tiles, las metatiles disponen de una parte que es el buffer, que será tenida en cuenta a la hora de generar la metatile, pero que no se mostrará en las teselas resultantes de la metatile. 
 
-.. image:: ../_static/metatiles/metatile_gutter.png
+.. image:: _static/metatiles/metatile_gutter.png
 
 El objetivo de este buffer es permitir que las etiquetas, marcadores, etc, que se encuentran en los límites de la metatile, se dibujen correctamente ya que estos elementos serán tenidos en cuenta en la generación de las teselas de esa metatile.
 
@@ -127,7 +127,7 @@ GeoWebCache, integrado en GeoServer es el que aporta la solución del metatilead
 
 vamos a la pestaña ``Tile Caching`` de nuestra capa publicada en GeoServer
 
-.. image:: ../_static/metatiles/tile_caching_layer.png
+.. image:: _static/metatiles/tile_caching_layer.png
 
 en las opciones de ``Tile cache configuration`` selecciones los siguientes valores:
 
@@ -136,7 +136,7 @@ en las opciones de ``Tile cache configuration`` selecciones los siguientes valor
 * En ``Metatiling Factors`` seleccionamos valores 4 ``tiles wide`` por 4 ``tiles high``
 * Seleccionamos un tamaño de Gutter (buffer) de 100 pixels
 
-.. image:: ../_static/metatiles/tile_cache_configuration.png
+.. image:: _static/metatiles/tile_cache_configuration.png
 
 
 De esta manera, se generará una metatile de 4x4, con un buffer de 100px.
@@ -161,7 +161,7 @@ Otra solución al problema de las etiquetas de las capas es la separación de lo
 
 A partir de la capa de polígonos se obtiene una capa con los puntos interiores mediante el uso, por ejemplo, de un SIG de Escritorio como QGIS o mediante el uso de cualquier otra herramienta SIG como PostGIS, OGR, etc. El producto final del procesamiento será una capa de puntos.
 
-.. image:: ../_static/metatiles/centroides.png
+.. image:: _static/metatiles/centroides.png
     :target: http://demo.geomati.co/geoserver/unredd-test/wms?service=WMS&version=1.1.0&request=GetMap&layers=unredd-test:centroides_sin_estilo&styles=&bbox=-70.11797893048644,-54.33202129909892,-54.64727704784167,-23.317464204714994&width=383&height=768&srs=EPSG:4326&format=application/openlayers
 
 Ahora deberemos dividir el SLD con el estilo original en dos partes y aplicaremos estos estilos a cada una de las capas. Por un lado mostraremos los contornos de las provincias sobre la capa de provincias original::
@@ -203,7 +203,7 @@ Ahora deberemos dividir el SLD con el estilo original en dos partes y aplicaremo
     
 lo que dará como resultado:
 
-.. image:: ../_static/metatiles/provincias_only.png
+.. image:: _static/metatiles/provincias_only.png
     :target: http://demo.geomati.co/geoserver/unredd-test/wms?service=WMS&version=1.1.0&request=GetMap&layers=unredd-test:provincias&styles=&bbox=-73.5777809999999,-55.06152999999995,-53.59183499999989,-21.778547999999944&width=461&height=768&srs=EPSG:4326&format=application/openlayers
 
 y por otro lado usaremos el estilo de las etiquetas con la capa de puntos que acabamos de generar::
@@ -255,7 +255,7 @@ y por otro lado usaremos el estilo de las etiquetas con la capa de puntos que ac
 
 lo que mostrará la capa de la siguiente manera:
 
-.. image:: ../_static/metatiles/labels.png
+.. image:: _static/metatiles/labels.png
     :target: http://demo.geomati.co/geoserver/unredd-test/wms?service=WMS&version=1.1.0&request=GetMap&layers=unredd-test:centroides&styles=&bbox=-70.11797893048644,-54.33202129909892,-54.64727704784167,-23.317464204714994&width=383&height=768&srs=EPSG:4326&format=application/openlayers
 
 Ahora deberemos pinchar ambas capas por separado en nuestro visor, aplicando el teselado en la de provincias y mostrando sin teselar la de las etiquetas.
