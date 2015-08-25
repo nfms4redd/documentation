@@ -77,10 +77,6 @@ portal.properties
 
   Idioma por defecto.
 
-* highlight-bounds=true
-
-  Si cuando se pide información sobre un objeto, al pasar el ratón sobre la tabla de atributos se resalta sólo el encuadre (bounds) del objeto y no el contorno. 
-
 * db-schema=portal_redd
 
   Nombre del esquema donde están las tablas necesarias para las distintas funcionalidades como estadísticas y feedback
@@ -140,8 +136,14 @@ Define la estructura de capas del proyecto. Consiste en un elemento JSON con cua
 	* baseUrl: URL del servidor WMS que sirve la capa. Si se especifica una URL sin servidor, por ejemplo "/diss_geoserver/gwc/service/wms", se usará ``default-server``.
 	* wmsName: Nombre de la capa en el servicio WMS
 	* imageFormat: Formato de imagen a utilizar en las llamadas WMS
-	* queryable: Si se pretende ofrecer herramienta de información para la capa o no. La herramienta de información sólo tiene en cuenta la instancia temporal general, no la específica de la capa que puede darse cuando se instala el plugin ``layer-time-sliders``. Esto sólo puede darse cuando se activa esta opción para capas con varias instancias temporales por lo que se recomienda evitar esta situación.
-	    
+	* queryType: Protocolo usado para la herramienta de información: "wfs" o "wms". En caso de ser "wfs" los siguientes parámetros son obligatorios: *queryUrl*, *querGeomFieldName*, *queryFieldNames*, *queryFieldAliases*, *queryTimeField* (en caso de ser una capa temporal). En caso de ser "wms" no hay ningún parámetro adicional obligatorio, por lo que una capa que quiera usar WMS para la herramienta de información puede configurarse sólo con: ``"queryType":"wms"``. Si la capa no tiene un parámetro ``queryType`` la capa no será consultable.
+	* queryUrl: URL base a utilizar en la petición de información. Base del servidor WMS o WFS a utilizar (según ``queryType``). Si no se especifica se toma ``baseUrl``.
+	* queryGeomFieldName: Obligatorio en el caso de ``"queryType":"wfs"``. El nombre del campo geométrico. Típicamente "geom", "the_geom", "geometry", etc.
+	* queryFieldNames: Obligatorio en el caso de ``"queryType":"wfs"``. Nombres de los campos que se quieren obtener en la petición de info.
+	* queryFieldAliases: Obligatorio en el caso de especificar ``queryFieldNames``. Aliases de los campos especificados en ``queryFieldNames``.
+	* queryTimeFieldName: Obligatorio en el caso de ``"queryType":"wfs"`` si la capa tiene varias instancias temporales. Sin uso en el caso de ``"queryType":"wms"``. 
+	* queryHighlightBounds: Sólo para el caso ``"queryType":"wms"``. Si se desea resaltar solo el rectángulo que encuadra la geometría de los objetos consultados (``true``) o toda la geometría (``false``). Por defecto es ``false``. En los casos en los que la geometría es muy grande puede ser conveniente ponerlo a ``true`` para que el proceso de resaltado sea más rápido.
+	
 	Por ejemplo:
 		
 	.. code-block:: javascript
