@@ -1,4 +1,4 @@
-Mensajes relevantes
+Referencia mensajes
 ======================
 
 .. _modules-loaded:
