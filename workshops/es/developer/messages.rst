@@ -84,9 +84,33 @@ Ejemplo de uso::
 info-features
 -----------------------------
 
+Resultados de la petición de información a una única capa.
+
 Parámetros:
 
-* features: array con las features OpenLayers
+* wmsLayerId: Id de la capa a la que pertenecen las features.
+* features: array con las features OpenLayers. Cada feature tiene:
+
+  * Una propiedad "aliases" que es un array que contiene un objeto con propiedades "name" y "alias" para cada atributo de la feature. Por ejemplo:
+  
+    .. code-block:: javascript
+  
+	[{
+		"name" : "ident",
+		"alias" : "Id"
+	},
+	{
+		"name" : "nprov",
+		"alias" : "Nombre"
+	},
+	{
+		"name" : "pop96",
+		"alias" : "Población (1996)"
+	}]
+  
+  * Opcionalmente un atributo "bbox" con el bounding box de la geometría de la feature. Siempre en EPSG:900913.
+  * Opcionalmente un atributo "geometry" que puede contener la geometría de la feature o el bounding box (en caso de que así se configure en el layers.json). Siempre en EPSG:900913.
+
 * x: Posición X en la que se hizo click para obtener la información
 * y: Posición Y en la que se hizo click para obtener la información
 
@@ -217,9 +241,9 @@ Más información:
 highlight-feature
 -----------------------------
 
-Indica que se debe resaltar la feature que se pasa como parámetro
+Indica que se debe resaltar la geometría que se pasa como parámetro
 
-Parámetros: OpenLayers.Feature
+Parámetros: OpenLayers.Geometry
 
 Ejemplo de uso:
 
