@@ -3,40 +3,31 @@
 Añadir elementos a la interfaz
 ================================
 
-Se crea el módulo de la forma habitual, creando el fichero en el directorio de módulos y añadiendo el módulo a la propiedad ``client.modules`` del fichero portal.properties.
+Se crea el módulo de la forma habitual, creando el fichero en el directorio de módulos y añadiendo el módulo como dependencia al pom.xml del proyecto.
 
-A continuación se debe elegir en qué punto de la página se quiere añadir el botón. En este caso queremos añadirlo a la barra de herramientas principal. Para ello tenemos que obtener el objeto div de dicha barra, el cual nos lo proporciona el módulo ``layout``, que importaremos como dependencia::
+A continuación se debe elegir en qué punto de la página se quiere añadir el botón. En este caso queremos añadirlo a la barra de herramientas principal. Para ello tenemos que obtener el objeto div de dicha barra, el cual nos lo proporciona el módulo ``toolbar``, que importaremos como dependencia::
 
-	define([ "layout" ], function(layout) {
+	define([ "toolbar" ], function(toolbar) {
 	
 	});
 
-Si observamos el módulo layout, podemos ver que devuelve los objetos jQuery en un objeto y que sólo tenemos que acceder a la propiedad ``toolbar`` para acceder al div::
+Si observamos el módulo toolbar, podemos ver que devuelve un objeto jQuery con el div y que sólo tenemos que acceder al objeto ``toolbar`` para acceder al div::
 
-
-	return {
-		"banner": divBanner,
-		"toolbar": divToolbar,
-		"timeSlider": divTimeSlider,
-		"map": divMap,
-		"layers": divLayerList,
-		"activeLayers": divActiveLayerList,
-		"layerListSelector":  divLayerListSelector
-	};
+	return divToolbar
 
 En este punto podríamos realizar una prueba para comprobar que tenemos una referencia valida al div. El siguiente código hace invisible el div de la barra de herramientas::
 
-	define([ "layout" ], function(layout) {
-		layout.toolbar.hide();	
+	define([ "toolbar" ], function(toolbar) {
+		toolbar.hide();	
 	});
 
 Si hemos hecho todos los pasos correctamente, veremos que la barra de herramientas no aparece, ya que la hemos escondido en nuestro módulo.
 
 Lo único que queda por hacer es reemplazar el código de prueba anterior por otro que cree un botón. Esto lo podemos hacer creando un tag ``<button>`` con jQuery::
 
-	define([ "layout", "jquery" ], function(layout, $) {
-		var aButton = $("<button/>").attr("id", "miboton").html("púlsame");
-		aButton.appendTo(layout.toolbar);
+	define([ "toolbar", "jquery" ], function(toolbar, $) {
+		var aButton = $("<button/>").attr("id", "miboton").addClass("blue_button").html("púlsame");
+		aButton.appendTo(toolbar);
 		aButton.click(function() {
 			alert("boton pulsado");
 		});
