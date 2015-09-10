@@ -508,4 +508,15 @@ Ejemplo de uso::
 
 	bus.send("show-group-info", [ "base" ]);
 	
-	
+wait-mask
+---------------
+
+Muestra un indicador de que el sistema está ocupado y el usuario debe esperar
+
+Parámetros: Texto informativo si se quiere activar o false si se quiere desactivar
+
+Ejemplo de uso::
+
+	bus.send("wait-mask", "Enviando información al servidor...");
+	...
+	bus.send("wait-mask", false);
