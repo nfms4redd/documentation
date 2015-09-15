@@ -108,8 +108,8 @@ Parámetros:
 		"alias" : "Población (1996)"
 	}]
   
-  * Opcionalmente un atributo "bbox" con el bounding box de la geometría de la feature. Siempre en EPSG:900913.
-  * Opcionalmente un atributo "geometry" que puede contener la geometría de la feature o el bounding box (en caso de que así se configure en el layers.json). Siempre en EPSG:900913.
+  * Una propiedad "bounds" con el bounding box de la geometría de la feature o null si el servidor no la devolvió. Siempre en EPSG:900913.
+  * Una propiedad highlightGeom con la geometría de la feature o el bounding box (en caso de que así se configure en el layers.json) o null si el servidor no devolvió datos geométricos. Siempre en EPSG:900913.
 
 * x: Posición X en la que se hizo click para obtener la información
 * y: Posición Y en la que se hizo click para obtener la información
