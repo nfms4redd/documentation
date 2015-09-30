@@ -63,6 +63,7 @@ Parámetros: Un objeto con las siguientes propiedades:
 * complete: función a ejecutar cuando el servidor responda, sea satisfactoriamente o tras un error
 * errorMsg: Mensaje de error
 * error: función a ejecutar cuando el servidor responda con un error. Por defecto se generará un mensaje de error con el contenido de errorMsg.
+* controlCallBack: función que recibe el objeto XMLHttpRequest que representa la petición. Este objeto tiene métodos como ``abort()`` que permiten la cancelación de la petición
 
 Ejemplo de uso:
 
