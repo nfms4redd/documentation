@@ -529,3 +529,25 @@ Parámetros: Ninguno
 Ejemplo de uso::
 
 	bus.send("hide-wait-mask");
+	
+activate-feedback
+-------------------
+
+Activa el modo feedback mostrando la ventana y seleccionando la herramienta para el dibujado del polígono sobre el que se da el feedback.
+
+Parámetros: ninguno
+
+Ejemplo de uso::
+
+	bus.send("activate-feedback");
+	
+deactivate-feedback
+-------------------
+
+Desactiva el modo feedback, ocultando la ventana y volviendo a la herramienta por defecto (navegación).
+
+Parámetros: ninguno
+
+Ejemplo de uso::
+
+	bus.send("deactivate-feedback");
