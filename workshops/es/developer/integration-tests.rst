@@ -15,6 +15,8 @@ Lo primero es levantar un servicio de base de datos que pueda ser utilizado por 
 	db-password=unr3dd
 	db-test-schema=integration_tests
 
+Actualmente esta configuración está apuntando al servidor local ya que así lo requiere el servidor de integración continua Travis.
+
 Configuración del plugin Feedback
 -----------------------------------
 
@@ -30,6 +32,8 @@ y pueda enviar emails::
 	feedback-mail-password=mipassword
 	feedback-mail-title=Comentario en portal UNREDD
 	feedback-mail-text=Por favor, visite $url para confirmar el envío.
+
+Este fichero portal.properties se encuentra en un directorio de configuración propio de los tests de integración, en ``integration-tests/test_config``. Como para enviar correos es necesario darle al sistema el password de onuredd@gmail.com y no queremos guardarlo en un repositorio de código público, en este portal.properties la propiedad ``feedback-mail-password`` tiene el valor $password, que se reemplazará por el valor de la variable de entorno ONUREDDMAILPASSWORD antes de ejecutar los tests.
 
 Ejecución de los tests
 --------------------------
