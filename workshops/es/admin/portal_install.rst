@@ -1,21 +1,57 @@
 Instalación del portal
 =======================
 
+.. note:: `Obtener aquí la última versión del fichero unredd-portal.war <http://demo.geomati.co/fao/portal/latest/unredd-portal.war>`_.
+
 La instalación del portal se realiza mediante el copiado del fichero .war de la aplicación al directorio ``webapps`` de la instancia Tomcat. Por ejemplo::
 
-  $ sudo cp unredd-portal.war /var/tomcat/webapps/portal.war
+	sudo cp unredd-portal.war /var/lib/tomcat/webapps/portal.war
 
 En respuesta a esta acción, Tomcat descomprimirá los contenidos del WAR en un directorio con el mismo nombre que el fichero .war y la aplicación se podrá acceder en:
 
-  http://localhost/portal/
+	http://localhost:8080/portal/
+
+Para exponer la aplicación por el puerto HTTP 80 a través de Apache2, editar el fichero ``/etc/apache2/sites-enabled/000-default.conf`` y añadir lo siguiente bajo ``<VirtualHost *:80>``::
+
+	ProxyPass        /portal ajp://localhost:8009/portal
+	ProxyPassReverse /portal ajp://localhost:8009/portal
+
+Reiniciar el servidor::
+
+	sudo service apache2 restart
+
+Y acceder a:
+
+	http://localhost/portal/
+
 
 Configuración del portal
-------------------------------
+------------------------
 
-Para la personalización del portal es necesario crear un directorio de configuración en ``/var/portal`` (o donde se haya configurado la variable PORTAL_CONFIG_DIR en setenv.sh). Se puede encontrar un directorio de configuración de ejemplo en el portal desempaquetado en la operación anterior, en ``/var/tomcat/portal/webapps/portal/WEB-INF/default_config``. La forma más fácil de crear el directorio de configuración es tomar el de ejemplo como base::
+Para la personalización del portal es necesario crear un directorio de configuración en ``/var/portal``. Se puede encontrar un directorio de configuración de ejemplo en el portal desempaquetado en la operación anterior, en ``/var/lib/tomcat/portal/webapps/portal/WEB-INF/default_config``. La forma más fácil de crear el directorio de configuración es tomar el de ejemplo como base::
 
-  $ sudo mkdir /var/portal
-  $ sudo cp -R /var/tomcat/webapps/portal/WEB-INF/default_config/* /var/portal/
+	sudo mkdir /var/portal
+	sudo cp -R /var/tomcat/webapps/portal/WEB-INF/default_config/* /var/portal/
+
+Y luego, hay que indicar a la aplicación cuál es la nueva ubicación. Editar `/etc/default/tomcat`, añadiendo la opción PORTAL_CONFIG_DIR a JAVA_OPTS::
+
+	...
+	PORTAL_CONFIG_DIR=/var/portal
+	...
+	JAVA_OPTS="... -DPORTAL_CONFIG_DIR=$PORTAL_CONFIG_DIR"
+
+El resultado final de `/etc/default/tomcat7` sería::
+
+	JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
+	GEOSERVER_DATA_DIR=/var/geoserver
+	PORTAL_CONFIG_DIR=/var/portal
+
+	JAVA_OPTS="-server -Xms1560m -Xmx2048m -XX:PermSize=256m -XX:MaxPermSize=512m -XX:+UseConcMarkSweepGC -XX:NewSize=48m -Dorg.geotools.shapefile.datetime=true -Duser.timezone=GMT -DGEOSERVER_DATA_DIR=$GEOSERVER_DATA_DIR -Dfile.encoding=UTF-8 -DMINIFIED_JS=true -DPORTAL_CONFIG_DIR=$PORTAL_CONFIG_DIR"
+
+Y reiniciamos tomcat::
+
+	sudo service tomcat7 restart
+
 
 Funcionalidades con acceso a base de datos
 -------------------------------------------
