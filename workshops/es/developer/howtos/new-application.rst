@@ -227,6 +227,7 @@ Primero, hay que introducir la siguiente sección en el ``pom.xml`` de ``mi-app`
 							<goal>generate-buildconfig</goal>
 						</goals>
 						<configuration>
+							<mainTemplate>${project.build.directory}/requirejs/main.js</mainTemplate>
 							<webClientFolder>${project.build.directory}/requirejs/nfms</webClientFolder>
 							<buildconfigOutputPath>${project.build.directory}/buildconfig.js</buildconfigOutputPath>
 							<mainOutputPath>${project.build.directory}/requirejs/nfms/modules/main.js</mainOutputPath>
