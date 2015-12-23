@@ -394,6 +394,7 @@ Parámetros:
 
 * id de la portalLayer que ha determinado su instante temporal.
 * objeto Date con el instante temporal seleccionado
+* cadena de carácteres con el nombre del estilo que se debe usar para esta instancia temporal. Puede ser nulo si la capa no requiere un estilo distinto por instante.
 
 Más información:
 
