@@ -218,7 +218,7 @@ Primero, hay que introducir la siguiente sección en el ``pom.xml`` de ``mi-app`
 			<plugin>
 				<groupId>org.fao.unredd</groupId>
 				<artifactId>jwebclient-analyzer-maven-plugin</artifactId>
-				<version>3.1-SNAPSHOT</version>
+				<version>4.0.1</version>
 				<executions>
 					<execution>
 						<id>generate-buildconfig</id>
@@ -228,7 +228,7 @@ Primero, hay que introducir la siguiente sección en el ``pom.xml`` de ``mi-app`
 						</goals>
 						<configuration>
 							<mainTemplate>${project.build.directory}/requirejs/main.js</mainTemplate>
-							<webClientFolder>${project.build.directory}/requirejs/nfms</webClientFolder>
+							<webClientFolder>${project.build.directory}/requirejs</webClientFolder>
 							<buildconfigOutputPath>${project.build.directory}/buildconfig.js</buildconfigOutputPath>
 							<mainOutputPath>${project.build.directory}/requirejs/nfms/modules/main.js</mainOutputPath>
 						</configuration>
