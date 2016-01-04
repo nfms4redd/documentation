@@ -28,6 +28,7 @@ Contents:
    metatileado
    statistics
    feedback
+   footnote
    admin-scripts
    authentication
    performance_checklist
