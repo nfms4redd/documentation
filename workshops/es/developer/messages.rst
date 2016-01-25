@@ -50,6 +50,23 @@ Más información:
 * :ref:`moduleconfiguration`
 
 
+.. _reset-layers:
+
+reset-layers
+-----------------------------
+
+Se envía para resetear la configuración de capas del portal.
+
+Como norma general, cualquier módulo que escuche los eventos :ref:`add-layer`, :ref:`add-group` o :ref:`layers-loaded` también deberá escuchar el evento ``reset-layers``, y devolver el estado interno del módulo (y del DOM) al que tenía justo antes de empezar a cargar grupos y capas.
+
+
+Parámetros: Ninguno
+
+Más información:
+
+* :ref:`add-layer`
+* :ref:`add-group`
+* :ref:`layers-loaded`
 
 ajax
 -----------------------------
