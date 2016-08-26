@@ -54,6 +54,26 @@ Para revisar la versión de GeoServer accederemos al servidor desde nuestro clie
 
 GeoWebCache
 ===========
+GeoWebCache (GWC) se encargará de crear las teselas de las capas más pesadas y almacenarlas en el disco duro, de manera estática, para evitar el procesamiento a la hora de mostrar
+las imágenes y así poder realizar esto de una manera más fluida. La estrategia que se utiliza básicamente es seleccionar unos bounding box y unos niveles de zoom y pregenerar
+las teselas correspondientes para esas zonas. Estas son almacenadas en el disco duro del servidor y será publicadas desde allí para las peticiones que correspondan. De manera
+somera, es interesante el uso de GWC para capas que sean pesadas, no se actualicen los datos muy a menudo y en los niveles de zoom donde sean más utilizados.
+
+Sobre la utilización de GeoWebCache existe en la documentación, `Pregeneración de teselas en GeoWebCache <http://snmb-admin.readthedocs.io/en/latest/geotalleres/geowebcache/pregeneracion.html>`_
+
+Comprobar, si corresponde, el uso de GWC para las capas y la capacidad del servidor para guardar imágenes, así como la estrategía de la generación de estas teselas.
+
+Para comprobar el estado del disco para GWC:
+
+1. En el servidor GeoServer ir a la sección *Tile Caching* -> *Disk Quota*
+
+.. image:: _static/disk_quota.png
+    :align: center
+
+2. Modificar los parametros de configuración adaptándolos a las necesidades especiales del portal
+
+.. image:: _static/configure_disk_quota.png
+    :align: center
 
 PostgreSQL & PostGIS
 ====================
