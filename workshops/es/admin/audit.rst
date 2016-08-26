@@ -72,7 +72,7 @@ relación que se está comprobando y realizando la comprobación de la relación
 
 Para comprobar la existencia de índices espaciales en nuestras tablas, deberemos:
 
-1. Conectarnos a nuestra base de datos con el cliente que utilicemos a menudo (se recomienda el uso de `pgAdmin3 <https://www.pgadmin.org/>`_)
+1. Conectarnos a nuestra base de datos con el cliente que utilicemos a menudo (las siguientes imágenes han sido obtenidas usando `pgAdmin3 <https://www.pgadmin.org/>`_)
 2. Seleccionamos la tabla que deseamos inspeccionar:
 
 .. image:: _static/table_pgadmin.png
@@ -87,6 +87,24 @@ Para comprobar la existencia de índices espaciales en nuestras tablas, deberemo
 
 .. image:: _static/info_table_index.png
     :align: center
+
+A través de la consola utilizando el cliente *psql* también podremos obtener la información de las tablas. Para ello nos conectaremos al servidor de bases de datos
+a través del cliente::
+
+  $ psql -U nombre_usuario -d nombre_base_datos
+
+una vez conectados a la base de datos inspeccionaremos las tablas espaciales para ver si tienen creados los índices::
+
+  # \d+ nombre_tabla
+
+a lo que obtendremos algo similar a esto:
+
+.. image:: _static/indexes_psql.png
+    :align: center
+
+donde se indica que la capa tiene definido el índice espacial::
+
+  "zona_prioritaria_geom_idx" gist (geom)
 
 `Mas información sobre índices espaciales <https://geotalleres.readthedocs.io/es/latest/postgis-indexacion-espacial/indexacion_espacial.html>`_
 
