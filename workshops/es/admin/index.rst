@@ -33,3 +33,4 @@ Contents:
    authentication
    performance_checklist
    backups
+   audit
