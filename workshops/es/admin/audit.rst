@@ -153,6 +153,19 @@ donde se podrán observar todos los archivos que componen la aplicación.
 
 Monitorización
 ==============
+La monitorización nos permitirá tener un seguimiento instantaneo del estado de nuestros servicios, así como de su rendimiento. Es interesante de cara a mantener el mejor
+servicio posible de nuestros recursos, que estos sean monitorizados en todo momento y que permita detectar posibles caidas o bajadas de rendimiento y que podamos actuar
+rápidamente para subsanarlos evitando así un mal servicio a nuestros usuarios.
+
+Existen infinidad de herramientas para realizar la monitorización de servicios. `Monit <https://mmonit.com/monit/>`_ es una herramienta sencilla en su configuración y uso,
+que nos permitirá realizar una monitorización de nuestros servicios.
+
+Asimismo GeoServer dispone de `herramientas de monitorización <http://docs.geoserver.org/2.8.3/user/extensions/monitoring/configuration.html>`_ que nos ayudarán en esta labor.
+
+Comprobar que se están realizando las tareas de monitorización de nuestros servicios.
+
+.. note::
+  Solicitar capacitación sobre monitorización de servicios.
 
 Backups
 =======
