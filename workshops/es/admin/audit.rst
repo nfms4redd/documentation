@@ -111,17 +111,11 @@ donde se indica que la capa tiene definido el índice espacial::
 Raster
 ------
 
-Portal
-======
-
-Logos y estilos propios
------------------------
-
 Optimización y seguridad
 ========================
 
 Minificación del código del portal
-==================================
+-----------------------------------
 
 La parte del portal que se ejecuta en el navegador web está desarrollada en el lenguaje JavaScript. Este lenguaje se ejecuta en el navegador que estemos utilizando,
 pero se descarga desde los servidores en los que tenemos publicados el portal. Cuanto menos ocupen los archivos, menos tiempo tardarán en descargarse y cuantos menos archivos tenga
@@ -168,9 +162,35 @@ En la instalación del portal existen tres partes sobre las que deberemos realiz
 2. GeoServer
 3. Portal
 
+.. warning::
+  Las copias de seguridad de las diferentes partes de la instalación son de **VITAL** importancia. Cualquier problema en los servidores ocasionaría la perdida
+  de los datos en la base de datos o en el servidor de mapas u ocasionaría la perdida de la configuración del portal.
+
 Creación de copias de seguridad en PostgreSQL
 ---------------------------------------------
+Con las copias de seguridad en PostgreSQL podremos mantener seguros los datos que se encuentran almacenados en la base de datos. Mediante los mecanismos de los que disponemos
+en PostgreSQL podremos restaurar la información en caso de perdida de los datos.
+
+Comprobar que se están realizando de manera correcta las copías de seguridad.
+
+.. note::
+  Documentación sobre realización de `copias de seguridad para PostgreSQL <http://snmb-admin.readthedocs.io/en/latest/geotalleres/postgresql/postgresql.html#postgresql-backup>`_
+
 Creación de copias de seguridad en GeoServer
 ---------------------------------------------
+Mediante las copias de seguridad del directorio de datos de GeoServer podremos mantener segura la configuración de nuestro servidor de mapas.
+
+Comprobar que se están realizando correctamente las copias de seguridad de GeoServer
+
+.. note::
+  Documentación sobre realización de `copias de seguridad para GeoServer <http://snmb-admin.readthedocs.io/en/latest/geotalleres/geoserver-backup/geoserver_backup.html#geoserver-backup>`_
+
 Creación de copias de seguridad para el portal
 ----------------------------------------------
+Para mantener seguro nuestro portal simplemente deberemos realizar copias de seguridad de la carpeta donde se encuentran los ficheros que configuran nuestro portal. La
+funcionalidad del mismo se encuentra en un archivo que podremos generar cuantas veces queramos a partir del código fuente.
+
+Comprobar que se están ejecutando de manera correcta las copias de seguridad del portal.
+
+.. note::
+  Documentación sobre realización de `copias de seguridad para el Portal <http://snmb-admin.readthedocs.io/en/latest/backups.html#portal>`_
