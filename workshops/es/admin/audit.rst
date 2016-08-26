@@ -110,6 +110,17 @@ donde se indica que la capa tiene definido el índice espacial::
 
 Raster
 ------
+Existen variedad de casos y de procesos para la optimización de imágenes raster. Es importante revisar los datos para poder enfocar las mejores
+optimizaciones para la particularidad de cada portal.
+
+En la `lista de rendimiento <http://snmb-admin.readthedocs.io/en/latest/performance_checklist.html#datos-raster>`_ se pueden encontrar algunos de los casos comunes de problemas que aparecen
+con los datos raster.
+
+También es importante valorar si el dato es propenso a ser vectorizado o viceversa. En el caso de coberturas será más interesante presentar estos datos como raster, mientras que
+para fenómenos aislados, puede ser interesante mostrar los datos en vectorial.
+
+.. note::
+  Solicite capacitación sobre optimización de la presentación de datos
 
 Optimización y seguridad
 ========================
