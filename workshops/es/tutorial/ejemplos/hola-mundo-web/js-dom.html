@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" /> 
+	<title>Hola mundo HTML</title>
+	<script type="text/javascript">
+		function init() { 
+			var h1Titulo = document.getElementById("titulo");
+			h1Titulo.onmouseover = function(){
+				h1Titulo.style.color = 'red';
+				var div = document.createElement("div");
+				div.id = "texto";
+				div.innerHTML = "Hemos pintado el título de rojo";
+				document.body.appendChild(div);
+			}
+			h1Titulo.onmouseout = function(){
+				h1Titulo.style.color = 'black';
+				var div = document.getElementById("texto");
+				div.parentNode.removeChild(div);
+			}
+		}
+	</script>
+</head>
+<body onload="init()">
+	<h1 id="titulo">Hola mundo</h1>
+</body>
