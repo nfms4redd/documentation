@@ -12,7 +12,7 @@ La web se construye básicamente sobre tres estándares:
 
 Podemos empezar por ver una [página HTML sencilla](ejemplos/hola-mundo-web/base.html). TODO explicar el DOM.
 
-El elemento existente en el ejemplo anterior tiene el estilo por defecto, pero con el uso de CSS podemos, por ejemplo, [cambiarle el color](ejemplos/hola-mundo-web/hola-css.html). TODO explicar que el CSS es parte del DOM.
+El elemento existente en el ejemplo anterior tiene el estilo por defecto, pero con el uso de CSS podemos, por ejemplo, [cambiarle el color](ejemplos/hola-mundo-web/hola-css.html). TODO explicar que el CSS es parte del DOM. TODO explicar # y . en la selección.
 
 Por otra parte, con el uso de Javascript podemos interactuar con el usuario, por ejemplo [decirle qué hora es](ejemplos/hola-mundo-web/hola-javascript.html)
 
@@ -22,8 +22,11 @@ TODO copiar el código de los ejemplos aquí y escribir la documentación detall
 
 ## jquery
 
-Creación de un ejemplo HTML mas complejo
-Mismo ejemplo con jquery 
+En sus inicios, jQuery permitía manipular el DOM de una manera más sencilla y más compatible. La evolución de los distintos navegadores y de los distintos estándares ha hecho estas operaciones más sencillas y cada vez tiene menos sentido utilizar jQuery. En cualquier caso, es una librería ampliamente utilizada en el portal de diseminación, por lo que es conveniente tener conocimiento de la misma. 
+
+La modificación del DOM vista en el ejemplo anterior se puede simplificar utilizando una librería llamada [jQuery](http://jquery.com).
+
+Para ello hay que copiar la librería junto con la página HTML e importarlo desde el DOM con un tag `script`, como se puede ver en [este ejemplo](ejemplos/jquery/jquery-dom.html).
 
 ## RequireJS
 
