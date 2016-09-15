@@ -38,13 +38,34 @@ Para evitar esto podemos utilizar otra librería llamada RequireJS que permite e
 
 TODO copiar el código de los ejemplos aquí y escribir la documentación detallando los elementos del código relevantes.
 
-## Plugins GeoLadris
+## Geoladris
 
-Tecnología de FAO permite agrupar modulos requirejs, librerías Javascript normales y hojas de estilo CSS en plugins. Observación de la pestaña network. Explicación de los dos tipos de empaquetado. Nos centramos en el javascript.
+El uso de RequireJS facilita la modularización de las aplicaciones web pero para que una aplicación se vuelva realmente versátil y modular hace falta un concepto de más alto nivel que nos permita:
+
+- Encapsular y reutilizar funcionalidades completas, posiblemente implementadas por varios módulos, junto con las hojas CSS asociadas.
+- Modificar la configuración de los módulos de cada funcionalidad.
+- Activar/Desactivar funcionalidades
+
+Esto es lo que hace el proyecto [Geoladris](https://github.com/geoladris/), cuyo núcleo permite la encapsulación de módulos RequireJS, CSS, librerías Javascript externas, etc. en el concepto de plugin.
+
+TODO Observación de la pestaña network con el portal de FAO e identificación de varios plugins.
+
+En concreto, un plugin Geoladris contiene los siguientes directorios:
+
+* `modules` con los módulos RequireJS y las hojas CSS propias de los módulos.
+* `jslib` con las librerías externas usadas por el plugin.
+* `styles` con las hojas CSS generales, típicamente de librerías externas.
+* `themes` con hojas CSS que definen el estilo general de los elementos del DOM aportados por el plugin.
+
+El portal de diseminación está construido sobre el núcleo de Geoladris, lo cual quiere decir que todas sus funcionalidades están agrupadas en distintos plugins que contienen la estructura de directorios recién descrita. En tanto que aplicación Java, es posible crear plugins Geoladris para extender el portal con las herramientas de programación habituales en el desarrollo de Java. Sin embargo es también posible crear plugins en el directorio de configuración, olvidándonos así de Java por completo. En lo que resta de capacitación nos centraremos en la creación de plugins **sin** necesidad de Java.
 
 ## Hola Geoladris
 
+Partimos de la base de que el portal de FAO está instalado siguiendo las instrucciones del [capítulo sobre los wars](wars.md). 
+
 Explicación de los tres directorios: creación del hola mundo en el portal
+
+
 
 ## Ejemplos:
 
