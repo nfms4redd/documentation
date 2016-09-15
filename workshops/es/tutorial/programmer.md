@@ -24,13 +24,19 @@ TODO copiar el código de los ejemplos aquí y escribir la documentación detall
 
 En sus inicios, jQuery permitía manipular el DOM de una manera más sencilla y más compatible. La evolución de los distintos navegadores y de los distintos estándares ha hecho estas operaciones más sencillas y cada vez tiene menos sentido utilizar jQuery. En cualquier caso, es una librería ampliamente utilizada en el portal de diseminación, por lo que es conveniente tener conocimiento de la misma. 
 
+TODO meter los ejemplos de la documentación anterior y explicarlos.
+
 La modificación del DOM vista en el ejemplo anterior se puede simplificar utilizando una librería llamada [jQuery](http://jquery.com).
 
 Para ello hay que copiar la librería junto con la página HTML e importarlo desde el DOM con un tag `script`, como se puede ver en [este ejemplo](ejemplos/jquery/jquery-dom.html).
 
 ## RequireJS
 
-RequireJS para evitar los problemas expuestos anteriormente. Aplicación anterior en requirejs.
+Los problemas con el modo anterior de crear las páginas HTML dinámicas cuando empezamos a añadir muchas funcionalidades es que el fichero puede crecer enormemente y ser difícil de entender y por tanto de mantener y extender.
+
+Para evitar esto podemos utilizar otra librería llamada RequireJS que permite el empaquetado de ficheros javascript en módulos y gestiona las dependencias entre estros módulos.
+
+TODO copiar el código de los ejemplos aquí y escribir la documentación detallando los elementos del código relevantes.
 
 ## Plugins GeoLadris
 
