@@ -1,4 +1,4 @@
-# Web ARchives
+# Portal de diseminación, una aplicación web Java
 
 El geoportal es una aplicación web Java que se empaqueta en un fichero con extensión .war (Web ARchive) y requiere de un contenedor de aplicaciones Java para funcionar, como Apache Tomcat. En la presente documentación se utilizará Tomcat 7 o posterior.
 
