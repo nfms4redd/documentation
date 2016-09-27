@@ -1,0 +1,7 @@
+{
+	"requirejs": {
+		"paths": {
+			"sweetalert": '../jslib/sweetalert/sweetalert.min'
+		}
+	}
+}

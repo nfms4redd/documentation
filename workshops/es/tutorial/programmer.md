@@ -32,6 +32,10 @@ La modificación del DOM vista en el ejemplo anterior se puede simplificar utili
 
 Para ello hay que copiar la librería junto con la página HTML e importarlo desde el DOM con un tag `script`, como se puede ver en [este ejemplo](ejemplos/jquery/jquery-dom.html).
 
+## JSON
+
+TODO breve referencia de JSON
+
 ## RequireJS
 
 Los problemas con el modo anterior de crear las páginas HTML dinámicas es que cuando empezamos a añadir muchas funcionalidades el fichero puede crecer enormemente y ser difícil de entender y por tanto de mantener y extender.
@@ -90,7 +94,9 @@ La estructura de un plugin Geoladris consta de:
 * `jslib/` directorio con las librerías externas usadas por el plugin.
 * `styles/` directorio con las hojas CSS generales, típicamente de librerías externas.
 * `themes/` directorio con hojas CSS que definen el estilo general de los elementos del DOM aportados por el plugin.
-* `conf.json` fichero con la configuración del plugin
+* `-conf.json` **Descriptor del plugin**, contiene la configuración de los módulos del plugin.
+
+TODO Enlazar a la referencia del descriptor y comentar que se puede configurar RequireJS y los módulos que nosotros implementamos. 
 
 Además, toda aplicación Geoladris consta de un directorio de configuración donde se puede cambiar la configuración de los plugins y añadir nuevos plugins. 
 
@@ -100,23 +106,101 @@ El portal de diseminación de datos de FAO está construido sobre el núcleo de 
 
 Partimos de una aplicación app base de GeoLadris, que tendremos que crear en la publicación de la versión.
 
-Explicación de los tres directorios: creación del hola mundo en el portal
+Explicación de los tres directorios.
 
-Echar un vistazo a esto: https://geomatico.slack.com/files/fergonco/F2882PLKY/instrucciones_pruebas_geoladris_micho.md
+TODO comprobar los siguientes ejemplos con la aplicación base
+* Ejemplo: creación del hola mundo en el portal (hola-geoladris)
+* Ejemplo: Migración del ejemplo mensaje-cool a Geoladris (mensaje-cool)
+* Ejemplo: Eliminar el plugin mensaje-cool y observar el resultado
+* Ejemplo: Eliminar el plugin i18n y observar el resultado
 
-## Ejemplos:
+TODO Enlazar a los ejemplos y explicar que son directorios de configuración usados por la aplicación geoladris-core
 
-* Uso de una librería externa
-* Carga de ficheros con !text
+Además de proporcionar el concepto de plugin, el núcleo de Geoladris incorpora algunas extensiones a RequireJS que facilitan el trabajo. Por ejemplo el plugin `text` que permite cargar recursos que hay en el servidor como si fueran otro módulo. Esto nos permite por ejemplo cargar una plantilla con la interfaz gráfica, o cargar unos datos fijos utilizados para un cálculo, etc. 
+
+TODO: ejemplo con !text
+
+## Configurando plugins
+
+### Habilitación y deshabilitación
+
+Ya hemos visto que podemos eliminar algunos de los plugins. Sin embargo, si la eliminación es temporal puede ser más conveniente desactivarlo. En el directorio de configuración de Geoladris existe un fichero `public-conf.json` donde se incluye la configuración de los plugins:
+
+	{
+		"plugin1": {
+		},
+		"plugin2": {
+		}
+		...
+		"pluginN": {
+		}
+	}
+
+Una de las cosas que podemos configurar para un plugin es si está activo o no. Por defecto todos los plugins están activos, pero podemos desactivarlos usando la propiedad `_enabled`. Así, si queremos desactivar el plugin que muestra el mensaje podemos usar un fichero así:
+
+	{
+		"mensaje": {
+			"_enabled" : false
+		}
+	}
+
+Ejemplo: deshabilitar el módulo que pone el título
+
+TODO: poner el código del public-conf.json aquí 
+
+### Configuración de los módulos
+
+Hasta ahora teníamos un módulo i18n que incluía las cadenas en un idioma concreto. Sin embargo podría ser interesante dar la posibilidad de que el usuario añada las traducciones para otros idiomas mediante configuración.
+
+La configuración de los módulos de un plugin se encuentra en dos lugares:
+
+* Descriptor del plugin (`-conf.json`)
+* fichero `public-conf.json` en el directorio de configuración
+
+Vamos a ver cómo podemos darle una configuración por defecto al plugin y luego cómo sobreescribirla en el directorio de configuración.
+
+De la misma manera en la que creamos un `mensaje-conf.json` para el plugin `mensaje` vamos a crear un `i18n-conf.json` en el plugin `i18n`. Pero a diferencia del primero, en este caso no vamos a configurar RequireJS sino el módulo `i18n`:
+
+	{
+		"default-conf": {
+			"i18n": {
+				"comentario" : "Hem pintat el títol en roig",
+				"hola": "Hola món"			
+			}
+		}
+	}
+
+Como podemos observar, en la propiedad `default-conf` hay una propiedad `i18n` que contiene la configuración del módulo `i18n` y que consiste en pares propiedad/valor con las traducciones que antes teníamos en el código.
+
+Si miramos el código, ahora vemos que lo que se hace es leer la configuración del plugin y que las cadenas ya no están en el código:
+
+	define(["module"], function(module) {
+		var traducciones = module.config();
+		return traducciones;
+	});
+
+Si ejecutamos el código veremos que el funcionamiento es exactamente el mismo y la única diferencia es que a nivel interno las cadenas de traducción se están obteniendo de la configuración.
+
+La ventaja es que ahora el usuario puede ir al directorio de configuración y poner las cadenas de traducción que considere oportunas, por ejemplo, en español:
+
+	{
+		"mensaje": {
+			"_enabled" : false
+		},
+		"i18n": {
+			"i18n" : {
+				"comentario" : "Hemos pintado el título de rojo",
+				"hola": "Hola mundo"			
+			}
+		}
+	}
 
 ## Portal de diseminación
 
 Partimos de la base de que el portal de FAO está instalado siguiendo las instrucciones del [capítulo sobre los wars](wars.md). 
-Portal FAO = geoladris core + plugins puestos encima = Mover tu plugin anterior al portal.
+Portal FAO = geoladris core + plugins puestos encima
 
-## Configurando plugins
-
-public-conf.json. Deshabilitado y configuración de los plugins. Hacer que el plugin se pueda configurar.
+Ejercicio: Mover tu plugin anterior al portal.
 
 ## Interacción con otros plugins
 
@@ -131,3 +215,7 @@ Requisitos del servicio usado desde Geoladris
 ## Plugins de interés en el portal FAO
 
 Se muestran los eventos de los plugins que pueden ser interesantes para construir nuevos plugins
+
+Ejemplo: internacionalización con los parámetros de la URL
+
+
