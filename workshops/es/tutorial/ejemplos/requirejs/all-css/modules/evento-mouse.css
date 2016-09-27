@@ -1,0 +1,15 @@
+div.activable {
+	display: none;
+}
+
+div.activable.activo {
+	display: block;
+}
+
+h1.activable {
+	color:black;
+}
+
+h1.activable.activo {
+	color:red;
+}
