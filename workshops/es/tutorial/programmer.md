@@ -79,12 +79,12 @@ TODO copiar el código de los ejemplos aquí y escribir la documentación detall
 
 Su funcionamiento es simple: 
 
-1. Para cada funcionalidad, existe un directorio con todos los componentes necesarios organizados de una manera precisa
-2. El núcleo de Geoladris lee todos los elementos necesarios y los organiza al vuelo como una aplicación RequireJS generando la carga de CSS en el HTML, la llamada para cargar todos los módulos, etc.)
+1. Para cada funcionalidad, existe un directorio con todos los componentes necesarios organizados de una manera precisa, que explicamos posteriormente.
+2. El núcleo de Geoladris lee todos los elementos necesarios y los ofrece como una aplicación RequireJS: generando las líneas en el documento HTML que cargan las hojas CSS, generando la llamada para cargar todos los módulos, etc.)
 
 Además de esto, Geoladris nos permite:
 - Activar y desactivar plugins mediante configuración.
-- Modificar la configuración de los módulos de un plugin.
+- Modificar la configuración de los plugins.
 
 TODO Observación de la pestaña network con el portal de FAO e identificación de varios plugins.
 
@@ -92,7 +92,7 @@ La estructura de un plugin Geoladris consta de:
 
 * `modules/` directorio con los módulos RequireJS y las hojas CSS propias de los módulos.
 * `jslib/` directorio con las librerías externas usadas por el plugin.
-* `styles/` directorio con las hojas CSS generales, típicamente de librerías externas.
+* `styles/` directorio con las hojas CSS generales, típicamente de las librerías externas.
 * `themes/` directorio con hojas CSS que definen el estilo general de los elementos del DOM aportados por el plugin.
 * `-conf.json` **Descriptor del plugin**, contiene la configuración de los módulos del plugin.
 
@@ -104,15 +104,14 @@ El portal de diseminación de datos de FAO está construido sobre el núcleo de 
 
 ## Hola Geoladris
 
-Partimos de una aplicación app base de GeoLadris, que tendremos que crear en la publicación de la versión.
+Partimos de una aplicación app base de GeoLadris TODO explicar
 
-Explicación de los tres directorios.
+TODO: Explicación de los tres directorios.
 
-TODO comprobar los siguientes ejemplos con la aplicación base
 * Ejemplo: creación del hola mundo en el portal (hola-geoladris)
 * Ejemplo: Migración del ejemplo mensaje-cool a Geoladris (mensaje-cool)
 * Ejemplo: Eliminar el plugin mensaje-cool y observar el resultado
-* Ejemplo: Eliminar el plugin i18n y observar el resultado
+* Ejemplo: Eliminar el plugin i18n y observar el resultado. Explicar que es responsabilidad del usuario gestionar las dependencias entre plugins. TODO comprobar los siguientes ejemplos con la aplicación base
 
 TODO Enlazar a los ejemplos y explicar que son directorios de configuración usados por la aplicación geoladris-core
 
@@ -145,8 +144,6 @@ Una de las cosas que podemos configurar para un plugin es si está activo o no. 
 	}
 
 Ejemplo: deshabilitar el módulo que pone el título
-
-TODO: poner el código del public-conf.json aquí 
 
 ### Configuración de los módulos
 

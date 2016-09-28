@@ -1,7 +1,7 @@
-define([ "jquery", "i18n/i18n" ], function($, i18n) {
+define([ "jquery" ], function($) {
 	$("<h1>")//
 	.attr("id", "titulo")//
-	.html(i18n["hola"])//
+	.html("Hola mundo")//
 	.appendTo("body");
 	// <h1 id="titulo">Hola mundo</h1>
 });

@@ -1,4 +1,4 @@
-define([ "jquery", "i18n", "h1-modulo" ], function($, i18n) {
+define([ "jquery", "i18n/i18n", "titulo/h1-modulo" ], function($, i18n) {
 	$("<div>")//
 	.attr("id", "texto")//
 	.html(i18n["comentario"])//

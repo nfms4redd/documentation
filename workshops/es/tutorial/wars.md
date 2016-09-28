@@ -4,6 +4,8 @@ El geoportal es una aplicación web Java que se empaqueta en un fichero con exte
 
 ## Instalación del .war en Tomcat
 
+TODO En algún punto hay que configurar el directorio de configuración, la minificación y la caché a falso. Explicar variables de entorno y propiedades de tomcat.
+
 Una vez tenemos el fichero .war con el portal tenemos que dárselo a Tomcat para que éste lo publique. Para ello hay que copiar dicho fichero en el directorio `webapps` dentro del directorio donde Tomcat está instalado, `$TOMCAT_HOME` a partir de ahora.
 
 En ese directorio podemos ver algunas aplicaciones que vienen con la instalación de Tomcat:
