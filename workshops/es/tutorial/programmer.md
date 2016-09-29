@@ -32,10 +32,6 @@ La modificación del DOM vista en el ejemplo anterior se puede simplificar utili
 
 Para ello hay que copiar la librería junto con la página HTML e importarlo desde el DOM con un tag `script`, como se puede ver en [este ejemplo](ejemplos/jquery/jquery-dom.html).
 
-## JSON
-
-TODO breve referencia de JSON
-
 ## RequireJS
 
 Los problemas con el modo anterior de crear las páginas HTML dinámicas es que cuando empezamos a añadir muchas funcionalidades el fichero puede crecer enormemente y ser difícil de entender y por tanto de mantener y extender.
@@ -98,7 +94,7 @@ La estructura de un plugin Geoladris consta de:
 
 TODO Enlazar a la referencia del descriptor y comentar que se puede configurar RequireJS y los módulos que nosotros implementamos. 
 
-Además, toda aplicación Geoladris consta de un directorio de configuración donde se puede cambiar la configuración de los plugins y añadir nuevos plugins. 
+Además, toda aplicación Geoladris consta de un directorio de configuración donde se puede cambiar la configuración de los plugins y añadir nuevos plugins.
 
 El portal de diseminación de datos de FAO está construido sobre el núcleo de Geoladris, lo cual quiere decir que todas sus funcionalidades están agrupadas en distintos plugins que contienen la estructura de directorios recién descrita. Como aplicación Java, es posible crear plugins Geoladris para extender el portal con las herramientas de programación habituales en el desarrollo de Java. Sin embargo es también posible crear plugins en el directorio de configuración, olvidándonos así de Java por completo. En lo que resta de capacitación nos centraremos en la creación de plugins **sin** necesidad de Java.
 
@@ -110,8 +106,8 @@ TODO: Explicación de los tres directorios.
 
 * Ejemplo: creación del hola mundo en el portal (hola-geoladris)
 * Ejemplo: Migración del ejemplo mensaje-cool a Geoladris (mensaje-cool)
-* Ejemplo: Eliminar el plugin mensaje-cool y observar el resultado
-* Ejemplo: Eliminar el plugin i18n y observar el resultado. Explicar que es responsabilidad del usuario gestionar las dependencias entre plugins. TODO comprobar los siguientes ejemplos con la aplicación base
+* Ejemplo: Eliminar el plugin "mensaje" y observar el resultado
+* Ejemplo: Eliminar el plugin i18n y observar el resultado. TODO Explicar que es responsabilidad del usuario gestionar las dependencias entre plugins.
 
 TODO Enlazar a los ejemplos y explicar que son directorios de configuración usados por la aplicación geoladris-core
 
@@ -143,7 +139,16 @@ Una de las cosas que podemos configurar para un plugin es si está activo o no. 
 		}
 	}
 
-Ejemplo: deshabilitar el módulo que pone el título
+Ejemplo: deshabilitar el módulo que muestra el mensaje al hacer mouse over sobre el título.
+
+	{
+		"mensaje": {
+			"_enabled": false
+		},
+		"evento-mouse": {
+			"_enabled": true
+		}
+	}
 
 ### Configuración de los módulos
 
@@ -156,18 +161,20 @@ La configuración de los módulos de un plugin se encuentra en dos lugares:
 
 Vamos a ver cómo podemos darle una configuración por defecto al plugin y luego cómo sobreescribirla en el directorio de configuración.
 
+#### Configuración por defecto
+
 De la misma manera en la que creamos un `mensaje-conf.json` para el plugin `mensaje` vamos a crear un `i18n-conf.json` en el plugin `i18n`. Pero a diferencia del primero, en este caso no vamos a configurar RequireJS sino el módulo `i18n`:
 
 	{
 		"default-conf": {
-			"i18n": {
-				"comentario" : "Hem pintat el títol en roig",
-				"hola": "Hola món"			
+			"traducciones": {
+				"comentario": "Hem pintat el títol en roig",
+				"hola": "Hola món"
 			}
 		}
 	}
 
-Como podemos observar, en la propiedad `default-conf` hay una propiedad `i18n` que contiene la configuración del módulo `i18n` y que consiste en pares propiedad/valor con las traducciones que antes teníamos en el código.
+Como podemos observar, en la propiedad `default-conf` hay una propiedad `i18n` que contiene la configuración del módulo `traducciones` y que consiste en pares propiedad/valor con las traducciones que antes teníamos en el código.
 
 Si miramos el código, ahora vemos que lo que se hace es leer la configuración del plugin y que las cadenas ya no están en el código:
 
@@ -178,6 +185,8 @@ Si miramos el código, ahora vemos que lo que se hace es leer la configuración 
 
 Si ejecutamos el código veremos que el funcionamiento es exactamente el mismo y la única diferencia es que a nivel interno las cadenas de traducción se están obteniendo de la configuración.
 
+#### Sobreescritura de la configuración por defecto
+
 La ventaja es que ahora el usuario puede ir al directorio de configuración y poner las cadenas de traducción que considere oportunas, por ejemplo, en español:
 
 	{
@@ -185,7 +194,7 @@ La ventaja es que ahora el usuario puede ir al directorio de configuración y po
 			"_enabled" : false
 		},
 		"i18n": {
-			"i18n" : {
+			"traducciones" : {
 				"comentario" : "Hemos pintado el título de rojo",
 				"hola": "Hola mundo"			
 			}

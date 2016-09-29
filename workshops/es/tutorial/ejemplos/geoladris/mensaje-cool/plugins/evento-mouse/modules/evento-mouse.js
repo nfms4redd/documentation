@@ -1,7 +1,7 @@
-define([ "jquery", "i18n/i18n", "titulo/h1-modulo" ], function($, i18n) {
+define([ "jquery", "i18n/traducciones", "titulo/h1-modulo" ], function($, traducciones) {
 	$("<div>")//
 	.attr("id", "texto")//
-	.html(i18n["comentario"])//
+	.html(traducciones["comentario"])//
 	.addClass("activable")//
 	.appendTo("body");
 	$("#titulo").addClass("activable");

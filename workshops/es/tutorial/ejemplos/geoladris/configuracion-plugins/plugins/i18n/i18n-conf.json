@@ -1,6 +1,6 @@
 {
 	"default-conf": {
-		"i18n": {
+		"traducciones": {
 			"comentario": "Hem pintat el títol en roig",
 			"hola": "Hola món"
 		}

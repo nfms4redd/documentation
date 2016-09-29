@@ -23,6 +23,15 @@ Y si Tomcat está ejecutándose, tras unos segundos vamos a ver que se crea un d
 	$ ls $TOMCAT_HOME/webapps/
 	docs  examples  host-manager  manager  ROOT  unredd-portal  unredd-portal.war
 
+TODO Configuración del directorio de configuración
+TODO Configuración de la caché
+ export NFMS_CONFIG_CACHE=false
+ export CATALINA_OPTS="-DPORTAL_CONFIG_DIR=/home/fergonco/b/java/fao/documentation/workshops/es/tutorial/ejemplos/geoladris/mensaje-cool"
+ touch ../webapps/geoladris-core.war 
+ ./shutdown.sh 
+ ./startup.sh 
+
+
 ## Logs
 
 Lo que ha sucedido anteriormente es que Tomcat ha detectado el fichero .war en su directorio de aplicaciones, lo ha descomprimido en un directorio con su mismo nombre (los ficheros .war son ficheros comprimidos que contienen una estructura de ficheros dentro) y ha inicializado la aplicación.
