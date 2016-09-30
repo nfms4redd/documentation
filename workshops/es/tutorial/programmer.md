@@ -213,7 +213,7 @@ TODO verificar que la aplicación carga con conexión a internet y el directorio
 
 TODO: crear un directorio de configuración en el que el zoom es toda latinoamérica y hay capas de los portales de Ecuador, Bolivia, Paraguay y Argentina. Guardar el directorio en los ejemplos de la documentación.
 
-* TODO Ejercicio, copiar en "plugins" del directorio anterior el plugin "mensaje" del punto anterior 
+* Ejercicio: copiar en "plugins" del directorio de configuración el plugin "mensaje" del punto anterior. 
 
 ## Interacción con otros plugins
 
@@ -224,7 +224,9 @@ Para evitar este tipo de problemas se pueden seguir una serie de estrategias. Se
 Hay una estrategia que es usada ampliamente en las aplicaciones Geoladris, que es el uso de un bus de mensajes.
 TODO explicar el message-bus
 
-* Ejemplo: crear un plugin que muestre los nombres de los países y haga zoom a los mismos.
+* TODO Ejemplo: crear un plugin que muestre los nombres de los países y haga zoom a los mismos.
+
+TODO eliminar overrides.css
 
 TODO Explicar desacople (ya no usamos el mapa de forma directa, podemos cambiarlo en el futuro por Leaflet, OL3).
 TODO comentar planes para cambiar a OL3.
