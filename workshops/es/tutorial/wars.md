@@ -2,9 +2,23 @@
 
 El geoportal es una aplicación web Java que se empaqueta en un fichero con extensión .war (Web ARchive) y requiere de un contenedor de aplicaciones Java para funcionar, como Apache Tomcat. En la presente documentación se utilizará Tomcat 7 o posterior.
 
+## Arrancar y parar Tomcat
+
+TODO Explicar los comandos para hacer es
+
+TODO Explicar comando tail y recomendar tener una ventana con dicho comando abierta
+
 ## Instalación del .war en Tomcat
 
 TODO En algún punto hay que configurar el directorio de configuración, la minificación y la caché a falso. Explicar variables de entorno y propiedades de tomcat.
+
+TODO Configuración del directorio de configuración
+TODO Configuración de la caché
+ export NFMS_CONFIG_CACHE=false
+ export CATALINA_OPTS="-DPORTAL_CONFIG_DIR=/home/fergonco/b/java/fao/documentation/workshops/es/tutorial/ejemplos/geoladris/mensaje-cool"
+ touch ../webapps/geoladris-core.war 
+ ./shutdown.sh 
+ ./startup.sh 
 
 Una vez tenemos el fichero .war con el portal tenemos que dárselo a Tomcat para que éste lo publique. Para ello hay que copiar dicho fichero en el directorio `webapps` dentro del directorio donde Tomcat está instalado, `$TOMCAT_HOME` a partir de ahora.
 
@@ -22,15 +36,6 @@ Y si Tomcat está ejecutándose, tras unos segundos vamos a ver que se crea un d
 
 	$ ls $TOMCAT_HOME/webapps/
 	docs  examples  host-manager  manager  ROOT  unredd-portal  unredd-portal.war
-
-TODO Configuración del directorio de configuración
-TODO Configuración de la caché
- export NFMS_CONFIG_CACHE=false
- export CATALINA_OPTS="-DPORTAL_CONFIG_DIR=/home/fergonco/b/java/fao/documentation/workshops/es/tutorial/ejemplos/geoladris/mensaje-cool"
- touch ../webapps/geoladris-core.war 
- ./shutdown.sh 
- ./startup.sh 
-
 
 ## Logs
 

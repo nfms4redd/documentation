@@ -203,20 +203,38 @@ La ventaja es que ahora el usuario puede ir al directorio de configuración y po
 
 ## Portal de diseminación
 
-Partimos de la base de que el portal de FAO está instalado siguiendo las instrucciones del [capítulo sobre los wars](wars.md). 
-Portal FAO = geoladris core + plugins puestos encima
+En este punto vamos a ver que el portal de diseminación del sistema nacional de monitorización de bosques (SNMB) es una aplicación Geoladris y que los mismos plugins que hicimos en los puntos anteriores son válidos en el contexto del portal.
 
-Ejercicio: Mover tu plugin anterior al portal.
+Asumimos que en la misma instancia de Tomcat en la que venimos trabajando hay un fichero portal.war con la última versión del portal de diseminación, que hará que se pueda consultar el portal en la URL "http://localhost:8080/portal.
+
+Si hemos seguido el [capítulo sobre los wars](wars.md) habremos establecido el directorio de configuración.
+
+TODO: crear un directorio de configuración en el que el zoom es toda latinoamérica y hay capas de los portales de Ecuador, Bolivia, Paraguay y Argentina. Guardar el directorio en los ejemplos de la documentación.
+
+* TODO Ejercicio, copiar en "plugins" del directorio anterior los plugins del punto anterior 
 
 ## Interacción con otros plugins
 
-interacción con el resto de la aplicación (message-bus)
+En el punto sobre Geoladris hemos visto que existen dependencias entre nuestros plugins y que si eliminamos un plugin, aquellos que tengan referencias al mismo van a fallar. En resumen, que tenemos que tener en cuenta manualmente las dependencias entre plugins.
+
+Para evitar este tipo de problemas se pueden seguir una serie de estrategias. Se pueden escribir las dependencias en un fichero README, o agrupar los módulos en plugins de forma más lógica para evitar las dependencias, etc.
+
+Hay una estrategia que es usada ampliamente en las aplicaciones Geoladris, que es el uso de un bus de mensajes.
+TODO explicar el message-bus
+
+* Ejemplo: crear un plugin que muestre los nombres de los países y haga zoom a los mismos.
+
+TODO Explicar desacople (ya no usamos el mapa de forma directa, podemos cambiarlo en el futuro por Leaflet, OL3).
+TODO comentar planes para cambiar a OL3.
 
 ## Comunicación con el servidor
 
 Descripción interacción cliente/servidor
 Ejemplos en el geoportal
 Requisitos del servicio usado desde Geoladris
+TODO insertar en el punto de la primera sesión que hay que desarrollar un pequeño servicio que devuelve la temperatura en 
+TODO Comentar que GeoServer ofrece estas capacidades  
+TODO Ejemplos de interacción con GeoServer (obtener la geometría en la que hemos pinchado y dibujar un buffer?)
 
 ## Plugins de interés en el portal FAO
 
