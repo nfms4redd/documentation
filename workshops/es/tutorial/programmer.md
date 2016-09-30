@@ -209,9 +209,11 @@ Asumimos que en la misma instancia de Tomcat en la que venimos trabajando hay un
 
 Si hemos seguido el [capítulo sobre los wars](wars.md) habremos establecido el directorio de configuración.
 
+TODO verificar que la aplicación carga con conexión a internet y el directorio de configuración
+
 TODO: crear un directorio de configuración en el que el zoom es toda latinoamérica y hay capas de los portales de Ecuador, Bolivia, Paraguay y Argentina. Guardar el directorio en los ejemplos de la documentación.
 
-* TODO Ejercicio, copiar en "plugins" del directorio anterior los plugins del punto anterior 
+* TODO Ejercicio, copiar en "plugins" del directorio anterior el plugin "mensaje" del punto anterior 
 
 ## Interacción con otros plugins
 
