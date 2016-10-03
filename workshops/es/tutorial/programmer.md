@@ -225,15 +225,19 @@ Hay una estrategia que es usada ampliamente en las aplicaciones Geoladris, que e
 TODO explicar el message-bus
 
 * Ejemplo: crear un plugin que muestre los nombres de los países y haga zoom a los mismos.
-* TODO Ejemplo: crear un plugin que muestre los nombres de los países y haga zoom a los mismos.
-* Ejemplo: En el caso anterior era posible también recuperar la referencia al mapa, pero en otros casos la única forma de operar es con el `message-bus`. Por ejemplo, si queremos mostrar la leyenda de una capa podemos usar el evento "open-legend" con el id de la capa.
+* TODO Ejemplo: El mismo ejemplo anterior pero haciendo zoom mediante un evento.
 
 TODO Explicar desacople (ya no usamos el mapa de forma directa, podemos cambiarlo en el futuro por Leaflet, OL3).
 TODO comentar planes para cambiar a OL3.
 
+* Ejemplo: En el caso anterior era posible también recuperar la referencia al mapa, pero en otros casos la única forma de operar es con el `message-bus`. Por ejemplo, si queremos mostrar la leyenda de una capa podemos usar el evento "open-legend" con el id de la capa.
+
 TODO Poner en el open-legend-example el id de la capa o las capas cuya leyenda queramos mostrar
+
 TODO eliminar overrides.css
 TODO quitar plugin de google maps
+
+
 
 ## Comunicación con el servidor
 

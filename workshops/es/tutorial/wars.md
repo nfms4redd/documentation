@@ -2,46 +2,190 @@
 
 El geoportal es una aplicación web Java que se empaqueta en un fichero con extensión .war (Web ARchive) y requiere de un contenedor de aplicaciones Java para funcionar, como Apache Tomcat. En la presente documentación se utilizará Tomcat 7 o posterior.
 
+## Gestionando el servidor
+
 ## Arrancar y parar Tomcat
 
-TODO Explicar los comandos para hacer es
+Si Tomcat se instala mediante los paquetes de Ubuntu, quedará un servicio llamado "Tomcat7" que se puede arrancar, parar y reiniciar usando el comando `service`:
 
-TODO Explicar comando tail y recomendar tener una ventana con dicho comando abierta
+	$ sudo service tomcat7 start
+	$ sudo service tomcat7 stop
+	$ sudo service tomcat7 restart
+
+Tras cada uno de los pasos anteriores podemos comprobar con el navegador en el puerto `8080` si Tomcat está arrancado o parado.
+
+Otra de las cosas que es interesante observar es el log de Tomcat, que en la instalación se encuentra en el fichero `/var/log/tomcat7/catalina.out`. Éste es posible visualizarlo con el comando `less`, pero cuando hay que trabajar con Tomcat, se recomienda establecer dos conexiones SSH al servidor. En una de ellas podemos ejecutar el comando `tail` siguiente:
+
+	$ tail -f /var/log/tomcat7/catalina.out
+
+que deja bloqueada la línea de comandos y nos muestra el contenido del log a medida que va creciendo. En la otra conexión es en la que ejecutamos los comandos `service` que arrancan y paran Tomcat.
 
 ## Instalación del .war en Tomcat
 
-TODO En algún punto hay que configurar el directorio de configuración, la minificación y la caché a falso. Explicar variables de entorno y propiedades de tomcat.
+Con el comando `wget` podemos descargarnos la última versión del .war con el portal de FAO. En el siguiente ejemplo lo descargamos en `/tmp`:
 
-TODO Configuración del directorio de configuración
-TODO Configuración de la caché
- export NFMS_CONFIG_CACHE=false
- export CATALINA_OPTS="-DPORTAL_CONFIG_DIR=/home/fergonco/b/java/fao/documentation/workshops/es/tutorial/ejemplos/geoladris/mensaje-cool"
- touch ../webapps/geoladris-core.war 
- ./shutdown.sh 
- ./startup.sh 
+	usuario@virtual-fao:/tmp$ wget http://nullisland.geomati.co:8082/repository/releases/org/fao/unredd/apps/demo/5.0.0/demo-5.0.0.war
+	--2016-10-03 10:25:26--  http://nullisland.geomati.co:8082/repository/releases/org/fao/unredd/apps/demo/5.0.0/demo-5.0.0.war
+	Resolving nullisland.geomati.co (nullisland.geomati.co)... 177.85.98.237
+	Connecting to nullisland.geomati.co (nullisland.geomati.co)|177.85.98.237|:8082... connected.
+	HTTP request sent, awaiting response... 200 OK
+	Length: 6581661 (6.3M) [application/octet-stream]
+	Saving to: 'demo-5.0.0.war'
+	
+	demo-5.0.0.war 100%[===================>]   6.28M  4.26MB/s    in 1.5s    
+	
+	2016-10-03 10:25:28 (4.26 MB/s) - 'demo-5.0.0.war' saved [6581661/6581661]
 
-Una vez tenemos el fichero .war con el portal tenemos que dárselo a Tomcat para que éste lo publique. Para ello hay que copiar dicho fichero en el directorio `webapps` dentro del directorio donde Tomcat está instalado, `$TOMCAT_HOME` a partir de ahora.
+Una vez tenemos el fichero .war con el portal tenemos que dárselo a Tomcat para que éste lo publique. Para ello hay que copiar dicho fichero en el directorio `webapps` de Tomcat, que se encuentra en `/var/lib/tomcat7/webapps`.
 
-En ese directorio podemos ver algunas aplicaciones que vienen con la instalación de Tomcat:
+En ese directorio podemos ver que hay un subdirectorio ROOT con la aplicación por defecto de Tomcat:
 
-	$ ls $TOMCAT_HOME/webapps/
-	docs  examples  host-manager  manager  ROOT  
+	$ ls /var/lib/tomcat7/webapps
+	ROOT  
 
-Tras copiar el fichero quedaría así:
+Tras copiar el fichero como "portal.war" quedaría así:
 
-	$ ls $TOMCAT_HOME/webapps/
-	docs  examples  host-manager  manager  ROOT  unredd-portal.war
+	$ sudo cp /tmp/demo-5.0.0-beta3.war portal.war
+	$ ls /var/lib/tomcat7/webapps
+	ROOT  portal.war
 
 Y si Tomcat está ejecutándose, tras unos segundos vamos a ver que se crea un directorio con el mismo nombre que el archivo .war:
 
-	$ ls $TOMCAT_HOME/webapps/
-	docs  examples  host-manager  manager  ROOT  unredd-portal  unredd-portal.war
+	$ ls /var/lib/tomcat7/webapps
+	ROOT  portal  portal.war
 
 ## Logs
 
 Lo que ha sucedido anteriormente es que Tomcat ha detectado el fichero .war en su directorio de aplicaciones, lo ha descomprimido en un directorio con su mismo nombre (los ficheros .war son ficheros comprimidos que contienen una estructura de ficheros dentro) y ha inicializado la aplicación.
 
-Para ver que dicha inicialización ha sido correcta podemos echar un vistazo al log de Tomcat, que se encuentra en $TOMCAT_HOME/logs/catalina.out:
+Para ver que dicha inicialización ha sido correcta podemos echar un vistazo al log de Tomcat:
+
+
+	INFORMACIÓN: Server startup in 1169 ms
+	oct 03, 2016 10:30:31 AM org.apache.catalina.startup.HostConfig deployWAR
+	INFORMACIÓN: Despliegue del archivo /var/lib/tomcat7/webapps/portal.war de la aplicación web
+	oct 03, 2016 10:30:32 AM org.apache.catalina.startup.TldConfig execute
+	INFORMACIÓN: At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+	oct 03, 2016 10:30:32 AM org.apache.naming.NamingContext lookup
+	ADVERTENCIA: Excepción inesperada resolviendo referencia
+	java.sql.SQLException: org.postgresql.Driver
+		at org.apache.tomcat.jdbc.pool.PooledConnection.connectUsingDriver(PooledConnection.java:254)
+		at org.apache.tomcat.jdbc.pool.PooledConnection.connect(PooledConnection.java:182)
+		at org.apache.tomcat.jdbc.pool.ConnectionPool.createConnection(ConnectionPool.java:710)
+		at org.apache.tomcat.jdbc.pool.ConnectionPool.borrowConnection(ConnectionPool.java:644)
+		at org.apache.tomcat.jdbc.pool.ConnectionPool.init(ConnectionPool.java:466)
+		at org.apache.tomcat.jdbc.pool.ConnectionPool.<init>(ConnectionPool.java:143)
+		at org.apache.tomcat.jdbc.pool.DataSourceProxy.pCreatePool(DataSourceProxy.java:116)
+		at org.apache.tomcat.jdbc.pool.DataSourceProxy.createPool(DataSourceProxy.java:103)
+		at org.apache.tomcat.jdbc.pool.DataSourceFactory.createDataSource(DataSourceFactory.java:554)
+		at org.apache.tomcat.jdbc.pool.DataSourceFactory.getObjectInstance(DataSourceFactory.java:242)
+		at org.apache.naming.factory.ResourceFactory.getObjectInstance(ResourceFactory.java:142)
+		at javax.naming.spi.NamingManager.getObjectInstance(NamingManager.java:321)
+		at org.apache.naming.NamingContext.lookup(NamingContext.java:843)
+		at org.apache.naming.NamingContext.lookup(NamingContext.java:153)
+		at org.apache.naming.NamingContext.lookup(NamingContext.java:830)
+		at org.apache.naming.NamingContext.lookup(NamingContext.java:167)
+		at org.apache.catalina.core.NamingContextListener.addResource(NamingContextListener.java:1103)
+		at org.apache.catalina.core.NamingContextListener.createNamingContext(NamingContextListener.java:682)
+		at org.apache.catalina.core.NamingContextListener.lifecycleEvent(NamingContextListener.java:271)
+		at org.apache.catalina.util.LifecycleSupport.fireLifecycleEvent(LifecycleSupport.java:117)
+		at org.apache.catalina.util.LifecycleBase.fireLifecycleEvent(LifecycleBase.java:90)
+		at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5472)
+		at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:147)
+		at org.apache.catalina.core.ContainerBase.addChildInternal(ContainerBase.java:899)
+		at org.apache.catalina.core.ContainerBase.addChild(ContainerBase.java:875)
+		at org.apache.catalina.core.StandardHost.addChild(StandardHost.java:652)
+		at org.apache.catalina.startup.HostConfig.deployWAR(HostConfig.java:1091)
+		at org.apache.catalina.startup.HostConfig$DeployWar.run(HostConfig.java:1980)
+		at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+		at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+		at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+		at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+		at java.lang.Thread.run(Thread.java:745)
+	Caused by: java.lang.ClassNotFoundException: org.postgresql.Driver
+		at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
+		at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+		at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+		at java.lang.Class.forName0(Native Method)
+		at java.lang.Class.forName(Class.java:348)
+		at org.apache.tomcat.jdbc.pool.PooledConnection.connectUsingDriver(PooledConnection.java:246)
+		... 32 more
+	
+	oct 03, 2016 10:30:32 AM org.apache.catalina.core.NamingContextListener addResource
+	ADVERTENCIA: No pude registrar en JMX: javax.naming.NamingException: org.postgresql.Driver
+	2016-10-03 10:30:33 WARN  ConfigFolder:36 - PORTAL_CONFIG_DIR property not found. Using default config.
+	2016-10-03 10:30:33 INFO  ConfigFolder:48 - ============================================================================
+	2016-10-03 10:30:33 INFO  ConfigFolder:49 - PORTAL_CONFIG_DIR: /var/lib/tomcat7/webapps/portal/WEB-INF/default_config
+	2016-10-03 10:30:33 INFO  ConfigFolder:50 - ============================================================================
+	oct 03, 2016 10:30:33 AM org.apache.naming.NamingContext lookup
+	ADVERTENCIA: Excepción inesperada resolviendo referencia
+	java.sql.SQLException: org.postgresql.Driver
+		at org.apache.tomcat.jdbc.pool.PooledConnection.connectUsingDriver(PooledConnection.java:254)
+		at org.apache.tomcat.jdbc.pool.PooledConnection.connect(PooledConnection.java:182)
+		at org.apache.tomcat.jdbc.pool.ConnectionPool.createConnection(ConnectionPool.java:710)
+		at org.apache.tomcat.jdbc.pool.ConnectionPool.borrowConnection(ConnectionPool.java:644)
+		at org.apache.tomcat.jdbc.pool.ConnectionPool.init(ConnectionPool.java:466)
+		at org.apache.tomcat.jdbc.pool.ConnectionPool.<init>(ConnectionPool.java:143)
+		at org.apache.tomcat.jdbc.pool.DataSourceProxy.pCreatePool(DataSourceProxy.java:116)
+		at org.apache.tomcat.jdbc.pool.DataSourceProxy.createPool(DataSourceProxy.java:103)
+		at org.apache.tomcat.jdbc.pool.DataSourceFactory.createDataSource(DataSourceFactory.java:554)
+		at org.apache.tomcat.jdbc.pool.DataSourceFactory.getObjectInstance(DataSourceFactory.java:242)
+		at org.apache.naming.factory.ResourceFactory.getObjectInstance(ResourceFactory.java:142)
+		at javax.naming.spi.NamingManager.getObjectInstance(NamingManager.java:321)
+		at org.apache.naming.NamingContext.lookup(NamingContext.java:843)
+		at org.apache.naming.NamingContext.lookup(NamingContext.java:153)
+		at org.apache.naming.NamingContext.lookup(NamingContext.java:830)
+		at org.apache.naming.NamingContext.lookup(NamingContext.java:153)
+		at org.apache.naming.NamingContext.lookup(NamingContext.java:830)
+		at org.apache.naming.NamingContext.lookup(NamingContext.java:153)
+		at org.apache.naming.NamingContext.lookup(NamingContext.java:830)
+		at org.apache.naming.NamingContext.lookup(NamingContext.java:167)
+		at org.apache.naming.SelectorContext.lookup(SelectorContext.java:156)
+		at javax.naming.InitialContext.lookup(InitialContext.java:417)
+		at org.geoladris.DBUtils.processConnection(DBUtils.java:30)
+		at org.geoladris.DBUtils.processConnection(DBUtils.java:14)
+		at org.fao.unredd.feedback.DBFeedbackPersistence.getValidatedToNotifyInfo(DBFeedbackPersistence.java:105)
+		at org.fao.unredd.feedback.Feedback.notifyValidated(Feedback.java:77)
+		at org.fao.unredd.feedback.servlet.FeedbackContextListener$1.run(FeedbackContextListener.java:57)
+		at java.util.TimerThread.mainLoop(Timer.java:555)
+		at java.util.TimerThread.run(Timer.java:505)
+	Caused by: java.lang.ClassNotFoundException: org.postgresql.Driver
+		at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
+		at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+		at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+		at java.lang.Class.forName0(Native Method)
+		at java.lang.Class.forName(Class.java:348)
+		at org.apache.tomcat.jdbc.pool.PooledConnection.connectUsingDriver(PooledConnection.java:246)
+		... 28 more
+	
+	oct 03, 2016 10:30:33 AM org.apache.catalina.startup.HostConfig deployWAR
+	INFORMACIÓN: Deployment of web application archive /var/lib/tomcat7/webapps/portal.war has finished in 2.519 ms
+	2016-10-03 10:30:33 ERROR FeedbackContextListener:62 - Database error notifying the comment authors
+	org.geoladris.PersistenceException: Cannot obtain Datasource
+		at org.geoladris.DBUtils.processConnection(DBUtils.java:32)
+		at org.geoladris.DBUtils.processConnection(DBUtils.java:14)
+		at org.fao.unredd.feedback.DBFeedbackPersistence.getValidatedToNotifyInfo(DBFeedbackPersistence.java:105)
+		at org.fao.unredd.feedback.Feedback.notifyValidated(Feedback.java:77)
+		at org.fao.unredd.feedback.servlet.FeedbackContextListener$1.run(FeedbackContextListener.java:57)
+		at java.util.TimerThread.mainLoop(Timer.java:555)
+		at java.util.TimerThread.run(Timer.java:505)
+	Caused by: javax.naming.NamingException: org.postgresql.Driver
+		at org.apache.naming.NamingContext.lookup(NamingContext.java:859)
+		at org.apache.naming.NamingContext.lookup(NamingContext.java:153)
+		at org.apache.naming.NamingContext.lookup(NamingContext.java:830)
+		at org.apache.naming.NamingContext.lookup(NamingContext.java:153)
+		at org.apache.naming.NamingContext.lookup(NamingContext.java:830)
+		at org.apache.naming.NamingContext.lookup(NamingContext.java:153)
+		at org.apache.naming.NamingContext.lookup(NamingContext.java:830)
+		at org.apache.naming.NamingContext.lookup(NamingContext.java:167)
+		at org.apache.naming.SelectorContext.lookup(SelectorContext.java:156)
+		at javax.naming.InitialContext.lookup(InitialContext.java:417)
+		at org.geoladris.DBUtils.processConnection(DBUtils.java:30)
+		... 6 more
+	
+
+
+
 
 	Sep 13, 2016 1:26:31 PM org.apache.catalina.startup.HostConfig deployWAR
 	INFORMATION: Deploying web application archive /apps/apache-tomcat-7.0.67/webapps/portal.war
