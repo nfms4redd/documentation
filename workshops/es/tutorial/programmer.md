@@ -98,16 +98,34 @@ El portal de diseminación de datos de FAO está construido sobre el núcleo de 
 
 ## Hola Geoladris
 
-Partimos de una aplicación app base de GeoLadris TODO explicar
+Para hacer una aplicación sencilla con Geoladris tenemos que instalar en Tomcat el núcleo Geoladris de [aquí](nullisland.geomati.co:8082/repository/releases/org/fao/unredd/apps/geoladris-core/5.0.0/geoladris-core-5.0.0.war) e instalarla en Tomcat. Si hemos seguido el punto sobre [instalar el portal de diseminación](wars.md) todo estará listo y bastará copiar el fichero en `webapps`. En este caso lo copiaremos con el nombre `hola-geoladris.war`
 
-TODO: Explicación de los tres directorios.
+Como la variable `GEOLADRIS_CONF_DIR` ya está configurada, el directorio de configuración será `/var/geoladris/hola-geoladris/` y lo crearemos mediante el comando `mkdir`:
 
-* Ejemplo: creación del hola mundo en el portal (hola-geoladris)
+	$ sudo mkdir /var/geoladris/hola-geoladris
+
+En dicho directorio crearemos otro llamado "plugins" que es el que contendrá nuestros plugins.
+
+	$ sudo mkdir /var/geoladris/hola-geoladris/plugins
+
+Si nuestro hola mundo consiste en un elemento `h1` con un mensaje, tendremos que:
+
+1. Crear un directorio para el plugin, que llamaremos "titulo": `sudo mkdir /var/geoladris/hola-geoladris/plugins/titulo`; dentro de este directorio tendremos la estructura descrita en el punto anterior con los directorios `modules/`, `styles/`, etc.
+2. En este caso sólo necesitamos crear un módulo, que meteremos en el directorio `modules/` con el siguiente contenido:
+
+define([ "jquery" ], function($) {
+	$("<h1>")//
+	.attr("id", "titulo")//
+	.html("Hola mundo")//
+	.appendTo("body");
+	// <h1 id="titulo">Hola mundo</h1>
+});
+
+Los ejemplos siguientes se pueden encontrar [aquí](ejemplos/geoladris/mensaje-cool), que es el directorio de configuración que contiene el directorio `plugins` que contiene todos los plugins:
+
 * Ejemplo: Migración del ejemplo mensaje-cool a Geoladris (mensaje-cool)
 * Ejemplo: Eliminar el plugin "mensaje" y observar el resultado
-* Ejemplo: Eliminar el plugin i18n y observar el resultado. TODO Explicar que es responsabilidad del usuario gestionar las dependencias entre plugins.
-
-TODO Enlazar a los ejemplos y explicar que son directorios de configuración usados por la aplicación geoladris-core
+* Ejemplo: Eliminar el plugin i18n y observar el resultado. (es responsabilidad del usuario gestionar las dependencias entre plugins).
 
 Además de proporcionar el concepto de plugin, el núcleo de Geoladris incorpora algunas extensiones a RequireJS que facilitan el trabajo. Por ejemplo el plugin `text` que permite cargar recursos que hay en el servidor como si fueran otro módulo. Esto nos permite por ejemplo cargar una plantilla con la interfaz gráfica, o cargar unos datos fijos utilizados para un cálculo, etc. 
 
@@ -144,13 +162,13 @@ Ejemplo: deshabilitar el módulo que muestra el mensaje al hacer mouse over sobr
 			"_enabled": false
 		},
 		"evento-mouse": {
-			"_enabled": true
+			"_enabled": false
 		}
 	}
 
 ### Configuración de los módulos
 
-Hasta ahora teníamos un módulo i18n que incluía las cadenas en un idioma concreto. Sin embargo podría ser interesante dar la posibilidad de que el usuario añada las traducciones para otros idiomas mediante configuración.
+Hasta ahora teníamos un módulo `traducciones` que incluía las cadenas en un idioma concreto. Sin embargo podría ser interesante dar la posibilidad de que el usuario añada las traducciones para otros idiomas mediante configuración.
 
 La configuración de los módulos de un plugin se encuentra en dos lugares:
 
@@ -172,9 +190,9 @@ De la misma manera en la que creamos un `mensaje-conf.json` para el plugin `mens
 		}
 	}
 
-Como podemos observar, en la propiedad `default-conf` hay una propiedad `i18n` que contiene la configuración del módulo `traducciones` y que consiste en pares propiedad/valor con las traducciones que antes teníamos en el código.
+Como podemos observar, en la propiedad `default-conf` hay una propiedad `traducciones` que contiene la configuración del módulo con el mismo nombre y que consiste en pares propiedad/valor con las traducciones que antes teníamos en el código.
 
-Si miramos el código, ahora vemos que lo que se hace es leer la configuración del plugin y que las cadenas ya no están en el código:
+Ahora, en el módulo, en lugar de ofrecer directamente la lista de pares propiedad/valor, lo que vamos a hacer es leer esta documentación importando el pseudo-módulo `module` y llamando a su método `config()`:
 
 	define(["module"], function(module) {
 		var traducciones = module.config();
@@ -201,25 +219,23 @@ La ventaja es que ahora el usuario puede ir al directorio de configuración y po
 
 ## Portal de diseminación
 
-En este punto vamos a ver que el portal de diseminación del sistema nacional de monitorización de bosques (SNMB) es una aplicación Geoladris y que los mismos plugins que hicimos en los puntos anteriores son válidos en el contexto del portal.
+En este punto vamos a ver que el portal de diseminación del Sistema Nacional de Monitoreo de Bosques (SNMB) es una aplicación Geoladris y que los mismos plugins que hicimos en los puntos anteriores son válidos en el contexto del portal.
 
-Asumimos que en la misma instancia de Tomcat en la que venimos trabajando hay un fichero portal.war con la última versión del portal de diseminación, que hará que se pueda consultar el portal en la URL "http://localhost:8080/portal.
+Asumimos que en la misma instancia de Tomcat en la que venimos trabajando hay un fichero portal.war con la última versión del portal de diseminación, que hará que se pueda consultar el portal en la URL "http://<ip del servidor>:8080/portal".
 
-Si hemos seguido el [capítulo sobre los wars](wars.md) habremos establecido el directorio de configuración.
-
-TODO verificar que la aplicación carga con conexión a internet y el directorio de configuración
+Si hemos seguido el [capítulo sobre los wars](wars.md) habremos establecido el directorio de configuración en `/var/geoladris/portal/`.
 
 TODO: crear un directorio de configuración en el que el zoom es toda latinoamérica y hay capas de los portales de Ecuador, Bolivia, Paraguay y Argentina. Guardar el directorio en los ejemplos de la documentación.
 
-* Ejercicio: copiar en "plugins" del directorio de configuración el plugin "mensaje" del punto anterior. 
+* Ejercicio: copiar en "plugins" del directorio de configuración del portal el plugin con el mensaje "cool". 
 
 ## Interacción con otros plugins
 
 En el punto sobre Geoladris hemos visto que existen dependencias entre nuestros plugins y que si eliminamos un plugin, aquellos que tengan referencias al mismo van a fallar. En resumen, que tenemos que tener en cuenta manualmente las dependencias entre plugins.
 
-Para evitar este tipo de problemas se pueden seguir una serie de estrategias. Se pueden escribir las dependencias en un fichero README, o agrupar los módulos en plugins de forma más lógica para evitar las dependencias, etc.
+Para evitar este tipo de problemas se pueden seguir una serie de estrategias. Se pueden escribir las dependencias en un fichero README o agrupar los módulos en plugins de forma más lógica para evitar las dependencias, etc.
 
-Hay una estrategia que es usada ampliamente en las aplicaciones Geoladris, que es el uso de un bus de mensajes.
+Hay una estrategia que es usada ampliamente en las aplicaciones Geoladris, que es el uso de un bus de mensajes.Comun
 TODO explicar el message-bus
 
 * Ejemplo: crear un plugin que muestre los nombres de los países y haga zoom a los mismos.

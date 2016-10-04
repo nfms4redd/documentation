@@ -269,11 +269,11 @@ Esta forma de definir el directorio de configuración puede ser un poco contrain
 
 Para configurar el directorio de nuestro portal empezamos creándolo en el sistema de ficheros:
 
-	$ mkdir /var/geoladris/portal
+	$ sudo mkdir /var/geoladris/portal
 
 A continuación copiamos los contenidos del directorio que viene en el .war en el directorio que acabamos de crear:
 
-	$ cp -R /var/lib/tomcat7/webapps/portal/WEB-INF/default_config/* /var/geoladris/portal/
+	$ sudo cp -R /var/lib/tomcat7/webapps/portal/WEB-INF/default_config/* /var/geoladris/portal/
 
 Ahora que tenemos el directorio listo, sólo hay que pasárselo a Tomcat mediante la variable de entorno `GEOLADRIS_CONFIG_DIR`. Esto se puede hacer en el fichero `/etc/default/tomcat7` añadiendo en cualquier punto la siguiente línea:
 
@@ -282,6 +282,16 @@ Ahora que tenemos el directorio listo, sólo hay que pasárselo a Tomcat mediant
 Hay que recordar que la variable apunta a `/var/geoladris` y no a `/var/geoladris/portal` ya que el "/portal" del final lo toma del nombre de la aplicación en `webapps`. 
 
 Por último reiniciaremos el portal con el comando `touch` para que tome la nueva configuración.
+
+## Permisos del directorio de configuración
+
+Durante este tutorial se van a editar muchos ficheros del directorio de configuración. Si se tratan de ediciones menores estas se pueden realizar con uno de los editors de línea de comando en el servidor, como `nano` o `vim`, pero a medida que las ediciones son más complejas vamos a necesitar un editor con más facilidades para copiar, pegar, coloración sintáctica, etc.
+
+En este caso lo ideal es guardar una copia del directorio de configuración en la máquina local y editar los ficheros con nuestro editor favorito. Y una vez los cambios están hechos, copiar los ficheros al servidor.
+
+Para hacer esto posible es necesario que el directorio de configuración, en este caso `/var/geoladris` tenga los permisos necesarios. La opción más sencilla de hacer esto es dándole al usuario `usuario` la propiedad de dicho directorio:
+
+	$ sudo chown usuario:usuario /var/geoladris/ -R
 
 
 
