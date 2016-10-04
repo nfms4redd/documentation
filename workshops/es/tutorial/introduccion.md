@@ -1,20 +1,12 @@
-# Curso programación sobre el portal de diseminación
+# Curso programación sobre el portal de diseminación del Sistema Nacional de Monitoreo de Bosques (SNMB)
 
-Explicar que el curso tiene dos partes:
-1) Comprensión del ciclo de vida y configuración del .war. Java a nivel administrador
-2) Creación de plugins sobre el portal: Javascript + CSS + tecnología elegida en el servidor
+Este tutorial muestra cómo realizar aplicaciones web de forma modular con el proyecto [Geoladris](https://github.com/geoladris/) usando como caso de uso el portal de diseminación del SNMB.
 
-## Requisitos
-
-* XML
-* Línea de comandos linux
-* Dominio de algún lenguaje de programación
-* Conocimientos básicos de HTML y CSS
+La tecnología utilizada no es específica para la temática de bosques y la modularidad de Geoladris permite adaptar el portal fácilmente a otras temáticas.
 
 ## Servidor de pruebas
 
-En el presente tutorial se realizarán distintos ejercicios que consisten en cambiar la
-configuración de programas instalados en un servidor.
+Se realizarán distintos ejercicios que consisten en cambiar la configuración de programas instalados en un servidor.
 
 Se parte de la existencia de un servidor linux (ubuntu 14.04, aunque este detalle no es
 significativo para la mayor parte de los ejemplos) en el que tenemos una cuenta "usuario" con
@@ -59,6 +51,13 @@ ejemplo, desde la línea de comandos de linux:
 	
 	Last login: Mon Oct  3 09:38:06 2016
 	usuario@virtual-fao:~$ _ 
+
+## Contenidos
+
+Este tutorial consta de dos partes:
+
+1. [Comprensión del ciclo de vida y configuración del .war. Java a nivel administrador](wars.md)
+2. [Creación de plugins sobre el portal: HTML + CSS + Javascript](programmer.md)
 
 
 

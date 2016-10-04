@@ -1,8 +1,8 @@
-# Portal de diseminación, una aplicación web Java
+# Instalación del portal
+
+## Portal de diseminación, una aplicación web Java
 
 El geoportal es una aplicación web Java que se empaqueta en un fichero con extensión .war (Web ARchive) y requiere de un contenedor de aplicaciones Java para funcionar, como Apache Tomcat. En la presente documentación se utilizará Tomcat 7 o posterior.
-
-## Gestionando el servidor
 
 ## Arrancar y parar Tomcat
 
@@ -61,15 +61,23 @@ Lo que ha sucedido anteriormente es que Tomcat ha detectado el fichero .war en s
 Para ver que dicha inicialización ha sido correcta podemos echar un vistazo al log de Tomcat:
 
 
-	INFORMACIÓN: Server startup in 1169 ms
-	oct 03, 2016 10:30:31 AM org.apache.catalina.startup.HostConfig deployWAR
+	oct 04, 2016 2:10:25 AM org.apache.catalina.startup.HostConfig deployWAR
 	INFORMACIÓN: Despliegue del archivo /var/lib/tomcat7/webapps/portal.war de la aplicación web
-	oct 03, 2016 10:30:32 AM org.apache.catalina.startup.TldConfig execute
+	oct 04, 2016 2:10:26 AM org.apache.catalina.startup.TldConfig execute
 	INFORMACIÓN: At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
-	oct 03, 2016 10:30:32 AM org.apache.naming.NamingContext lookup
+	oct 04, 2016 2:10:26 AM org.apache.naming.NamingContext lookup
 	ADVERTENCIA: Excepción inesperada resolviendo referencia
-	java.sql.SQLException: org.postgresql.Driver
-		at org.apache.tomcat.jdbc.pool.PooledConnection.connectUsingDriver(PooledConnection.java:254)
+	org.postgresql.util.PSQLException: El intento de conexión falló.
+		at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:233)
+		at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:64)
+		at org.postgresql.jdbc2.AbstractJdbc2Connection.<init>(AbstractJdbc2Connection.java:144)
+		at org.postgresql.jdbc3.AbstractJdbc3Connection.<init>(AbstractJdbc3Connection.java:29)
+		at org.postgresql.jdbc3g.AbstractJdbc3gConnection.<init>(AbstractJdbc3gConnection.java:21)
+		at org.postgresql.jdbc4.AbstractJdbc4Connection.<init>(AbstractJdbc4Connection.java:31)
+		at org.postgresql.jdbc4.Jdbc4Connection.<init>(Jdbc4Connection.java:24)
+		at org.postgresql.Driver.makeConnection(Driver.java:410)
+		at org.postgresql.Driver.connect(Driver.java:280)
+		at org.apache.tomcat.jdbc.pool.PooledConnection.connectUsingDriver(PooledConnection.java:278)
 		at org.apache.tomcat.jdbc.pool.PooledConnection.connect(PooledConnection.java:182)
 		at org.apache.tomcat.jdbc.pool.ConnectionPool.createConnection(ConnectionPool.java:710)
 		at org.apache.tomcat.jdbc.pool.ConnectionPool.borrowConnection(ConnectionPool.java:644)
@@ -102,25 +110,33 @@ Para ver que dicha inicialización ha sido correcta podemos echar un vistazo al 
 		at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
 		at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
 		at java.lang.Thread.run(Thread.java:745)
-	Caused by: java.lang.ClassNotFoundException: org.postgresql.Driver
-		at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
-		at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
-		at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
-		at java.lang.Class.forName0(Native Method)
-		at java.lang.Class.forName(Class.java:348)
-		at org.apache.tomcat.jdbc.pool.PooledConnection.connectUsingDriver(PooledConnection.java:246)
-		... 32 more
+	Caused by: java.net.UnknownHostException: postgis.unredd
+		at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:184)
+		at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+		at java.net.Socket.connect(Socket.java:589)
+		at org.postgresql.core.PGStream.<init>(PGStream.java:61)
+		at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:109)
+		... 41 more
 	
-	oct 03, 2016 10:30:32 AM org.apache.catalina.core.NamingContextListener addResource
-	ADVERTENCIA: No pude registrar en JMX: javax.naming.NamingException: org.postgresql.Driver
-	2016-10-03 10:30:33 WARN  ConfigFolder:36 - PORTAL_CONFIG_DIR property not found. Using default config.
-	2016-10-03 10:30:33 INFO  ConfigFolder:48 - ============================================================================
-	2016-10-03 10:30:33 INFO  ConfigFolder:49 - PORTAL_CONFIG_DIR: /var/lib/tomcat7/webapps/portal/WEB-INF/default_config
-	2016-10-03 10:30:33 INFO  ConfigFolder:50 - ============================================================================
-	oct 03, 2016 10:30:33 AM org.apache.naming.NamingContext lookup
+	oct 04, 2016 2:10:26 AM org.apache.catalina.core.NamingContextListener addResource
+	ADVERTENCIA: No pude registrar en JMX: javax.naming.NamingException: El intento de conexión falló.
+	2016-10-04 02:10:26 WARN  ConfigFolder:36 - PORTAL_CONFIG_DIR property not found. Using default config.
+	2016-10-04 02:10:26 INFO  ConfigFolder:48 - ============================================================================
+	2016-10-04 02:10:26 INFO  ConfigFolder:49 - PORTAL_CONFIG_DIR: /var/lib/tomcat7/webapps/portal/WEB-INF/default_config
+	2016-10-04 02:10:26 INFO  ConfigFolder:50 - ============================================================================
+	oct 04, 2016 2:10:27 AM org.apache.naming.NamingContext lookup
 	ADVERTENCIA: Excepción inesperada resolviendo referencia
-	java.sql.SQLException: org.postgresql.Driver
-		at org.apache.tomcat.jdbc.pool.PooledConnection.connectUsingDriver(PooledConnection.java:254)
+	org.postgresql.util.PSQLException: El intento de conexión falló.
+		at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:233)
+		at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:64)
+		at org.postgresql.jdbc2.AbstractJdbc2Connection.<init>(AbstractJdbc2Connection.java:144)
+		at org.postgresql.jdbc3.AbstractJdbc3Connection.<init>(AbstractJdbc3Connection.java:29)
+		at org.postgresql.jdbc3g.AbstractJdbc3gConnection.<init>(AbstractJdbc3gConnection.java:21)
+		at org.postgresql.jdbc4.AbstractJdbc4Connection.<init>(AbstractJdbc4Connection.java:31)
+		at org.postgresql.jdbc4.Jdbc4Connection.<init>(Jdbc4Connection.java:24)
+		at org.postgresql.Driver.makeConnection(Driver.java:410)
+		at org.postgresql.Driver.connect(Driver.java:280)
+		at org.apache.tomcat.jdbc.pool.PooledConnection.connectUsingDriver(PooledConnection.java:278)
 		at org.apache.tomcat.jdbc.pool.PooledConnection.connect(PooledConnection.java:182)
 		at org.apache.tomcat.jdbc.pool.ConnectionPool.createConnection(ConnectionPool.java:710)
 		at org.apache.tomcat.jdbc.pool.ConnectionPool.borrowConnection(ConnectionPool.java:644)
@@ -149,18 +165,17 @@ Para ver que dicha inicialización ha sido correcta podemos echar un vistazo al 
 		at org.fao.unredd.feedback.servlet.FeedbackContextListener$1.run(FeedbackContextListener.java:57)
 		at java.util.TimerThread.mainLoop(Timer.java:555)
 		at java.util.TimerThread.run(Timer.java:505)
-	Caused by: java.lang.ClassNotFoundException: org.postgresql.Driver
-		at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
-		at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
-		at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
-		at java.lang.Class.forName0(Native Method)
-		at java.lang.Class.forName(Class.java:348)
-		at org.apache.tomcat.jdbc.pool.PooledConnection.connectUsingDriver(PooledConnection.java:246)
-		... 28 more
+	Caused by: java.net.UnknownHostException: postgis.unredd
+		at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:184)
+		at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+		at java.net.Socket.connect(Socket.java:589)
+		at org.postgresql.core.PGStream.<init>(PGStream.java:61)
+		at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:109)
+		... 37 more
 	
-	oct 03, 2016 10:30:33 AM org.apache.catalina.startup.HostConfig deployWAR
-	INFORMACIÓN: Deployment of web application archive /var/lib/tomcat7/webapps/portal.war has finished in 2.519 ms
-	2016-10-03 10:30:33 ERROR FeedbackContextListener:62 - Database error notifying the comment authors
+	oct 04, 2016 2:10:27 AM org.apache.catalina.startup.HostConfig deployWAR
+	INFORMACIÓN: Deployment of web application archive /var/lib/tomcat7/webapps/portal.war has finished in 1.921 ms
+	2016-10-04 02:10:27 ERROR FeedbackContextListener:62 - Database error notifying the comment authors
 	org.geoladris.PersistenceException: Cannot obtain Datasource
 		at org.geoladris.DBUtils.processConnection(DBUtils.java:32)
 		at org.geoladris.DBUtils.processConnection(DBUtils.java:14)
@@ -169,7 +184,7 @@ Para ver que dicha inicialización ha sido correcta podemos echar un vistazo al 
 		at org.fao.unredd.feedback.servlet.FeedbackContextListener$1.run(FeedbackContextListener.java:57)
 		at java.util.TimerThread.mainLoop(Timer.java:555)
 		at java.util.TimerThread.run(Timer.java:505)
-	Caused by: javax.naming.NamingException: org.postgresql.Driver
+	Caused by: javax.naming.NamingException: El intento de conexión falló.
 		at org.apache.naming.NamingContext.lookup(NamingContext.java:859)
 		at org.apache.naming.NamingContext.lookup(NamingContext.java:153)
 		at org.apache.naming.NamingContext.lookup(NamingContext.java:830)
@@ -182,37 +197,10 @@ Para ver que dicha inicialización ha sido correcta podemos echar un vistazo al 
 		at javax.naming.InitialContext.lookup(InitialContext.java:417)
 		at org.geoladris.DBUtils.processConnection(DBUtils.java:30)
 		... 6 more
-	
 
+Si observamos la primera línea de `INFORMACION:` podemos ver que se notifica el inicio del despliegue del fichero portal.war. Luego viene una `ADVERTENCIA` indicándonos un error en la conexión a la base de datos, que no hemos configurado todavía, y que se repite más adelante. Entre estos errores se puede observar un log del portal (comenzando por 2016-...) que nos indica el directorio de configuración `PORTAL_CONFIG_DIR` y en la última entrada de `INFORMACION` podemos ver que Tomcat nos avisa de que el portal está desplegado y que el proceso de inicialización duró 1.921 segundos.
 
-
-
-	Sep 13, 2016 1:26:31 PM org.apache.catalina.startup.HostConfig deployWAR
-	INFORMATION: Deploying web application archive /apps/apache-tomcat-7.0.67/webapps/portal.war
-	Sep 13, 2016 1:26:31 PM org.apache.catalina.startup.TldConfig execute
-	INFORMATION: At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
-	2016-09-13 13:26:31 WARN  ConfigFolder:45 - PORTAL_CONFIG_DIR property not found. Using default config.
-	2016-09-13 13:26:31 INFO  ConfigFolder:58 - ============================================================================
-	2016-09-13 13:26:31 INFO  ConfigFolder:59 - PORTAL_CONFIG_DIR: /apps/apache-tomcat-7.0.67/webapps/portal/WEB-INF/default_config
-	2016-09-13 13:26:31 INFO  ConfigFolder:60 - ============================================================================
-	2016-09-13 13:26:32 WARN  AppContextListener:69 - plugin-conf.json file for configuration has been deprecated. Use public-conf.json instead.
-	Sep 13, 2016 1:26:32 PM org.apache.catalina.startup.HostConfig deployWAR
-	INFORMATION: Deployment of web application archive /apps/apache-tomcat-7.0.67/webapps/portal.war has finished in 888 ms
-	2016-09-13 13:26:35 ERROR FeedbackContextListener:66 - Database error notifying the comment authors
-	org.fao.unredd.portal.PersistenceException: Database error
-	        at org.fao.unredd.portal.DBUtils.processConnection(DBUtils.java:41)
-	        at org.fao.unredd.portal.DBUtils.processConnection(DBUtils.java:14)
-	        at org.fao.unredd.feedback.DBFeedbackPersistence.getValidatedToNotifyInfo(DBFeedbackPersistence.java:122)
-	        at org.fao.unredd.feedback.Feedback.notifyValidated(Feedback.java:83)
-	        at org.fao.unredd.feedback.servlet.FeedbackContextListener$1.run(FeedbackContextListener.java:61)
-	        at java.util.TimerThread.mainLoop(Timer.java:555)
-	        at java.util.TimerThread.run(Timer.java:505)
-	Caused by: org.apache.tomcat.dbcp.dbcp.SQLNestedException: Cannot create PoolableConnectionFactory (Connection failed)
-	[...]
-
-Si observamos sólo las líneas que comienzan con `INFORMATION:` podemos ver que en la primera se notifica el inicio del despliegue del fichero portal.war y que en la última notifica que el proceso ha terminado en 888ms. Entre estas líneas podemos observar otras que comienzan por una fecha (2016-...) y que corresponden a mensajes que se dan durante la inicialización del portal. Especialmente interesante es la línea que nos indica dónde está el directorio de configuración con el que podemos personalizar el portal.
-
-El último mensaje de inicialización del portal que se puede observar en el log anterior (comenzando por 2016-...) ocupa varias líneas y se corresponde con un error de conexión a la base de datos que arreglaremos más adelante.
+Por tanto, el portal ya está en funcionamiento y si navegamos a la URL `http://<ip del servidor>:8080/portal/` podremos acceder a él.
 
 ## Reinicio del portal
 
@@ -220,17 +208,17 @@ En algunos casos puede ser necesario reiniciar la aplicación del portal. Casi s
 
 La manera más sencilla de hacer esto es usando el comando `touch` con el fichero .war como parámetro, lo cual cambia la fecha y hora del mismo a las actuales, simulando así que acaba de ser copiado en el directorio `webapps`:
 
-	$ touch $TOMCAT_HOME/webapps/portal.war
+	$ sudo touch /var/lib/tomcat7/webapps/portal.war
 
 De nuevo, Tomcat reconocerá que hay un nuevo fichero en `webapps` (aunque en realidad no es nuevo) y procederá a su despliegue. Es importante notar que el reinicio eliminará el directorio `portal` para volver a regenerarlo. Por esto es importante **no hacer modificaciones nunca en este directorio**, ya que puede borrarse de forma automática.
 
 ## Configuración de la conexión a la base de datos
 
-Un ejemplo de configuración que requiere el reinicio del portal es la conexión a la base de datos. Ésta se hace a nivel de Tomcat para aprovechar que éste configura un pool de conexiones que se mantienen abiertas y se reutilizan a fin de ahorrar el coste de abrir la conexión en cada petición.
+Un ejemplo de configuración que requiere el reinicio del portal es la conexión a la base de datos. Ésta se hace a nivel de Tomcat para aprovechar que éste configura un pool de conexiones que se mantienen abiertas y se reutilizan, ahorrando así el coste de abrir una conexión en cada petición.
 
-En el portal, la conexión a la base de datos es usada por el plugin de feedback y por la visualización de estadísticas, por lo que para que estos plugins funcionen es necesario configurarla.
+En el portal, la conexión a la base de datos es usada por el plugin de feedback y por la visualización de estadísticas, por lo que para que estos plugins funcionen es necesario configurarla correctamente.
 
-Esta configuración se cambia en un fichero `context.xml` existente en el directorio `META-INF` que hay dentro del directorio expandido del portal, es decir, en $TOMCAT_HOME/webapps/portal/META-INF/context.xml.
+Esta configuración se cambia en un fichero `context.xml` existente en el directorio `META-INF` que hay dentro del directorio expandido del portal, es decir, en `/var/lib/tomcat7/webapps/portal/META-INF/context.xml`.
 
 Se trata de un fichero XML que tiene la siguiente sección:
 
@@ -239,18 +227,18 @@ Se trata de un fichero XML que tiene la siguiente sección:
 		username="spatial_user" password="unr3dd" maxActive="20" maxIdle="10"
 		maxWait="-1" />
 
-donde podemos ver que se puede configurar la URL de la base de datos, el usuario y password y algunos parámetros más para el pool de conexiones que Tomcat crea. Por defecto hay unos valores que se usan para pruebas durante el desarrollo y que obviamente habrá que cambiar para adaptarse al entorno donde se instale el portal. Si por ejemplo, la base de datos se llama "portal" se encuentra en el mismo servidor que Tomcat y se accede con el usuario "admin_portal" y con el password "bosques", la sección anterior habrá de cambiarse así:
+donde podemos ver que se especifica la URL de la base de datos, el usuario y password y algunos parámetros más para el pool de conexiones que Tomcat crea. Por defecto hay unos valores que se usan para pruebas durante el desarrollo y que obviamente no se adaptan a los distintos entornos de producción. Si por ejemplo, la base de datos se llama "portal" se encuentra en el mismo servidor que Tomcat y se accede con el usuario "admin_portal" y con el password "bosques", la sección anterior habrá de cambiarse así:
 
 	<Resource name="jdbc/unredd-portal" auth="Container" type="javax.sql.DataSource"
 		driverClassName="org.postgresql.Driver" url="jdbc:postgresql://localhost:5432/portal"
 		username="admin_portal" password="bosques" maxActive="20" maxIdle="10"
 		maxWait="-1" />
 
-Una modificado este fichero tendremos que reiniciar el portal con el comando `touch`, lo cual... **¡borrará el directorio "portal" y lo volverá a generar, perdiendo así nuestra configuración, que acabamos de hacer dentro del mismo!**.
+Una modificado este fichero tendremos que reiniciar el portal con el comando `touch`, lo cual regenerará el directorio portal... **¡que es donde está el fichero que acabamos de editar!**.
 
-Es por esto, que al desplegarse el portal, dicho fichero se copia en un directorio fuera de `webapps`: $TOMCAT_HOME/conf/Catalina/localhost/portal.xml. Esto es un mecanismo de Tomcat que se usa precisamente para poder modificar la configuración del .war y que esta sea persistente a los reinicios del mismo.
+Es por esto, que al desplegarse el portal, dicho fichero se copia en un directorio fuera de `webapps`: `/var/lib/tomcat7/conf/Catalina/localhost/portal.xml`. Esta es la manera que ofrece Tomcat precisamente para poder modificar la configuración del .war y que esta sea persistente a los reinicios del mismo.
 
-Una vez hecho el cambio en este fihero de la manera explicada anteriormente, el reinicio del portal se puede realizar sin temor ya que este fichero no se eliminará y la nueva configuración tendrá éxito.
+Una vez hecho el cambio en este fichero de la manera explicada anteriormente, el reinicio del portal se puede realizar sin temor ya que este fichero no se eliminará y la nueva configuración tendrá éxito.
 
 Tras reiniciar el portal podremos observar que aparece en el log el siguiente texto:
 
@@ -268,3 +256,41 @@ Tras reiniciar el portal podremos observar que aparece en el log el siguiente te
 	INFORMATION: Reloading Context with name [/portal] is completed
 
 donde las líneas `INFORMATION:` hablan de "reloading" (recarga) en lugar de "deployment" y no aparece ningún error al final.
+
+## Directorio de configuración
+
+Si observamos el log anterior veremos que el directorio de configuración del portal es `/var/lib/tomcat7/webapps/portal/WEB-INF/default_config`, que es el directorio que viene por defecto en el portal.
+
+Ya sabemos que no debemos modificar nada que haya dentro de `webapps` porque el directorio puede regenerarse en cualquier momento y se perderían los cambios ahí realizados.
+
+Para evitar esto es necesario sacar el directorio de configuración de `webapps` y esto se puede hacer con la variable de entorno `GEOLADRIS_CONFIG_DIR`. Esta variable apunta al directorio donde se encuentra el directorio de configuración, que se llamará igual que el directorio de `webapps`. Por ejemplo, si la variable apunta a `/var/geoladris/` y nuestro .war es "portal.war" entonces el directorio de configuración será `/var/geoladris/portal`.
+
+Esta forma de definir el directorio de configuración puede ser un poco contraintuitiva, pero permite tener varios portales en un mismo Tomcat con distintos directorios de configuración.
+
+Para configurar el directorio de nuestro portal empezamos creándolo en el sistema de ficheros:
+
+	$ mkdir /var/geoladris/portal
+
+A continuación copiamos los contenidos del directorio que viene en el .war en el directorio que acabamos de crear:
+
+	$ cp -R /var/lib/tomcat7/webapps/portal/WEB-INF/default_config/* /var/geoladris/portal/
+
+Ahora que tenemos el directorio listo, sólo hay que pasárselo a Tomcat mediante la variable de entorno `GEOLADRIS_CONFIG_DIR`. Esto se puede hacer en el fichero `/etc/default/tomcat7` añadiendo en cualquier punto la siguiente línea:
+
+	GEOLADRIS_CONFIG_DIR=/var/geoladris
+
+Hay que recordar que la variable apunta a `/var/geoladris` y no a `/var/geoladris/portal` ya que el "/portal" del final lo toma del nombre de la aplicación en `webapps`. 
+
+Por último reiniciaremos el portal con el comando `touch` para que tome la nueva configuración.
+
+
+
+
+
+
+ 
+
+
+
+
+

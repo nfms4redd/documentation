@@ -1,6 +1,4 @@
-# Tutorial programación portal FAO
-
-## Geoladris
+# Tutorial programación portal
 
 ## Hola mundo web
 
@@ -10,49 +8,51 @@ La web se construye básicamente sobre tres estándares:
 * CSS: Nos permite controlar el estilo de los elementos HTML, es decir, la forma en la que se muestran al usuario. Ejemplos de aspectos que se pueden controlar desde CSS es: color, si un elemento es visible o no, tamaño de la letra, borde y un largo etcétera
 * Javascript: Nos permite hacer que la página HTML/CSS interactúe con el usuario. Por ejemplo, podemos mostrar una imagen cuando se pincha en un botón o controlar que antes de enviar un formulario todos los datos son correctos.
 
-Podemos empezar por ver una [página HTML sencilla](ejemplos/hola-mundo-web/base.html). TODO explicar el DOM.
+Podemos empezar por ver una [página HTML sencilla](ejemplos/hola-mundo-web/base.html).
 
-El elemento existente en el ejemplo anterior tiene el estilo por defecto, pero con el uso de CSS podemos, por ejemplo, [cambiarle el color](ejemplos/hola-mundo-web/hola-css.html).
-TODO explicar que el CSS es parte del DOM (se necesita después)
-TODO explicar # y . en la selección.
+El elemento `h1` existente en el ejemplo anterior tiene el estilo por defecto, pero con el uso de CSS podemos, por ejemplo, [cambiarle el color](ejemplos/hola-mundo-web/hola-css-style-element.html).
+
+En dicho ejemplo hemos establecido el estilo de todos los elementos h1 con un elemento `style`. Si tenemos varios elementos `h1` y sólo queremos cambiar uno de ellos es posible [establecer el atributo `style` del elemento concreto](ejemplos/hola-mundo-web/hola-css-style-attribute.html).
+
+Pero en general es buena idea separar el estilo del contenido, ya que el estilo se suele cambiar con frecuencia (sin ir más lejos, en función del dispositivo con el que se visualiza la página). Para ello, podemos darle un identificador al título y volver al elemento `style` pero esta vez [aplicándolo sólo al título que nos interesa](ejemplos/hola-mundo-web/hola-css-style-id.html).
+
+Y si hubiera varios elementos a los que queremos aplicar un mismo estilo, es posible clasificarlos en un grupo (clase) y [aplicar el estilo a esa clase](ejemplos/hola-mundo-web/hola-css-style-class.html).
+
+Por último, es posible también meter los estilos en un fichero separado y [enlazarlo desde el HTML](ejemplos/hola-mundo-web/hola-css-style-class-external.html)
+
+Es importante retener que los estilos forman parte del DOM y que es posible seleccionar elementos concretos por id con el selector `#` y clasificar elementos y seleccionarlos con el selector `.`
 
 Por otra parte, con el uso de Javascript podemos interactuar con el usuario, por ejemplo [decirle qué hora es](ejemplos/hola-mundo-web/hola-javascript.html)
 
-Pero la parte que más nos va a interesar de Javascript es [modificar el DOM (HTML + CSS) de la página](ejemplos/hola-mundo-web/js-dom.html)
+Pero la parte que más nos va a interesar de Javascript es [modificar el DOM de la página](ejemplos/hola-mundo-web/js-dom.html), que recordamos también incluía aspectos de estilo.
 
-TODO copiar el código de los ejemplos aquí y escribir la documentación detallando los elementos del código relevantes.
+## jQuery
 
-## jquery
+En sus inicios, [jQuery](http://jquery.com) permitía manipular el DOM de una manera más sencilla y compatible con todos los navegadores, que implementaban el estándar de manera distinta. Actualmente, los navegadores respetan más estrictamente el estándar y cada vez tiene menos sentido utilizar jQuery. En cualquier caso, es una librería ampliamente utilizada en el portal de diseminación, por lo que es conveniente tener conocimiento de la misma. 
 
-En sus inicios, jQuery permitía manipular el DOM de una manera más sencilla y compatible con todos los navegadores, que implementaban el estándar de manera distinta. Actualmente, los navegadores respetan más estrictamente el estándar y cada vez tiene menos sentido utilizar jQuery. En cualquier caso, es una librería ampliamente utilizada en el portal de diseminación, por lo que es conveniente tener conocimiento de la misma. 
-
-TODO meter los ejemplos de la documentación anterior y explicarlos.
-
-La modificación del DOM vista en el ejemplo anterior se puede simplificar utilizando una librería llamada [jQuery](http://jquery.com).
-
-Para ello hay que copiar la librería junto con la página HTML e importarlo desde el DOM con un tag `script`, como se puede ver en [este ejemplo](ejemplos/jquery/jquery-dom.html).
+La modificación del DOM vista en el ejemplo anterior se puede simplificar utilizando jQuery. Para ello hay que copiar la librería junto con la página HTML e importarla desde el DOM con un tag `script`, como se puede ver en [este ejemplo](ejemplos/jquery/jquery-dom.html).
 
 ## RequireJS
 
 Los problemas con el modo anterior de crear las páginas HTML dinámicas es que cuando empezamos a añadir muchas funcionalidades el fichero puede crecer enormemente y ser difícil de entender y por tanto de mantener y extender.
 
-Para evitar esto podemos utilizar otra librería llamada [RequireJS](http://requirejs.org/) que permite el empaquetado de ficheros javascript en módulos y gestiona las dependencias entre estros módulos.
+Para evitar esto podemos utilizar otra librería llamada [RequireJS](http://requirejs.org/) que permite el empaquetado de ficheros javascript en módulos y gestiona las dependencias entre estos módulos.
 
-El ejemplo anterior podemos implementarlo con RequireJS [así](ejemplos/requirejs/hola-requirejs.html) 
+El ejemplo anterior podemos implementarlo con RequireJS [así](ejemplos/requirejs/hola-requirejs/hola-requirejs.html) 
 
-TODO Objetivo: entender una aplicación RequireJS completamente (modulos, librerías y css), ver ventajas, ver limitaciones, luego trasladaremos a GeoLadris para resolver las limitaciones.
+A continuación se plantea una serie de ejercicios que vamos a ir resolviendo añadiendo nuevos módulos al ejemplo anterior y detectando algunos aspectos a tener en cuenta.
 
-* Ejercicio: Crear el H1 como un módulo
+* Ejercicio: [Crear el H1 con Javascript](ejemplos/requirejs/h1-modulo/h1-modulo.html) 
     * Dependencia en evento-mouse para que h1-modulo se cargue antes
-* Modificar todos los módulos para que el estilo inicial sea una clase css y el cambio de estilo sea otra
+* Ejercicio: Modificar todos los módulos para que [el estilo inicial sea una clase css y el cambio de estilo sea otra](ejemplos/requirejs/all-css/all-css.html)
     * Hay que añadir la CSS a mano en el documento HTML.
-* Ejercicio: Internacionalizar ambos módulos con un tercer módulo con las traducciones.
-    * Explicar el valor de retorno del i18n
-* Ejercicio: Usar una nueva librería. Tal vez para mostrar un mensaje al usuario en un diálogo. Si necesita CSSs mejor.
+* Ejercicio: Internacionalizar ambos módulos [con un tercero con las traducciones](ejemplos/requirejs/i18n/i18n.html).
+    * valores de retorno del módulo i18n
+* Ejercicio: Usar una nueva librería [para mostrar un mensaje al usuario en un diálogo](ejemplos/requirejs/mensaje-cool/mensaje-cool.html).
     * El nuevo módulo que usa la librería tenemos que importarlo desde ejemplo, ya que ningún otro módulo lo pide.
-    * El módulo debe importar la librería y se debe configurar su ubicación.
+    * El módulo debe importar la librería y se debe configurar la ubicación de esta última.
 
-El uso de requireJS tiene unas ventajas evidentes. Con RequireJS es fácil agrupar las funcionalidades en pequeños módulos que son más fácilmente localizables y mantenibles. Además se establece un árbol de dependencias entre los módulos que ayuda a ver qué funcionalidades son requeridas por un módulo. Sin embargo el concepto de módulo no encapsula a una funcionalidad. Cuando desarrollamos una funcionalidad:
+El uso de requireJS tiene unas ventajas evidentes. Con RequireJS es fácil agrupar las funcionalidades en pequeños módulos que son más fácilmente localizables y mantenibles. Además se establece un árbol de dependencias entre módulos que ayuda a ver qué funcionalidades son requeridas por un módulo determinado. Sin embargo el concepto de módulo no encapsula a una funcionalidad. Cuando desarrollamos una funcionalidad:
 
 * Desarrollamos módulos. Tal vez más de uno como es el caso de `evento-mouse`, que usa `i18n`.
 * Incluimos en el documento HTML hojas de estilo CSS
@@ -67,22 +67,20 @@ Así, si queremos quitar una funcionalidad, tenemos que:
 
 En el siguiente punto vamos a ver cómo el proyecto Geoladris permite el empaquetado de todos estos aspectos en un concepto "plugin" de más alto nivel.  
 
-TODO copiar el código de los ejemplos aquí y escribir la documentación detallando los elementos del código relevantes.
-
 ## Geoladris
 
 [Geoladris](https://github.com/geoladris/) es un proyecto escrito en Java que permite agrupar todos los aspectos necesarios para implementar una funcionalidad (módulos RequireJS, CSS, configuración, etc.) en el concepto de plugin.
 
 Su funcionamiento es simple: 
 
-1. Para cada funcionalidad, existe un directorio con todos los componentes necesarios organizados de una manera precisa, que explicamos posteriormente.
-2. El núcleo de Geoladris lee todos los elementos necesarios y los ofrece como una aplicación RequireJS: generando las líneas en el documento HTML que cargan las hojas CSS, generando la llamada para cargar todos los módulos, etc.)
+1. Para cada funcionalidad, existe un directorio con todos los componentes necesarios organizados de una manera precisa, que se explica más adelante.
+2. El núcleo de Geoladris lee todos los elementos necesarios y los ofrece como una aplicación RequireJS: generando la carga de CSS en el HTML, generando la llamada para cargar todos los módulos, etc.)
 
 Además de esto, Geoladris nos permite:
 - Activar y desactivar plugins mediante configuración.
 - Modificar la configuración de los plugins.
 
-TODO Observación de la pestaña network con el portal de FAO e identificación de varios plugins.
+Ejemplo: Observación del portal.
 
 La estructura de un plugin Geoladris consta de:
 
@@ -90,13 +88,13 @@ La estructura de un plugin Geoladris consta de:
 * `jslib/` directorio con las librerías externas usadas por el plugin.
 * `styles/` directorio con las hojas CSS generales, típicamente de las librerías externas.
 * `themes/` directorio con hojas CSS que definen el estilo general de los elementos del DOM aportados por el plugin.
-* `-conf.json` **Descriptor del plugin**, contiene la configuración de los módulos del plugin.
+* `*-conf.json` **Descriptor del plugin**, contiene la configuración de los módulos del plugin.
 
-TODO Enlazar a la referencia del descriptor y comentar que se puede configurar RequireJS y los módulos que nosotros implementamos. 
+Para información detallada sobre el formato del descriptor del plugin se puede consultar la [documentación de referencia](https://geoladris-core.readthedocs.io/es/latest/plugins/#estructura) 
 
 Además, toda aplicación Geoladris consta de un directorio de configuración donde se puede cambiar la configuración de los plugins y añadir nuevos plugins.
 
-El portal de diseminación de datos de FAO está construido sobre el núcleo de Geoladris, lo cual quiere decir que todas sus funcionalidades están agrupadas en distintos plugins que contienen la estructura de directorios recién descrita. Como aplicación Java, es posible crear plugins Geoladris para extender el portal con las herramientas de programación habituales en el desarrollo de Java. Sin embargo es también posible crear plugins en el directorio de configuración, olvidándonos así de Java por completo. En lo que resta de capacitación nos centraremos en la creación de plugins **sin** necesidad de Java.
+El portal de diseminación de datos de FAO está construido sobre el núcleo de Geoladris, lo cual quiere decir que todas sus funcionalidades están agrupadas en distintos plugins que contienen la estructura de directorios recién descrita. Como aplicación Java, es posible crear plugins Geoladris para extender el portal con las herramientas de programación habituales en el desarrollo de Java. Sin embargo es también posible crear plugins en el mencionado directorio de configuración, olvidándonos así de Java por completo. En lo que resta de capacitación nos centraremos en la creación de plugins **sin** necesidad de Java.
 
 ## Hola Geoladris
 
