@@ -8,6 +8,8 @@ La web se construye básicamente sobre tres estándares:
 * CSS: Nos permite controlar el estilo de los elementos HTML, es decir, la forma en la que se muestran al usuario. Ejemplos de aspectos que se pueden controlar desde CSS es: color, si un elemento es visible o no, tamaño de la letra, borde y un largo etcétera
 * Javascript: Nos permite hacer que la página HTML/CSS interactúe con el usuario. Por ejemplo, podemos mostrar una imagen cuando se pincha en un botón o controlar que antes de enviar un formulario todos los datos son correctos.
 
+A continuación se muestran algunos aspectos mediante ejemplos. Estos ejemplos no necesitan situarse en un servidor y pueden visualizarse desde el propio sistema de ficheros. Más adelante, con el uso de Geoladris veremos que sí que hace falta un componente en el servidor.
+
 Podemos empezar por ver una [página HTML sencilla](ejemplos/hola-mundo-web/base.html).
 
 El elemento `h1` existente en el ejemplo anterior tiene el estilo por defecto, pero con el uso de CSS podemos, por ejemplo, [cambiarle el color](ejemplos/hola-mundo-web/hola-css-style-element.html).
@@ -30,7 +32,7 @@ Pero la parte que más nos va a interesar de Javascript es [modificar el DOM de 
 
 En sus inicios, [jQuery](http://jquery.com) permitía manipular el DOM de una manera más sencilla y compatible con todos los navegadores, que implementaban el estándar de manera distinta. Actualmente, los navegadores respetan más estrictamente el estándar y cada vez tiene menos sentido utilizar jQuery. En cualquier caso, es una librería ampliamente utilizada en el portal de diseminación, por lo que es conveniente tener conocimiento de la misma. 
 
-La modificación del DOM vista en el ejemplo anterior se puede simplificar utilizando jQuery. Para ello hay que copiar la librería junto con la página HTML e importarla desde el DOM con un tag `script`, como se puede ver en [este ejemplo](ejemplos/jquery/jquery-dom.html).
+La modificación del DOM vista en el ejemplo anterior se puede implementar utilizando jQuery. Para ello hay que copiar la librería junto con la página HTML e importarla desde el DOM con un tag `script`, como se puede ver en [este ejemplo](ejemplos/jquery/jquery-dom.html).
 
 ## RequireJS
 
@@ -54,7 +56,7 @@ A continuación se plantea una serie de ejercicios que vamos a ir resolviendo a�
 
 El uso de requireJS tiene unas ventajas evidentes. Con RequireJS es fácil agrupar las funcionalidades en pequeños módulos que son más fácilmente localizables y mantenibles. Además se establece un árbol de dependencias entre módulos que ayuda a ver qué funcionalidades son requeridas por un módulo determinado. Sin embargo el concepto de módulo no encapsula a una funcionalidad. Cuando desarrollamos una funcionalidad:
 
-* Desarrollamos módulos. Tal vez más de uno como es el caso de `evento-mouse`, que usa `i18n`.
+* Desarrollamos módulos. Tal vez más de uno como es el caso de `evento-mouse`, que usa `traducciones`.
 * Incluimos en el documento HTML hojas de estilo CSS
 * Incluimos librerías externas en un directorio y configuramos RequireJS para que las encuentre.
 
@@ -80,8 +82,6 @@ Además de esto, Geoladris nos permite:
 - Activar y desactivar plugins mediante configuración.
 - Modificar la configuración de los plugins.
 
-Ejemplo: Observación del portal.
-
 La estructura de un plugin Geoladris consta de:
 
 * `modules/` directorio con los módulos RequireJS y las hojas CSS propias de los módulos.
@@ -100,26 +100,26 @@ El portal de diseminación de datos de FAO está construido sobre el núcleo de 
 
 Para hacer una aplicación sencilla con Geoladris tenemos que instalar en Tomcat el núcleo Geoladris de [aquí](nullisland.geomati.co:8082/repository/releases/org/fao/unredd/apps/geoladris-core/5.0.0/geoladris-core-5.0.0.war) e instalarla en Tomcat. Si hemos seguido el punto sobre [instalar el portal de diseminación](wars.md) todo estará listo y bastará copiar el fichero en `webapps`. En este caso lo copiaremos con el nombre `hola-geoladris.war`
 
-Como la variable `GEOLADRIS_CONF_DIR` ya está configurada, el directorio de configuración será `/var/geoladris/hola-geoladris/` y lo crearemos mediante el comando `mkdir`:
+Como la variable `GEOLADRIS_CONF_DIR` ya está configurada, el directorio de configuración será `/var/geoladris/hola-geoladris/` y lo crearemos mediante el comando `mkdir` (sin sudo si hemos cambiado el propietario de `/var/geoladris`):
 
-	$ sudo mkdir /var/geoladris/hola-geoladris
+	$ mkdir /var/geoladris/hola-geoladris
 
 En dicho directorio crearemos otro llamado "plugins" que es el que contendrá nuestros plugins.
 
-	$ sudo mkdir /var/geoladris/hola-geoladris/plugins
+	$ mkdir /var/geoladris/hola-geoladris/plugins
 
 Si nuestro hola mundo consiste en un elemento `h1` con un mensaje, tendremos que:
 
 1. Crear un directorio para el plugin, que llamaremos "titulo": `sudo mkdir /var/geoladris/hola-geoladris/plugins/titulo`; dentro de este directorio tendremos la estructura descrita en el punto anterior con los directorios `modules/`, `styles/`, etc.
 2. En este caso sólo necesitamos crear un módulo, que meteremos en el directorio `modules/` con el siguiente contenido:
 
-define([ "jquery" ], function($) {
-	$("<h1>")//
-	.attr("id", "titulo")//
-	.html("Hola mundo")//
-	.appendTo("body");
-	// <h1 id="titulo">Hola mundo</h1>
-});
+	define([ "jquery" ], function($) {
+		$("<h1>")//
+		.attr("id", "titulo")//
+		.html("Hola mundo")//
+		.appendTo("body");
+		// <h1 id="titulo">Hola mundo</h1>
+	});
 
 Los ejemplos siguientes se pueden encontrar [aquí](ejemplos/geoladris/mensaje-cool), que es el directorio de configuración que contiene el directorio `plugins` que contiene todos los plugins:
 

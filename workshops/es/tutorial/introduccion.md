@@ -1,12 +1,10 @@
 # Curso programación sobre el portal de diseminación del Sistema Nacional de Monitoreo de Bosques (SNMB)
 
-Este tutorial muestra cómo realizar aplicaciones web de forma modular con el proyecto [Geoladris](https://github.com/geoladris/) usando como caso de uso el portal de diseminación del SNMB.
-
-La tecnología utilizada no es específica para la temática de bosques y la modularidad de Geoladris permite adaptar el portal fácilmente a otras temáticas.
+Este tutorial muestra cómo realizar aplicaciones web de forma modular con el proyecto [Geoladris](https://github.com/geoladris/) usando como caso de uso el portal de diseminación del SNMB. Sin embargo, la tecnología utilizada no es específica para la temática de bosques y la modularidad de Geoladris permite adaptar el portal fácilmente a otras temáticas.
 
 ## Servidor de pruebas
 
-Se realizarán distintos ejercicios que consisten en cambiar la configuración de programas instalados en un servidor.
+Se realizarán distintos ejercicios que necesitarán de cambiar la configuración de programas instalados en un servidor.
 
 Se parte de la existencia de un servidor linux (ubuntu 14.04, aunque este detalle no es
 significativo para la mayor parte de los ejemplos) en el que tenemos una cuenta "usuario" con
@@ -16,10 +14,10 @@ Para el acceso al servidor necesitaremos:
 
 * Un cliente de SSH.
     * En linux, la línea de comando habitual y el comando `ssh`.
-    * En Windows podemos utilizar PuTTY (http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html).
+    * En Windows podemos utilizar [PuTTY](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html).
 * Una herramienta para copiar archivos al servidor.
      * En linux, de nuevo a través de la línea de comando
-     * En Windows podemos utilizar WinSCP (http://winscp.net).
+     * En Windows podemos utilizar [WinSCP](http://winscp.net).
 
 ### Máquina virtual
 
@@ -56,7 +54,7 @@ ejemplo, desde la línea de comandos de linux:
 
 Este tutorial consta de dos partes:
 
-1. [Comprensión del ciclo de vida y configuración del .war. Java a nivel administrador](wars.md)
+1. [Comprensión del ciclo de vida y configuración del portal a nivel administrador](wars.md)
 2. [Creación de plugins sobre el portal: HTML + CSS + Javascript](programmer.md)
 
 
