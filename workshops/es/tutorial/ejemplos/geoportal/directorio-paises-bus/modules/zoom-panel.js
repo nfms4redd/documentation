@@ -1,4 +1,4 @@
-define([ "map" ], function(map) {
+define([ "message-bus" ], function(bus) {
 
 	function showZoomPanel() {
 		if ($("#paises").length > 0) {
@@ -10,10 +10,10 @@ define([ "map" ], function(map) {
 			.attr("class", "panel-paises");
 
 			var paises = {
-				"Argentina" : "-62, -38",
-				"Bolivia" : "-65, -19",
-				"Ecuador" : "-78, 0",
-				"Paraguay" : "-57, -25"
+				"Argentina" : [ -62, -38 ],
+				"Bolivia" : [ -65, -19 ],
+				"Ecuador" : [ -78, 0 ],
+				"Paraguay" : [ -57, -25 ]
 			};
 
 			for ( var pais in paises) {
@@ -23,10 +23,11 @@ define([ "map" ], function(map) {
 				.html(pais)//
 				.on("click", function(e) {
 					var pais = $(e.target).attr("id");
-					var center = new OpenLayers.LonLat(paises[pais].split(","));
-					var epsg4326 = new OpenLayers.Projection("EPSG:4326");
-					center.transform(epsg4326, map.projection);
-					map.setCenter(center);
+					bus.send("zoom-to", {
+						"x" : paises[pais][0],
+						"y" : paises[pais][1],
+						"zoomLevel" : 4
+					});
 				});
 			}
 		}

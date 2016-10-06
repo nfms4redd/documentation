@@ -229,36 +229,48 @@ TODO: crear un directorio de configuración en el que el zoom es toda latinoamé
 
 * Ejercicio: copiar en "plugins" del directorio de configuración del portal el plugin con el mensaje "cool". 
 
+## Recapitulación
+
+De nuevo hemos pasado por los distintos problemas que pueden surgir al montar una aplicación Geoladris. Y de nuevo podemos resumirlo todo en algo no tan complicado:
+
+1. Los plugins Geoladris pueden ponerse en el directorio `plugins` del directorio de configuración.
+2. Dentro del directorio de un plugin podemos encontrar distintos directorios donde meter nuestros módulos RequireJS, nuestras hojas de estilo y nuestras librerías.
+3. En la raíz podemos del directorio de un plugin podemos encontrar un descriptor terminado en `-conf.json` que puede contener la información sobre la ubicación de las librerías que usa el plugin así como la configuración por defecto de los módulos que hemos programado configurables.
+4. La configuración por defecto la podemos sobreescribir en el directorio de configuración, en un fichero `public-conf.json`, en el que podemos además habilitar y deshabilitar plugins.
+
 ## Interacción con otros plugins
 
-En el punto sobre Geoladris hemos visto que existen dependencias entre nuestros plugins y que si eliminamos un plugin, aquellos que tengan referencias al mismo van a fallar. En resumen, que tenemos que tener en cuenta manualmente las dependencias entre plugins.
+Hemos visto que existen dependencias entre nuestros plugins y que si eliminamos un plugin, aquellos que tengan referencias al mismo van a fallar. En resumen, que tenemos que tener en cuenta manualmente las dependencias entre plugins.
 
 Para evitar este tipo de problemas se pueden seguir una serie de estrategias. Se pueden escribir las dependencias en un fichero README o agrupar los módulos en plugins de forma más lógica para evitar las dependencias, etc.
 
-Hay una estrategia que es usada ampliamente en las aplicaciones Geoladris, que es el uso de un bus de mensajes.Comun
-TODO explicar el message-bus
+Hay una estrategia que es usada ampliamente en las aplicaciones Geoladris, que es el uso de un bus de mensajes. Cuando una parte de la aplicación tiene que ser notificada de algo, en lugar de importar el módulo que necesitamos e invocar algún método, lo que hacemos es lanzar un evento a través de un `bus` y éste se encarga de notificar a todos los módulos interesados. Veamos un ejemplo:
 
 * Ejemplo: crear un plugin que muestre los nombres de los países y haga zoom a los mismos.
-* TODO Ejemplo: El mismo ejemplo anterior pero haciendo zoom mediante un evento.
+* Ejemplo: El mismo ejemplo anterior pero haciendo zoom mediante un evento.
 
-TODO Explicar desacople (ya no usamos el mapa de forma directa, podemos cambiarlo en el futuro por Leaflet, OL3).
-TODO comentar planes para cambiar a OL3.
+Lo principal que podemos observar entre las dos implementaciones de `zoom-panel.js` es que la segunda no tiene al mapa como dependencia. En su lugar tiene una referencia al módulo `message-bus`. Y esto tiene una serie de consecuencias positivas:
 
-* Ejemplo: En el caso anterior era posible también recuperar la referencia al mapa, pero en otros casos la única forma de operar es con el `message-bus`. Por ejemplo, si queremos mostrar la leyenda de una capa podemos usar el evento "open-legend" con el id de la capa.
+* ¿Cómo se llama el módulo que instala el mapa en la aplicación? A nuestro módulo le da igual.
+* Ya no usamos Open Layers directamente. ¿Es OpenLayers 2? ¿OpenLayers 3? ¿Leaflet? A nuestro módulo le da igual.
+* ¿Cuántos mapas hay en nuestra aplicación? ¿uno? ¿dos? ¿ninguno? A nuestro módulo le da igual.
 
-TODO Poner en el open-legend-example el id de la capa o las capas cuya leyenda queramos mostrar
+El resultado es que nuestro módulo va a funcionar independientemente de que haya mapa o no. Obviamente si no hay mapa no tendrá efecto ninguno.
 
-TODO eliminar overrides.css
-TODO quitar plugin de google maps
+En el caso anterior era posible también recuperar la referencia al mapa, pero en otros casos la única forma de operar es con el `message-bus`. 
 
-
+Ejemplo: Mostrar la leyenda de una capa usando el evento "open-legend" con el id de la capa.
 
 ## Comunicación con el servidor
 
-Descripción interacción cliente/servidor
-Ejemplos en el geoportal
+Geoladris es una aplicación cliente/servidor en la que el cliente ofrece una interacción al usuario con la información que obtiene del servidor.
+
+Para obtener información del servidor es necesario que haya un servicio en algún punto que nos devuelva un documento en algún formato (JSON, XML, etc) que la aplicación cliente utilizará para ofrecer una nueva funcionalidad al usuario. Un ejemplo de esta interacción es la herramienta de información.
+
+
+
 Requisitos del servicio usado desde Geoladris
-TODO insertar en el punto de la primera sesión que hay que desarrollar un pequeño servicio que devuelve la temperatura en 
+TODO insertar en el punto de la primera sesión que hay que desarrollar un pequeño servicio que devuelve la temperatura en las coordenadas que se pasan
 TODO Comentar que GeoServer ofrece estas capacidades  
 TODO Ejemplos de interacción con GeoServer (obtener la geometría en la que hemos pinchado y dibujar un buffer?)
 
