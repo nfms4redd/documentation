@@ -1,25 +1,25 @@
 .. _portal_configuration:
 
-Portal: Configuración inicial 
+Portal: Configuración inicial
 ======================================
 
 .. note::
 
 	=================  ================================================
 	Fecha              Autores
-	=================  ================================================ 
+	=================  ================================================
 	1 Noviembre 2012    * Stefano Giaccio (Stefano.Giaccio@fao.org)
 	1 Diciembre 2012    * Oscar Fonts (oscar.fonts@geomati.co)
 	24 Junio 2013		* Fernando González (fernando.gonzalez@fao.org)
-	=================  ================================================	
+	=================  ================================================
 
-	©2013 FAO Forestry 
-	
+	©2013 FAO Forestry
+
 	Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : Creative Commons (Creative Commons - Attribution - Share Alike: http://creativecommons.org/licenses/by-sa/3.0/deed.es)
 
 El Portal de NFMS es la aplicación pública de la plataforma, utilizada para la visualización de los recursos cartográficos y estadísticos.
 
-El portal es personalizable a las necesidades de cada país, tanto en su aspecto como en los datos mostrados. La aplicación viene con una 
+El portal es personalizable a las necesidades de cada país, tanto en su aspecto como en los datos mostrados. La aplicación viene con una
 configuración por defecto que puede usarse como punto de partida.
 
 En nuestro caso, una vez instalado el portal se obtendrá el siguiente aspecto inicial:
@@ -60,7 +60,7 @@ Los ficheros principales son:
  * ``layers.json``, probablemente el fichero más importante, contiene la configuración de las capas de datos a mostrar.
  * ``messages/`` contiene los textos de la aplicación traducidos a varios idiomas.
  * ``modules/`` permite añadir modulos Javascript a la aplicación.
- * ``static/`` contiene recursos estáticos. 
+ * ``static/`` contiene recursos estáticos.
  * ``static/loc``: recursos clasificados por idioma
  * ``static/overrides.css``: última hoja CSS cargada, ideal para sobreescribir otros estilos
 
@@ -72,7 +72,7 @@ portal.properties
 * languages = {"en": "English", "fr": "Fran\u00e7ais", "es": "Espa\u00f1ol"}
 
   Elemento JSON con los idiomas que soporta la aplicación
-  
+
 * languages.default = en
 
   Idioma por defecto.
@@ -80,23 +80,23 @@ portal.properties
 * db-schema=portal_redd
 
   Nombre del esquema donde están las tablas necesarias para las distintas funcionalidades como estadísticas y feedback
-  
+
 * layers.rootFolder=/tmp
 
   Raíz de la configuración de estadísticas (experimental)
-  
+
 * info.layerUrl=http://demo1.geo-solutions.it/diss_geoserver/gwc/service/wms
 
   URL de las capas ``queryable``
 
 * info.queryUrl=http://demo1.geo-solutions.it/diss_geoserver/wms
-  
+
   URL de las capas ``queryable`` contra la que hacer la petición GetFeatureInfo
 
 * map.centerLonLat=24, -4
 
   Longitud y latitud del centro inicial del mapa
-  
+
 * map.initialZoomLevel=5
 
   Nivel de zoom inicial
@@ -108,46 +108,38 @@ Define la estructura de capas del proyecto. Consiste en un elemento JSON con cua
 
 	{
 		"default-server" : "http://demo1.geo-solutions.it",
-	
 		"wmsLayers" : [],
-	
 		"portalLayers" : [],
-	
 		"groups" : []
 	}
 
 * ``default-server`` define el servidor que se usará como base en caso de que la URL de las capas no incluyan servidor. Ver atributo ``baseUrl`` más abajo.
 
-* ``wmsLayers`` define las capas WMS que tendrá el mapa. El orden en el que estas capas aparecen en el array ``wmsLayers`` define el orden de las capas en el dibujado del mapa. Cada capa consistirá en un elemento que puede ser de tres tipos. El tipo por defecto es WMS y tiene las siguientes propiedades:
+* ``wmsLayers`` define las capas que tendrá el mapa. El orden en el que estas capas aparecen en este array define el orden de las capas en el dibujado del mapa. Cada capa consistirá en un elemento que puede ser de tres tipos. El tipo por defecto es WMS y tiene las siguientes propiedades:
 
-	* id: Identificado de la capa
-	* type: Tipo de la capa: WMS, Open Street Map, Google maps, respectivamente "wms", "osm" o "gmaps". Por defecto se tomará type:"wms"
-	* visible: Si la capa es utilizada para visualizarse en el mapa o sólo para otras cosas (petición de información, por ejemplo).
-	* zIndex: Posición en la pila de dibujado
-	* legend: Nombre del fichero imagen con la leyenda de la capa. Estos ficheros se acceden en static/loc/{lang}/images. También es posible poner la cadena de carácteres "auto" y el portal intentará obtener la imagen automáticamente de GeoServer usando la petición GetLegendGraphics de WMS.
-	* label: Título de la leyenda
-	* sourceLink: URL del proveedor de los datos
-	* sourceLabel: Texto con el que presentar el enlace especificado en sourceLink
+	* ``id ``: Identificador de la capa.
+	*  ``type ``: Tipo de la capa. Puede ser  ``wms ``,  ``osm `` (para Open Street Map) o  ``gmaps `` (para Google Maps). Por defecto es  ``wms ``.
+	*  ``legend ``: Nombre del fichero imagen con la leyenda de la capa. Estos ficheros se acceden en  ``static/loc/{lang}/images ``. También es posible poner la cadena de carácteres  ``auto `` y el portal intentará obtener la imagen automáticamente de GeoServer usando la petición  ``GetLegendGraphic `` de WMS.
+	*  ``sourceLink ``: URL del proveedor de los datos.
+	*  ``sourceLabel ``: Texto con el que presentar el enlace especificado en  ``sourceLink ``.
 
-	En función del tipo de la capa se especificarán además otras propiedades
-	
-  * WMS:
-	
-	* baseUrl: URL del servidor WMS que sirve la capa. Si se especifica una URL sin servidor, por ejemplo "/diss_geoserver/gwc/service/wms", se usará ``default-server``.
-	* wmsName: Nombre de la capa en el servicio WMS
-	* imageFormat: Formato de imagen a utilizar en las llamadas WMS
-	* queryType: Protocolo usado para la herramienta de información: "wfs" o "wms". En caso de ser "wfs" los siguientes parámetros son obligatorios: *queryUrl*, *querGeomFieldName*, *queryFieldNames*, *queryFieldAliases*, *queryTimeField* (en caso de ser una capa temporal). En caso de ser "wms" no hay ningún parámetro adicional obligatorio, por lo que una capa que quiera usar WMS para la herramienta de información puede configurarse sólo con: ``"queryType":"wms"``. El único requisito para capas con ``"queryType":"wms"`` es que el servidor codifique en EPSG:4326 la geometría de la respuesta al GetFeatureInfo, en caso contrario el objeto consultado no se podrá localizar en el mapa mediante zoom y resaltado. Si la capa no tiene un parámetro ``queryType`` la capa no será consultable.
-	* queryUrl: URL base a utilizar en la petición de información. Base del servidor WMS o WFS a utilizar (según ``queryType``). Si no se especifica se toma ``baseUrl``.
-	* queryGeomFieldName: Obligatorio en el caso de ``"queryType":"wfs"``. El nombre del campo geométrico. Típicamente "geom", "the_geom", "geometry", etc.
-	* queryFieldNames: Obligatorio en el caso de ``"queryType":"wfs"``. Nombres de los campos que se quieren obtener en la petición de info.
-	* queryFieldAliases: Obligatorio en el caso de especificar ``queryFieldNames``. Aliases de los campos especificados en ``queryFieldNames``.
-	* queryTimeFieldName: Obligatorio en el caso de ``"queryType":"wfs"`` si la capa tiene varias instancias temporales. Sin uso en el caso de ``"queryType":"wms"``. 
-	* queryHighlightBounds: Sólo para el caso ``"queryType":"wms"``. Si se desea resaltar solo el rectángulo que encuadra la geometría de los objetos consultados (``true``) o toda la geometría (``false``). Por defecto es ``false``. En los casos en los que la geometría es muy grande puede ser conveniente ponerlo a ``true`` para que el proceso de resaltado sea más rápido.
-	
+  En función del tipo de la capa se especificarán además otras propiedades. Para ``wms ``:
+
+	*  ``baseUrl ``: URL del servidor WMS que sirve la capa. Si se especifica una URL sin servidor, por ejemplo  ``/diss_geoserver/gwc/service/wms ``, se usará ``default-server``.
+	*  ``wmsName ``: Nombre de la capa en el servicio WMS.
+	*  ``imageFormat ``: Formato de imagen a utilizar en las llamadas WMS.
+	*  ``queryType ``: Protocolo usado para la herramienta de información:  ``wfs `` o  ``wms ``. En caso de ser  ``wfs `` los siguientes parámetros son obligatorios:  ``queryGeomFieldName ``,  ``queryFieldNames ``,  ``queryFieldAliases `` y  ``queryTimeField `` (en caso de ser una capa temporal). En caso de ser  ``wms `` no hay ningún parámetro adicional obligatorio, por lo que una capa que quiera usar WMS para la herramienta de información puede configurarse sólo con: ``"queryType": "wms"``. El único requisito para capas con ``"queryType": "wms"`` es que el servidor codifique en EPSG:4326 la geometría de la respuesta al  ``GetFeatureInfo ``; en caso contrario el objeto consultado no se podrá localizar en el mapa mediante zoom y resaltado. Si la capa no tiene un parámetro ``queryType`` la capa no será consultable.
+	*  ``queryUrl ``: URL base a utilizar en la petición de información. Base del servidor WMS o WFS a utilizar (según ``queryType``). Si no se especifica se toma ``baseUrl``.
+	*  ``queryGeomFieldName ``: Obligatorio en el caso de ``"queryType": "wfs"``. El nombre del campo geométrico. Típicamente  ``geom ``,  ``the_geom ``,  ``geometry ``, etc.
+	*  ``queryFieldNames ``: Obligatorio en el caso de ``"queryType": "wfs"``. Nombres de los campos que se quieren obtener en la petición de info.
+	*  ``queryFieldAliases ``: Obligatorio en el caso de especificar ``queryFieldNames``. Aliases de los campos especificados en ``queryFieldNames``.
+	*  ``queryTimeFieldName ``: Obligatorio en el caso de ``"queryType": "wfs"`` si la capa tiene varias instancias temporales. Sin uso en el caso de ``"queryType": "wms"``.
+	*  ``queryHighlightBounds ``: Sólo para el caso ``"queryType": "wms"``. Si se desea resaltar solo el rectángulo que encuadra la geometría de los objetos consultados (``true``) o toda la geometría (``false``). Por defecto es ``false``. En los casos en los que la geometría es muy grande puede ser conveniente ponerlo a ``true`` para que el proceso de resaltado sea más rápido.
+
 	Por ejemplo:
-		
+
 	.. code-block:: javascript
-			
+
 		{
 			"wmsLayers" : [
 				{
@@ -164,12 +156,12 @@ Define la estructura de capas del proyecto. Consiste en un elemento JSON con cua
 			...
 		}
 
-  * Open Street Map:
-    
-	* osmUrls: lista de las URL de los tiles. Usando ${x}, ${y} y ${z} como variables.
-    
+  Para  ``osm `` (Open Street Map):
+
+	* ``osmUrls ``: lista de las URLs de los tiles. Usando ${x}, ${y} y ${z} como variables.
+
 	Por ejemplo:
- 		
+
     .. code-block:: javascript
 
 		{
@@ -182,19 +174,19 @@ Define la estructura de capas del proyecto. Consiste en un elemento JSON con cua
 						"http://b.tile.openstreetmap.org/${z}/${x}/${y}.png",
 						"http://c.tile.openstreetmap.org/${z}/${x}/${y}.png"
 					]
-				}			
+				}
 			],
 			...
 		}
-    
-  * Google:
-    
-	* gmaps-type: Tipo de capa Google: ROADMAP, SATELLITE, HYBRID o TERRAIN
-      
+
+  Para  ``gmaps `` (Google Maps):
+
+	*  ``gmaps-type ``: Tipo de capa Google:  ``ROADMAP ``,  ``SATELLITE ``,  ``HYBRID `` o  ``TERRAIN ``.
+
 	Por ejemplo:
-	
+
     .. code-block:: javascript
-      
+
 		{
 			"wmsLayers" : [
 				{
@@ -205,24 +197,24 @@ Define la estructura de capas del proyecto. Consiste en un elemento JSON con cua
 			],
 			...
 		}
-	
+
 
 * ``portalLayers`` define las capas que aparecen visibles al usuario. Una ``portalLayer`` puede contener varias ``wmsLayers``. Cada ``portalLayer`` puede contener los siguientes elementos:
 
-	* id: id de la capa
-	* label: Texto con el nombre de la capa a usar en el portal. Si se especifica entre ${ }, se intentará obtener la traducción de los ficheros .properties existentes en el directorio ``messages`` del  directorio de configuración del portal.
-	* infoFile: Nombre del fichero HTML con información sobre la capa. El fichero se accede en static/loc/{lang}/html. En la interfaz gráfica se representa con un botón de información al lado del nombre de la capa 
-	* infoLink: Url con la información sobre la capa. Igual que infoFile pero especificando una ruta absoluta. infoFile tiene preferencia sobre infoLink, por lo que si se define el primero, infoLink se ignorará. 
-	* inlineLegendUrl: URL con una imagen pequeña que situar al lado del nombre de la capa en el árbol de capas. También es posible poner la cadena de carácteres "auto" y el portal intentará obtener la imagen automáticamente de GeoServer usando la petición GetLegendGraphics de WMS.
-	* active: Si la capa está inicialmente visible o no
-	* layers: Array con los identificadores de las ``wmsLayers`` a las que se accede a través de esta capa
-	* timeInstances: Instantes de tiempo en ISO8601 separados por comas
-	* timeStyles: Nombres de los estilos a utilizar para cada instancia temporal. Cada estilo se corresponde con aquella instancia temporal que ocupa la misma posición en la lista. Si no se especifica este parámetro se utilizará el estilo por defecto para todos los estilos.
-	* date-format: Formato de la fecha para cada capa. Según la librería Moment (http://momentjs.com/docs/#/displaying/). Por ejempo: "DD-MM-YYYY". Por defecto sólo el año (YYYY).
-	* feedback: En el caso de que la herramienta de feedback esté instalada, si se quiere o no que la capa aparezca en dicha herramienta para permitir al usuario hacer comentarios sobre la capa.  
-	
+	*  ``id ``: Identificador de la capa.
+	*  ``label ``: Texto con el nombre de la capa a usar en el portal. Si se especifica entre ${ }, se intentará obtener la traducción de los ficheros  ``.properties `` existentes en el directorio ``messages`` del  directorio de configuración del portal.
+	*  ``infoFile ``: Nombre del fichero HTML con información sobre la capa. El fichero se accede en  ``static/loc/{lang}/html ``. En la interfaz gráfica se representa con un botón de información al lado del nombre de la capa.
+	*  ``infoLink ``: URL con la información sobre la capa. Igual que  ``infoFile `` pero especificando una ruta absoluta.  ``infoFile `` tiene preferencia sobre  ``infoLink ``, por lo que si se define el primero,  ``infoLink `` se ignorará.
+	*  ``inlineLegendUrl ``: URL con una imagen pequeña que situar al lado del nombre de la capa en el árbol de capas. También es posible poner la cadena de carácteres  ``auto `` y el portal intentará obtener la imagen automáticamente de GeoServer usando la petición  ``GetLegendGraphic `` de WMS.
+	*  ``active ``: Si la capa está inicialmente visible o no.
+	*  ``layers ``: Array con los identificadores de las ``wmsLayers`` a las que se accede a través de esta capa.
+	*  ``timeInstances ``: Instantes de tiempo en ISO8601 separados por comas.
+	*  ``timeStyles ``: Nombres de los estilos a utilizar para cada instancia temporal. Cada estilo se corresponde con aquella instancia temporal que ocupa la misma posición en la lista. Si no se especifica este parámetro se utilizará el estilo por defecto para todos los estilos.
+	*  ``date-format ``: Formato de la fecha para cada capa. Según la librería `Moment <http://momentjs.com/docs/#/displaying>_`. Por ejempo:  ``DD-MM-YYYY ``. Por defecto sólo el año ( ``YYYY ``).
+	*  ``feedback ``: En el caso de que la herramienta de feedback esté instalada, si se quiere o no que la capa aparezca en dicha herramienta para permitir al usuario hacer comentarios sobre la capa.
+
 	Por ejemplo::
-		
+
 		{
 			"wmsLayers" : [
 				{
@@ -251,17 +243,17 @@ Define la estructura de capas del proyecto. Consiste en un elemento JSON con cua
 			],
 			...
 		}
-	
+
 * ``groups`` define la estructura final de las capas en el árbol de capas de la aplicación. Cada elemento de ``groups`` contiene:
 
-	* id: id del grupo
-	* label: Igual que en ``portalLayer``
-	* infoFile: Igual que en ``portalLayer``
-	* infoLink: Igual que en ``portalLayer``
-	* items. Array de otros grupos, con la misma estructura que este elemento (recursivo).
-	
+	* ``id ``: Identificador del grupo.
+	* ``label``: Igual que en ``portalLayer``
+	* ``infoFile``: Igual que en ``portalLayer``
+	* ``infoLink``: Igual que en ``portalLayer``
+	* ``items``. Array con los identificadores de otros grupos (con la misma estructura que este elemento; recursivo) o capas (``portalLayer``).
+
 	Por ejemplo::
-		
+
 		{
 			"wmsLayers" : [
 				{
@@ -389,7 +381,7 @@ El formato utilizado para este fichero de configuración es JSON (JavaScript Obj
 	}
 
   o incluso un elemento dentro de otro:
-  
+
   .. code-block:: js
 
 	{
@@ -401,14 +393,14 @@ El formato utilizado para este fichero de configuración es JSON (JavaScript Obj
 		},
 		"pais":"Argentina"
 	}
-  
+
 
 * Los arrays especifican sus valores entre corchetes ([]) y separados por comas.
 
   .. code-block:: js
 
 	[1, 2, 3, 4, 5]
-	
+
   .. code-block:: js
 
 	[
@@ -499,18 +491,18 @@ Cada "portalLayer" representa una capa en el árbol de capas del portal y por ta
   * el nuevo "id" será "regions".
   * como "label" se utilizará "${limites_administrativos}". De nuevo, esta etiqueta de sintaxis ${...} será sustituida por un texto en el idioma que
     corresponda, según los contenidos de "messages". Es la etiqueta que se mostrará en la interfaz gráfica.
-  * en "infoFile" pondremos "administrative_boundaries_def.html". Esto creará un enlace a un documento con información sobre 
+  * en "infoFile" pondremos "administrative_boundaries_def.html". Esto creará un enlace a un documento con información sobre
     los datos (localizado en :file:`static/loc/<idioma>/html/`).
   * en "layers" pondremos ["limites_administrativos"], haciendo referencia al nuevo *layer*.
   * en "inlineLegendUrl" estableceremos el parámetro LAYER así `LAYER=capacitacion:limites_administrativos`. Esto generará
-    una imagen con la leyenda. 
+    una imagen con la leyenda.
 
 
 Grupos
 .............
 
 Los "Groups" son una estructura recursiva (multinivel) para agrupar visualmente las capas en el panel.
-El "group" de primer nivel construye cada uno de los grupos de capas en forma de persiana desplegable, conteniendo una lista de 
+El "group" de primer nivel construye cada uno de los grupos de capas en forma de persiana desplegable, conteniendo una lista de
 "items" que hacen referencia a los contextos definidos anteriormente.
 
 .. code-block:: js
@@ -520,7 +512,7 @@ El "group" de primer nivel construye cada uno de los grupos de capas en forma de
 			"id" : "admin",
 			"label" : "${admin_areas}",
 			"items" : [ "countryBoundaries", "provinces" ]
-		}, 
+		},
 		...
 	]
 
@@ -543,14 +535,14 @@ Nótese que en la propiedad "items", se hace referencia a las "portalLayers" def
 					"items": [ "provincias" ]
 				}
 			]
-		}, 
+		},
 		...
 	]
 
 
 * Añadir un nuevo elemento `{ "context": "limites_administrativos" }` a continuación de `{ "context": "country" }`. Esto incluirá la capa
   en el grupo de áreas administrativas.
-  
+
 * Finalmente, utilizar un validador JSON, para comprobar que la sintaxis del nuevo :file:`layers.json` es correcta, y recargar la página.
 
 Posición inicial del mapa y prefijo capas
@@ -564,13 +556,13 @@ Antes de añadir la capa de carreteras vamos a proceder a configurar la posició
 	UNREDD.maxResolution = 4891.969809375;
 	UNREDD.mapCenter = new OpenLayers.LonLat(-9334782,-101119);
 	UNREDD.defaultZoomLevel = 0;
-	
+
 	UNREDD.wmsServers = [
 	    "http://demo1.geo-solutions.it",
 	    "http://incuweb84-33-51-16.serverclienti.com"
 	];
-	
-Para la posición central del mapa tendremos que modificar el valor *UNREDD.mapCenter* y poner la coordenada central en Google 
+
+Para la posición central del mapa tendremos que modificar el valor *UNREDD.mapCenter* y poner la coordenada central en Google
 Mercator (EPSG:900913 o EPSG:3857), que es el sistema de referencia que se usa en la aplicación web.
 
   * Obtener la coordenada central del mapa en el sistema de coordenadas usado en el portal.
@@ -593,7 +585,7 @@ Repetiremos el ejercicio anterior para añadir la capa de ciudades, teniendo en 
 * Para el nuevo "layer", usaremos el id "ciudades" y la capa wms "capacitacion:ciudades". Además, añadiremos un nuevo
   atributo `"legend": "ciudades.png"` para mostrar la leyenda de la capa. Este atributo hace referencia a una imagen
   localizada en :file:`static/loc/<idioma>/images/`.
-  
+
 * En el nuevo "context", será más sencillo, sólo contendrá los tres elementos `"id": "roads", "label": "${ciudades}", "layers": ["ciudades"]`.
 
 * En "contextGroups", crearemos un nuevo grupo llamado "otros", con esta sintaxis:
