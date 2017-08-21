@@ -17,7 +17,6 @@ A continuación se presenta el caso particular del portal (:ref:`project_archite
    :maxdepth: 2
 
    architecture.rst
-   reference.rst
    requirejs/index.rst
    message-bus/index.rst
    servlet3/index.rst
