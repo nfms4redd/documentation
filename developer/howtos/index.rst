@@ -11,7 +11,6 @@ Las siguientes secciones incluyen manuales para la creación de las tareas de de
    botonera
    events
    map-reference
-   read-url-parameters
    hello-world-service
    configuration-service-1
    configuration-service-2

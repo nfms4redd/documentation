@@ -7,5 +7,3 @@ Arquitectura servidor
    :maxdepth: 2
 
    filters-servlets-contexts
-   web-fragments
-   reference

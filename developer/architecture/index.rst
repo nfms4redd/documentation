@@ -18,5 +18,4 @@ A continuación se presenta el caso particular del portal (:ref:`project_archite
 
    architecture.rst
    requirejs/index.rst
-   message-bus/index.rst
    servlet3/index.rst
