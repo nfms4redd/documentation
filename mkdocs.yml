@@ -1,0 +1,6 @@
+site_name: Documentación de administración de NFMS4REDD
+theme: 'material'
+markdown_extensions: [codehilite]
+pages:
+- Home: index.md
+
