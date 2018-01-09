@@ -2,5 +2,11 @@ site_name: Documentación de administración de NFMS4REDD
 theme: 'material'
 markdown_extensions: [codehilite]
 pages:
-- Home: index.md
+- 'Introducción': index.md
+- 'Inventario': inventory.md
+- 'Instalación del servidor': install.md
+- 'Carga de datos en PostGIS': postgis.md
+- 'Publicación de datos en GeoServer': geoserver.md
+- 'Configuración del portal': portal.md
+- 'Optimizaciones': optimization.md
 
