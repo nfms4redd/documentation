@@ -31,6 +31,7 @@ El Portal es accesible en:
   http://localhost/portal/
 
 
+
 El directorio de configuración
 ------------------------------
 
@@ -100,6 +101,19 @@ portal.properties
 * map.initialZoomLevel=5
 
   Nivel de zoom inicial
+
+Para algunas funcionalidades, como la herramienta de feedback o las estadísticas, el portal interactúa con una base de datos. Para configurar el acceso a la base de datos será necesario configurar dos cosas: la conexión a la base de datos y el esquema en el que se meten las tablas que necesita el portal.
+
+Todas las funcionalidades que necesitan apoyo de la base de datos acceden a tablas con nombre conocido en un esquema que se configura en el fichero "portal.properties", situado en el directorio de configuración del portal, mediante la propiedad ``db-schema``.
+
+Así, para configurar estas funcionalidades hay que seguir dos pasos:
+
+#. Especificar el esquema con la propiedad db-schema. Ver :ref:`portal_properties_configuration`.
+#. Crear las tablas de nombre conocido según la funcionalidad que se desee instalar. 
+
+   * Servicio de estadísticas, ver :ref:`instalacion_servicio_estadisticas`
+   * Herramienta de feedback, ver :ref:`configuracion_herramienta_feedback`
+
 
 layers.json
 ------------
