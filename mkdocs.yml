@@ -4,7 +4,12 @@ markdown_extensions: [codehilite]
 pages:
 - 'Introducción': index.md
 - 'Inventario': inventory.md
-- 'Instalación del servidor': install.md
+- 'Instalación del servidor':
+    - 'Instalación de PostGIS': install/postgis.md
+    - 'Instalación de GeoServer': install/geoserver.md
+    - 'Instalación del portal': install/portal.md
+    - 'Copias de seguridad': install/backups.md
+    - 'Rendimiento': install/performance.md
 - 'Carga de datos en PostGIS': postgis.md
 - 'Publicación de datos en GeoServer': geoserver.md
 - 'Configuración del portal': portal.md

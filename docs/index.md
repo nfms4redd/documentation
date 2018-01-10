@@ -20,7 +20,7 @@ En el siguiente diagrama podemos observar estos componentes, junto con otros de 
 Para poder instalar estos componentes, en esta documentación asumimos que contamos con:
 
 * Los **datos** listos para su publicación, tanto vectoriales (*shapefiles*) como raster (*GeoTIFF*).
-* Un **servidor** con acceso público a Internet y posibilidad de realizar tareas administrativas (instalación, modificación de ficheros, etc.) en dicho servidor.
+* Un **servidor Linux** con acceso público a Internet y posibilidad de realizar tareas administrativas (instalación, modificación de ficheros, etc.) en dicho servidor.
 
 Una vez el sistema esté instalado se podrá conectar a los diferentes componentes de varias maneras:
 
@@ -33,7 +33,12 @@ Una vez el sistema esté instalado se podrá conectar a los diferentes component
 Los pasos a seguir para instalar el sistema son los siguientes:
 
 * [Inventario](inventory.md).
-* [Instalación del servidor](install.md).
+* Instalación del servidor
+	* [Instalación de PostGIS](install/postgis.md).
+	* [Instalación de GeoServer](install/geoserver.md).
+	* [Instalación del portal](install/portal.md).
+	* [Copias de seguridad](install/backups.md).
+	* [Rendimiento](install/performance.md).
 * [Carga de datos en PostGIS](postgis.md).
 * [Publicación de datos en GeoServer](geoserver.md).
 * [Configuración del portal](portal.md).
