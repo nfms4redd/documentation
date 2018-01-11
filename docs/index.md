@@ -33,10 +33,9 @@ Una vez el sistema esté instalado se podrá conectar a los diferentes component
 Los pasos a seguir para instalar el sistema son los siguientes:
 
 * [Inventario](inventory.md).
-* Instalación del servidor
-	* [Instalación de PostGIS](install/postgis.md).
-	* [Instalación de GeoServer](install/geoserver.md).
-	* [Instalación del portal](install/portal.md).
+* Instalación del servidor.
+	* [Instalación con Docker](install/docker.md).
+	* [Instalación con paquetes](install/packages.md).
 	* [Copias de seguridad](install/backups.md).
 	* [Rendimiento](install/performance.md).
 * [Carga de datos en PostGIS](postgis.md).
