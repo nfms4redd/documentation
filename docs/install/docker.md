@@ -13,7 +13,7 @@ Para sistemas Ubuntu, existe un script que lo instala automáticamente. Basta co
 ```bash
 wget https://nfms4redd.github.io/documentation/install/docker/install.sh
 chmod +x install.sh
-sudo ./setup.sh
+sudo ./install.sh
 ```
 
 Para comprobar que se ha instalado correctamente podemos ejecutar:
