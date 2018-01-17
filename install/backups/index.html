@@ -213,9 +213,48 @@
     <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
     
     
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Copias de seguridad
+      </label>
+    
     <a href="./" title="Copias de seguridad" class="md-nav__link md-nav__link--active">
       Copias de seguridad
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#postgresql" title="PostgreSQL" class="md-nav__link">
+    PostgreSQL
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#geoserver" title="GeoServer" class="md-nav__link">
+    GeoServer
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#portal" title="Portal" class="md-nav__link">
+    Portal
+  </a>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -300,6 +339,34 @@
   
   
   
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#postgresql" title="PostgreSQL" class="md-nav__link">
+    PostgreSQL
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#geoserver" title="GeoServer" class="md-nav__link">
+    GeoServer
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#portal" title="Portal" class="md-nav__link">
+    Portal
+  </a>
+  
+</li>
+      
+      
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -313,7 +380,51 @@
                 
                   <h1>Copias de seguridad</h1>
                 
-                
+                <h2 id="postgresql">PostgreSQL</h2>
+<p>Ver documentación en <a href="https://geotalleres.readthedocs.io/es/latest/postgresql/postgresql.html#creacion-de-copias-de-seguridad">GeoTalleres</a>.</p>
+<h2 id="geoserver">GeoServer</h2>
+<p>Ver documentación en <a href="https://geotalleres.readthedocs.io/es/latest/geoserver-backup/geoserver_backup.html">GeoTalleres</a>, teniendo en cuenta que la instalación estándar del sistema establece <code>/var/nfms/geoserver</code> como directorio de datos de GeoServer.</p>
+<h2 id="portal">Portal</h2>
+<p>Las copias de seguridad de la configuración del portal son muy similares a las de GeoServer ya que la configuración está almacenada también en un directorio, generalmente <code>/var/nfms/geoladris</code>.</p>
+<p>Además, es conveniente guardar una copia del fichero <code>.war</code> del portal, de forma que se pueda repetir la instalación utilizando exactamente el mismo software en caso necesario.</p>
+<p>Para realizar una copia de seguridad, es necesario copiar este directorio, comprimido por comodidad y optimización de espacio, a algún lugar fuera del servidor. Los siguientes comandos crearían una copia de la configuración en el fichero <code>/tmp/portal-backup.tar.gz</code>:</p>
+<div class="codehilite"><pre><span></span><span class="nb">cd</span> /var/nfms/geoladris
+tar -czvf /tmp/portal-backup.tar.gz *
+</pre></div>
+
+
+<p>Las opciones <code>-czvf</code> especificadas significan:</p>
+<ul>
+<li>c: crear</li>
+<li>z: comprimir en zip</li>
+<li>v: verbose, muestra por pantalla los ficheros que se incluyen en la copia de seguridad</li>
+<li>f: fichero resultante, especificado a continuación</li>
+</ul>
+<blockquote>
+<p><strong>IMPORTANTE</strong>: Se deben guardar los ficheros con la copia de seguridad en una máquina distinta al servidor que alberga el portal, ya que en caso de que haya algún problema con dicha máquina se pueden perder también las copias.</p>
+</blockquote>
+<p>Para recuperar la configuración sólo tenemos que reemplazar el directorio <code>/var/nfms/geoladris</code> por los contenidos del fichero que contiene la copia. Para ello se puede descomprimir la copia de seguridad en un directorio temporal:</p>
+<div class="codehilite"><pre><span></span>mkdir /tmp/copia
+tar -xzvf /tmp/portal-backup.tgz --directory<span class="o">=</span>/tmp/copia
+</pre></div>
+
+
+<p>A diferencia del comando <code>tar</code> que utilizamos para crear la copia de seguridad, ahora estamos usando la opción <code>x</code> (extraer) en lugar de <code>c</code> (crear) y estamos especificando con la opción <code>--directory</code> que queremos extraer la copia en el directorio <code>/tmp/copia</code>.</p>
+<p>Una vez descomprimido sólo hay que reemplazar los contenidos del directorio <code>/var/nfms/geoladris</code> por los del directorio <code>/tmp/copia</code>. Por seguridad, mantendremos los contenidos anteriores en <code>/tmp</code>:</p>
+<div class="codehilite"><pre><span></span>sudo mv /var/nfms/geoladris /tmp/geoladris.bak
+sudo mv /tmp/copia /var/nfms/geoladris
+</pre></div>
+
+
+<p>Por último quedaría reiniciar el portal:</p>
+<div class="codehilite"><pre><span></span><span class="nb">cd</span> /var/nfms
+docker-compose restart portal
+</pre></div>
+
+
+<p>o, si se ha instalado mediante paquetes:</p>
+<div class="codehilite"><pre><span></span>sudo service tomcat7 restart
+</pre></div>
                 
                   
                 

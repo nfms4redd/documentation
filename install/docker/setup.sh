@@ -72,6 +72,8 @@ mkdir -p ${installDir}/geoladris
 
 echo "Descargando recursos..."
 wget -q https://nfms4redd.github.io/documentation/install/docker/docker-compose.yml -O ${installDir}/docker-compose.yml
+wget -q https://nfms4redd.github.io/documentation/install/docker/httpd.conf -O ${installDir}/httpd.conf
+wget -q https://nfms4redd.github.io/documentation/install/docker/proxy-http.conf -O ${installDir}/proxy-http.conf
 wget -q https://nfms4redd.github.io/documentation/install/docker/context.xml -O ${installDir}/context.xml
 if [ -z "${app}" ]; then
   wget -q "https://oss.sonatype.org/content/repositories/snapshots/com/github/geoladris/apps/demo/${VERSION}/demo-7.0.0-20180115.121345-1.war" -O ${installDir}/${name}.war
@@ -90,6 +92,7 @@ addToBashrc "GEOLADRIS_CONFIG_DIR" "${installDir}/geoladris"
 addToBashrc "GEOLADRIS_APP_NAME" "${name}"
 addToBashrc "DB_USER" "${user}"
 addToBashrc "DB_PASS" "${pass}"
+sed -i "s/__app__/${GEOLADRIS_APP_NAME}/g" ${installDir}/proxy-http.conf
 
 echo "Arrancando..."
 pushd ${installDir} > /dev/null
