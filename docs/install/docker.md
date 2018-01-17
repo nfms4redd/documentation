@@ -1,4 +1,4 @@
-> La instalación con [Docker](https://www.docker.com) es muy sencilla y permite tener el sistema funcionando en muy pocos segundos.
+> La instalación con [Docker](https://www.docker.com) es muy sencilla y permite tener el sistema funcionando en muy pocos minutos.
 
 > Sin embargo, en algunos entornos no es posible utilizar Docker o la política de sistemas lo impide. En tal caso, es posible [instalar el sistema mediante paquetes](packages.md).
 
