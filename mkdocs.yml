@@ -11,6 +11,9 @@ pages:
     - 'Rendimiento': install/performance.md
 - 'Carga de datos en PostGIS': postgis.md
 - 'Publicación de datos en GeoServer': geoserver.md
-- 'Configuración del portal': portal.md
+- 'Configuración del portal':
+    - 'Configuración del portal': config/portal.md
+    - 'Configuración de capas temporales': config/temporal.md
+    - 'Configuración de capas raster temporales': config/raster_temporal.md
 - 'Optimizaciones': optimization.md
 

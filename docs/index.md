@@ -40,5 +40,8 @@ Los pasos a seguir para instalar el sistema son los siguientes:
 	* [Rendimiento](install/performance.md).
 * [Carga de datos en PostGIS](postgis.md).
 * [Publicación de datos en GeoServer](geoserver.md).
-* [Configuración del portal](portal.md).
+* Configuracion del Portal:
+	* [Configuración del portal](config/portal.md).
+	* [Configuracion de capas temporales](config/temporal.md).
+	* [Configuración raster temporales](config/raster_temporal.md).
 * [Optimizaciones](optimization.md).
