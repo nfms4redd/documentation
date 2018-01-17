@@ -1,0 +1,38 @@
+version: '3'
+services:
+  db:
+    image: kartoza/postgis:9.6-2.4
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASS=${DB_PASS}
+      - POSTGRES_DBNAME=nfms
+  geoserver:
+    image: oscarfonts/geoserver:2.12.1
+    depends_on:
+      - db
+    volumes:
+      - "${GEOSERVER_DATA_DIR}:/var/local/geoserver"
+  portal:
+    image: tomcat:8.5
+    depends_on:
+      - geoserver
+    volumes:
+      - "${GEOLADRIS_CONFIG_DIR}:/var/local/geoladris"
+      - "./${GEOLADRIS_APP_NAME}.war:/usr/local/${GEOLADRIS_APP_NAME}.war"
+      - "./context.xml:/usr/local/tomcat/conf/Catalina/localhost/${GEOLADRIS_APP_NAME}.xml"
+    environment:
+      - GEOLADRIS_CONFIG_DIR=/var/local/geoladris
+      - JAVA_OPTS=-DGEOLADRIS_APP_NAME=${GEOLADRIS_APP_NAME} -DDB_USER=${DB_USER} -DDB_PASS=${DB_PASS}
+  apache:
+    image: httpd:2.4-alpine
+    ports:
+      - "80:80"
+    depends_on:
+      - portal
+      - geoserver
+    volumes:
+      - ./httpd.conf:/usr/local/apache2/conf/httpd.conf
+      - ./proxy-http.conf:/usr/local/apache2/conf/extra/proxy-http.conf
+
