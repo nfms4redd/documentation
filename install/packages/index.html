@@ -1,0 +1,801 @@
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+      
+        <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      
+      <meta name="generator" content="mkdocs-0.16.2, mkdocs-material-1.7.5">
+    
+    
+      
+        <title>Instalación con paquetes - Documentación de administración de NFMS4REDD</title>
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr-1df76c4e58.js"></script>
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application-769c285a91.css">
+      
+    
+    
+      
+        
+        
+        
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+    
+  </head>
+  
+  
+  
+  
+    <body>
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <a href="../.." title="Documentación de administración de NFMS4REDD" class="md-icon md-icon--home md-header-nav__button">
+          </a>
+        
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <span class="md-flex__ellipsis md-header-nav__title">
+          
+            
+              
+                <span class="md-header-nav__parent">
+                  Instalación del servidor
+                </span>
+              
+            
+            Instalación con paquetes
+          
+        </span>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" required placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset">close</button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result" data-md-lang-search="">
+          <div class="md-search-result__meta" data-md-lang-result-none="No matching documents" data-md-lang-result-one="1 matching document" data-md-lang-result-other="# matching documents">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    
+      <i class="md-icon md-icon--home md-nav__button"></i>
+    
+    Documentación de administración de NFMS4REDD
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Introducción" class="md-nav__link">
+      Introducción
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../inventory/" title="Inventario" class="md-nav__link">
+      Inventario
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Instalación del servidor
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Instalación del servidor
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../docker/" title="Instalación con Docker" class="md-nav__link">
+      Instalación con Docker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Instalación con paquetes
+      </label>
+    
+    <a href="./" title="Instalación con paquetes" class="md-nav__link md-nav__link--active">
+      Instalación con paquetes
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#postgresqlpostgis" title="PostgreSQL/PostGIS" class="md-nav__link">
+    PostgreSQL/PostGIS
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#apache-tomcat" title="Apache / Tomcat" class="md-nav__link">
+    Apache / Tomcat
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jai" title="JAI" class="md-nav__link">
+    JAI
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#geoserver" title="GeoServer" class="md-nav__link">
+    GeoServer
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#directorio-de-configuracion" title="Directorio de configuración" class="md-nav__link">
+    Directorio de configuración
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#portal" title="Portal" class="md-nav__link">
+    Portal
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#directorio-de-configuracion_1" title="Directorio de configuración" class="md-nav__link">
+    Directorio de configuración
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#base-de-datos" title="Base de datos" class="md-nav__link">
+    Base de datos
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conexion" title="Conexión" class="md-nav__link">
+    Conexión
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verificacion-del-despliegue" title="Verificación del despliegue" class="md-nav__link">
+    Verificación del despliegue
+  </a>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../backups/" title="Copias de seguridad" class="md-nav__link">
+      Copias de seguridad
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../performance/" title="Rendimiento" class="md-nav__link">
+      Rendimiento
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../postgis/" title="Carga de datos en PostGIS" class="md-nav__link">
+      Carga de datos en PostGIS
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../geoserver/" title="Publicación de datos en GeoServer" class="md-nav__link">
+      Publicación de datos en GeoServer
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../portal/" title="Configuración del portal" class="md-nav__link">
+      Configuración del portal
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../optimization/" title="Optimizaciones" class="md-nav__link">
+      Optimizaciones
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#postgresqlpostgis" title="PostgreSQL/PostGIS" class="md-nav__link">
+    PostgreSQL/PostGIS
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#apache-tomcat" title="Apache / Tomcat" class="md-nav__link">
+    Apache / Tomcat
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jai" title="JAI" class="md-nav__link">
+    JAI
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#geoserver" title="GeoServer" class="md-nav__link">
+    GeoServer
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#directorio-de-configuracion" title="Directorio de configuración" class="md-nav__link">
+    Directorio de configuración
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#portal" title="Portal" class="md-nav__link">
+    Portal
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#directorio-de-configuracion_1" title="Directorio de configuración" class="md-nav__link">
+    Directorio de configuración
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#base-de-datos" title="Base de datos" class="md-nav__link">
+    Base de datos
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conexion" title="Conexión" class="md-nav__link">
+    Conexión
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verificacion-del-despliegue" title="Verificación del despliegue" class="md-nav__link">
+    Verificación del despliegue
+  </a>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>Instalación con paquetes</h1>
+                
+                <p>Para la instalación de todo el sistema mediante paquetes se asume la utilización de un servidor con Linux. En caso de no estar familiarizado con este sistema operativo, se recomienda leer antes una <a href="https://geotalleres.readthedocs.io/es/latest/linux/linux.html">introducción</a>.</p>
+<blockquote>
+<p><strong>NOTA</strong>: Esta guía se ha realizado utilizando Ubuntu 16.04 (Xenial).</p>
+</blockquote>
+<h2 id="postgresqlpostgis">PostgreSQL/PostGIS</h2>
+<p>Para instalar PostgreSQL/PostGIS bastará con ejecutar:</p>
+<div class="codehilite"><pre><span></span>apt update
+apt install -y postgresql postgis
+</pre></div>
+
+
+<p>Una vez la instalación ha terminado habrá que configurar el acceso desde el exterior de la máquina. Para ello editaremos el fichero <code>/etc/postgresql/&lt;version&gt;/main/postgresql.conf</code> y reemplazaremos la línea:</p>
+<div class="codehilite"><pre><span></span>#listen_addresses = &#39;localhost&#39;
+</pre></div>
+
+
+<p>con:</p>
+<div class="codehilite"><pre><span></span>listen_addresses = &#39;*&#39;
+</pre></div>
+
+
+<p>Esto sirve para que PostgreSQL acepte conexiones de cualquier máquina.</p>
+<p>Posteriormente añadiremos esto al final del fichero <code>/etc/postgresql/&lt;version&gt;/main/pg_hba.conf</code>:</p>
+<div class="codehilite"><pre><span></span>host    all             all             0.0.0.0/0               md5
+</pre></div>
+
+
+<p>que sirve para poder hacer login en la base de datos utilizando usuario y contraseña desde cualquier máquina.</p>
+<p>Por último arrancaremos el servicio:</p>
+<div class="codehilite"><pre><span></span>systemctl <span class="nb">enable</span> postgresql
+service postgresql start
+</pre></div>
+
+
+<h2 id="apache-tomcat">Apache / Tomcat</h2>
+<p>Como hemos visto en la <a href="../..">introducción</a>, tanto GeoServer como el portal son aplicaciones web Java que se ejecutan en Tomcat. Por tanto, lo primero que tenemos que hacer es instalar Apache y Tomcat:</p>
+<div class="codehilite"><pre><span></span>apt update
+apt install -y tomcat8 apache2
+</pre></div>
+
+
+<p>y arrancar los servicios:</p>
+<div class="codehilite"><pre><span></span>systemctl <span class="nb">enable</span> tomcat8
+service tomcat8 start
+systemctl <span class="nb">enable</span> apache2
+service apache2 start
+</pre></div>
+
+
+<h2 id="jai">JAI</h2>
+<p>Las librerías JAI son unas librerías Java para el procesado de imágenes que utiliza GeoServer. Para instalarlas, ejecutaremos los siguientes comandos:</p>
+<div class="codehilite"><pre><span></span><span class="nb">cd</span> /usr/lib/jvm/java-8-*
+wget http://download.java.net/media/jai/builds/release/1_1_3/jai-1_1_3-lib-linux-amd64-jdk.bin
+tail -n +139 jai-1_1_3-lib-linux-amd64-jdk.bin &gt; INSTALL-jai
+chmod u+x INSTALL-jai
+./INSTALL-jai
+rm jai-1_1_3-lib-linux-amd64-jdk.bin INSTALL-jai *.txt
+wget http://download.java.net/media/jai-imageio/builds/release/1.1/jai_imageio-1_1-lib-linux-amd64-jdk.bin
+tail -n +215 jai_imageio-1_1-lib-linux-amd64-jdk.bin &gt; INSTALL-jai_imageio
+chmod u+x INSTALL-jai_imageio
+./INSTALL-jai_imageio
+rm jai_imageio-1_1-lib-linux-amd64-jdk.bin INSTALL-jai_imageio *.txt
+</pre></div>
+
+
+<h2 id="geoserver">GeoServer</h2>
+<p>Descargaremos GeoServer:</p>
+<div class="codehilite"><pre><span></span><span class="nb">cd</span> /tmp
+wget http://sourceforge.net/projects/geoserver/files/GeoServer/2.12.1/geoserver-2.12.1-war.zip
+</pre></div>
+
+
+<p>y lo desplegaremos en el directorio de aplicaciones de Tomcat:</p>
+<div class="codehilite"><pre><span></span>unzip geoserver-*-war.zip -d geoserver
+mv geoserver/geoserver.war /var/lib/tomcat8/webapps
+rm -rf geoserver*
+</pre></div>
+
+
+<h3 id="directorio-de-configuracion">Directorio de configuración</h3>
+<p>Al desplegar GeoServer, el directorio de datos de GeoServer por defecto está dentro del directorio de aplicaciones de Tomcat. Por ello, si no lo movemos de sitio, cada vez que actualicemos Tomcat o GeoServer, perderemos este directorio de datos. Así que primero moveremos el directorio por defecto a otra ruta:</p>
+<div class="codehilite"><pre><span></span>mv /var/lib/tomcat8/webapps/geoserver/data /var/local/geoserver
+</pre></div>
+
+
+<p>Y luego configuraremos ese directorio cambiando el valor de <code>JAVA_OPTS</code> en <code>/etc/default/tomcat8</code> por:</p>
+<div class="codehilite"><pre><span></span><span class="nv">JAVA_OPTS</span><span class="o">=</span><span class="s2">&quot;-server -Djava.awt.headless=true -Xms768m -Xmx1560m -XX:+UseConcMarkSweepGC -XX:NewSize=48m -DGEOSERVER_DATA_DIR=/var/local/geoserver&quot;</span>
+</pre></div>
+
+
+<p>Por último, reiniciaremos Tomcat:</p>
+<div class="codehilite"><pre><span></span>service tomcat8 restart
+</pre></div>
+
+
+<h2 id="portal">Portal</h2>
+<p>Descargaremos el portal en el directorio de aplicaciones de Tomcat:</p>
+<div class="codehilite"><pre><span></span>wget http://nullisland.geomati.co:8082/repository/snapshots/org/geoladris/apps/demo/7.0.0-SNAPSHOT/demo-7.0.0-SNAPSHOT.war -O /var/lib/tomcat8/webapps/portal.war
+</pre></div>
+
+
+<h3 id="directorio-de-configuracion_1">Directorio de configuración</h3>
+<p>El portal tiene un directorio de configuración que por defecto está dentro del directorio de aplicaciones de Tomcat. Por ello, si no lo movemos de sitio, cada vez que actualicemos Tomcat o el portal, perderemos su configuración. Así que primero moveremos el directorio por defecto a otra ruta:</p>
+<div class="codehilite"><pre><span></span>mkdir /var/geoladris
+mv /var/lib/tomcat8/webapps/portal/WEB-INF/default_config /var/geoladris/portal
+</pre></div>
+
+
+<p>Y luego configuraremos ese directorio al final del fichero <code>/etc/default/tomcat8</code>:</p>
+<div class="codehilite"><pre><span></span><span class="nv">GEOLADRIS_CONFIG_DIR</span><span class="o">=</span>/var/geoladris
+</pre></div>
+
+
+<h3 id="base-de-datos">Base de datos</h3>
+<p>El portal tiene diferentes plugins que acceden a una base de datos para funcionar. Esta base de datos se configura en el fichero <code>/etc/tomcat8/Catalina/localhost/portal.xml</code>. En él encontraremos un elemento <code>&lt;Resource&gt;</code> con los datos de conexión de la base de datos (<code>url</code>, <code>username</code> y <code>password</code>). En nuestro caso, debería quedar algo así:</p>
+<div class="codehilite"><pre><span></span><span class="nt">&lt;Resource</span> <span class="na">name=</span><span class="s">&quot;jdbc/geoladris&quot;</span> <span class="na">auth=</span><span class="s">&quot;Container&quot;</span> <span class="na">type=</span><span class="s">&quot;javax.sql.DataSource&quot;</span>
+          <span class="na">driverClassName=</span><span class="s">&quot;org.postgresql.Driver&quot;</span>
+          <span class="na">url=</span><span class="s">&quot;jdbc:postgresql://localhost:5432/nfms&quot;</span>
+          <span class="na">username=</span><span class="s">&quot;admin&quot;</span> <span class="na">password=</span><span class="s">&quot;admin&quot;</span>
+          <span class="na">maxActive=</span><span class="s">&quot;20&quot;</span> <span class="na">maxIdle=</span><span class="s">&quot;10&quot;</span> <span class="na">maxWait=</span><span class="s">&quot;-1&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+
+
+<p>Por último, reiniciaremos Tomcat:</p>
+<div class="codehilite"><pre><span></span>service tomcat8 restart
+</pre></div>
+
+
+<h2 id="conexion">Conexión</h2>
+<p>Llegados a este punto deberíamos poder acceder al portal y a GeoServer desde un navegador en las siguientes URLs:</p>
+<ul>
+<li><code>http://&lt;servidor&gt;:8080/portal</code>.</li>
+<li><code>http://&lt;servidor&gt;:8080/geoserver</code>.</li>
+</ul>
+<p>Para eliminar el puerto <code>:8080</code> de la URL tendremos que habilitar un proxy de Apache:</p>
+<div class="codehilite"><pre><span></span>a2enmod proxy_http
+</pre></div>
+
+
+<p>configurarlo escribiendo el fichero <code>/etc/apache2/mods-enabled/proxy_http.conf</code> con el siguiente contenido:</p>
+<div class="codehilite"><pre><span></span>ProxyPreserveHost On
+ProxyPass /portal  http://localhost:8080/portal
+ProxyPass /portal/ http://localhost:8080/portal/
+ProxyPassReverse /portal  http://localhost:8080/portal
+ProxyPassReverse /portal/ http://localhost:8080/portal/
+ProxyPass /geoserver  http://localhost:8080/geoserver
+ProxyPass /geoserver/ http://localhost:8080/geoserver/
+ProxyPassReverse /geoserver  http://localhost:8080/geoserver
+ProxyPassReverse /geoserver/ http://localhost:8080/geoserver/
+</pre></div>
+
+
+<p>y por último, reiniciar Apache:</p>
+<div class="codehilite"><pre><span></span>service apache2 restart
+</pre></div>
+
+
+<h2 id="verificacion-del-despliegue">Verificación del despliegue</h2>
+<p>Cuando se reinicia Tomcat, se da el caso de que todas las aplicaciones se inicializan una detrás de otra. Por tanto, el tiempo que tarda el portal en iniciarse depende de cuántas aplicaciones haya además de ésta y de lo pesadas que sean. Por ejemplo, si tenemos GeoServer con muchos datos cargados, es probable que durante el reinicio de Tomcat el portal tome más tiempo que si estuviera sólo.</p>
+<p>Desde este momento deberíamos poder acceder al portal mediante un navegador en la URL <code>http://&lt;servidor&gt;/portal</code>. En el navegador podemos abrir las herramientas de desarrollo y verificar que en las pestañas de <em>Consola</em> y <em>Red</em> no aparece ningún error.</p>
+<p>Además, se puede verificar que la inicialización del portal y la visualización en el navegador no han dado ningún error visualizando los logs. Cada vez que el portal se inicializa o se carga en un navegador, el sistema escribe información relevante en un fichero de log de Tomcat (<code>/var/tomcat/logs/catalina.out</code>). En él deberíamos encontrar algo como:</p>
+<div class="codehilite"><pre><span></span><span class="m">2018</span>-01-10 <span class="m">12</span>:23:48 INFO  AppContextListener:133 - <span class="o">============================================================================</span>
+<span class="m">2018</span>-01-10 <span class="m">12</span>:23:48 INFO  AppContextListener:134 - Configuration directory: /var/geoladris/portal
+<span class="m">2018</span>-01-10 <span class="m">12</span>:23:48 INFO  AppContextListener:135 - <span class="o">============================================================================</span>
+Jan <span class="m">10</span>, <span class="m">2018</span> <span class="m">12</span>:23:48 PM org.apache.catalina.core.StandardContext reload
+INFO: Reloading Context with name <span class="o">[</span>/portal<span class="o">]</span> is completed
+</pre></div>
+
+
+<p>En caso de que haya algún error nos encontraremos con algo así:</p>
+<div class="codehilite"><pre><span></span>INFO: Despliegue del archivo portal.war de la aplicación web
+<span class="m">2015</span>-04-02 <span class="m">02</span>:34:50 INFO  ConfigFolder:55 - <span class="o">============================================================================</span>
+<span class="m">2015</span>-04-02 <span class="m">02</span>:34:50 INFO  ConfigFolder:56 - PORTAL_CONFIG_DIR: /var/argentina
+<span class="m">2015</span>-04-02 <span class="m">02</span>:34:50 INFO  ConfigFolder:57 - <span class="o">============================================================================</span>
+<span class="m">2015</span>-04-02 <span class="m">02</span>:34:50 DEBUG ConfigFolder:73 - Reading portal properties file /var/argentina/portal.properties
+<span class="m">2015</span>-04-02 <span class="m">02</span>:34:50 DEBUG ConfigFolder:73 - Reading portal properties file /var/argentina/portal.properties
+<span class="m">2015</span>-04-02 <span class="m">02</span>:34:50 ERROR FeedbackContextListener:66 - Database error notifying the comment authors
+org.fao.unredd.portal.PersistenceException: Database error
+    at org.fao.unredd.portal.DBUtils.processConnection<span class="o">(</span>DBUtils.java:41<span class="o">)</span>
+    at org.fao.unredd.portal.DBUtils.processConnection<span class="o">(</span>DBUtils.java:14<span class="o">)</span>
+    at org.fao.unredd.feedback.DBFeedbackPersistence.getValidatedToNotifyInfo<span class="o">(</span>DBFeedbackPersistence.java:122<span class="o">)</span>
+    at org.fao.unredd.feedback.Feedback.notifyValidated<span class="o">(</span>Feedback.java:83<span class="o">)</span>
+    at org.fao.unredd.feedback.servlet.FeedbackContextListener<span class="nv">$1</span>.run<span class="o">(</span>FeedbackContextListener.java:61<span class="o">)</span>
+    at java.util.TimerThread.mainLoop<span class="o">(</span>Timer.java:512<span class="o">)</span>
+    at java.util.TimerThread.run<span class="o">(</span>Timer.java:462<span class="o">)</span>
+Caused by: org.apache.tomcat.dbcp.dbcp.SQLNestedException: Cannot create PoolableConnectionFactory <span class="o">(</span>Conexión rechazada. Verifique que el nombre del Host y el puerto sean correctos y que postmaster este aceptando conexiones TCP/IP.<span class="o">)</span>
+    at org.apache.tomcat.dbcp.dbcp.BasicDataSource.createPoolableConnectionFactory<span class="o">(</span>BasicDataSource.java:1549<span class="o">)</span>
+    at org.apache.tomcat.dbcp.dbcp.BasicDataSource.createDataSource<span class="o">(</span>BasicDataSource.java:1388<span class="o">)</span>
+    at org.apache.tomcat.dbcp.dbcp.BasicDataSource.getConnection<span class="o">(</span>BasicDataSource.java:1044<span class="o">)</span>
+    at org.fao.unredd.portal.DBUtils.processConnection<span class="o">(</span>DBUtils.java:37<span class="o">)</span>
+    ... <span class="m">6</span> more
+Caused by: org.postgresql.util.PSQLException: Conexión rechazada. Verifique que el nombre del Host y el puerto sean correctos y que postmaster este aceptando conexiones TCP/IP.
+    at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl<span class="o">(</span>ConnectionFactoryImpl.java:215<span class="o">)</span>
+    at org.postgresql.core.ConnectionFactory.openConnection<span class="o">(</span>ConnectionFactory.java:64<span class="o">)</span>
+    at org.postgresql.jdbc2.AbstractJdbc2Connection.&lt;init&gt;<span class="o">(</span>AbstractJdbc2Connection.java:144<span class="o">)</span>
+    at org.postgresql.jdbc3.AbstractJdbc3Connection.&lt;init&gt;<span class="o">(</span>AbstractJdbc3Connection.java:29<span class="o">)</span>
+    at org.postgresql.jdbc3g.AbstractJdbc3gConnection.&lt;init&gt;<span class="o">(</span>AbstractJdbc3gConnection.java:21<span class="o">)</span>
+    at org.postgresql.jdbc4.AbstractJdbc4Connection.&lt;init&gt;<span class="o">(</span>AbstractJdbc4Connection.java:31<span class="o">)</span>
+    at org.postgresql.jdbc4.Jdbc4Connection.&lt;init&gt;<span class="o">(</span>Jdbc4Connection.java:24<span class="o">)</span>
+    at org.postgresql.Driver.makeConnection<span class="o">(</span>Driver.java:410<span class="o">)</span>
+    at org.postgresql.Driver.connect<span class="o">(</span>Driver.java:280<span class="o">)</span>
+    at org.apache.tomcat.dbcp.dbcp.DriverConnectionFactory.createConnection<span class="o">(</span>DriverConnectionFactory.java:38<span class="o">)</span>
+    at org.apache.tomcat.dbcp.dbcp.PoolableConnectionFactory.makeObject<span class="o">(</span>PoolableConnectionFactory.java:582<span class="o">)</span>
+    at org.apache.tomcat.dbcp.dbcp.BasicDataSource.validateConnectionFactory<span class="o">(</span>BasicDataSource.java:1556<span class="o">)</span>
+    at org.apache.tomcat.dbcp.dbcp.BasicDataSource.createPoolableConnectionFactory<span class="o">(</span>BasicDataSource.java:1545<span class="o">)</span>
+    ... <span class="m">9</span> more
+Caused by: java.net.ConnectException: Connection refused
+    at java.net.PlainSocketImpl.socketConnect<span class="o">(</span>Native Method<span class="o">)</span>
+    at java.net.PlainSocketImpl.doConnect<span class="o">(</span>PlainSocketImpl.java:351<span class="o">)</span>
+    at java.net.PlainSocketImpl.connectToAddress<span class="o">(</span>PlainSocketImpl.java:213<span class="o">)</span>
+    at java.net.PlainSocketImpl.connect<span class="o">(</span>PlainSocketImpl.java:200<span class="o">)</span>
+    at java.net.SocksSocketImpl.connect<span class="o">(</span>SocksSocketImpl.java:366<span class="o">)</span>
+    at java.net.Socket.connect<span class="o">(</span>Socket.java:529<span class="o">)</span>
+    at org.postgresql.core.PGStream.&lt;init&gt;<span class="o">(</span>PGStream.java:61<span class="o">)</span>
+    at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl<span class="o">(</span>ConnectionFactoryImpl.java:109<span class="o">)</span>
+    ... <span class="m">21</span> more
+</pre></div>
+                
+                  
+                
+              
+              
+                
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../docker/" title="Instalación con Docker" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Instalación con Docker
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../backups/" title="Copias de seguridad" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Copias de seguridad
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="http://www.mkdocs.org" title="MkDocs">MkDocs</a>
+        and
+        <a href="http://squidfunk.github.io/mkdocs-material/" title="Material for MkDocs">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application-07b0fbb49b.js"></script>
+      
+      
+      <script>app.initialize({url:{base:"../.."}})</script>
+      
+    
+    
+      
+    
+  </body>
+</html>
