@@ -3,22 +3,22 @@
 |	1 Noviembre 2012 |   Stefano Giaccio (Stefano.Giaccio@fao.org) |
 |	1 Diciembre 2012   | Oscar Fonts (oscar.fonts@geomati.co) |
 |	24 Junio 2013		| Fernando González (fernando.gonzalez@fao.org)  |
-|	15 Enero 2018		| Michio García (micho.garcia@geomati.co)  |
+|	15 Enero 2018		| Micho García (micho.garcia@geomati.co)  |
 
 >	©2013 FAO Forestry
 >
 >	Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : [Creative Commons](http://creativecommons.org/licenses/by-sa/3.0/deed.es)
 
 
-Para configurar el portal y adaptarlo a cada pais se tendrá que realizar cierta modificaciones en la estructura de la aplicación instalada. El proceso de configuración se podrá seguir a partir de la [documentación de la plataforma](http://geoladris.readthedocs.io/es/latest/user/config/)
+Para configurar el portal y adaptarlo a cada pais se tendrán que realizar cierta modificaciones en la estructura de la aplicación instalada. El proceso de configuración se podrá seguir a partir de la [documentación de la plataforma](http://geoladris.readthedocs.io/es/latest/user/config/)
 
-A continuación se presentan una pequeña guia de aprendizaje para la configuración de nuevas capas.
+A continuación se presenta una pequeña guia de aprendizaje para la configuración de nuevas capas.
 
 ## Configuración de una nueva capa
 
-La definición de las capas a mostrar en el Portal se encuentra en el fichero `layers.json`.
+La definición de las capas a mostrar en el Portal se encuentra en el fichero [`layers.json`](https://geoladris.github.io/doc/ref/plugins/#layersjson).
 
-Contiene la información para asociar los elementos de la interfaz de usuario (panel con la lista de capas en la parte izquierda de la página) con las capas WMS publicadas en GeoServer, personalizar las leyendas, y definir cuáles de las capas son interrogables. También clasifica las capas por grupos.
+Este contiene la información para asociar los elementos de la interfaz de usuario (panel con la lista de capas en la parte izquierda de la página) con las capas WMS publicadas en GeoServer, personalizar las leyendas, y definir cuáles de las capas son interrogables. También clasifica las capas por grupos.
 
 El formato utilizado para este fichero de configuración es JSON (JavaScript Object Notation), que es un formato para la representación de datos. Está fuera del objetivo de esta guía el aprendizaje de JSON, pero se exponen a continuación algunas nociones básicas:
 
@@ -107,9 +107,7 @@ Cada "wmsLayer" se corresponde con una de las capas publicadas en GeoServer, y d
   * el nuevo "wmsName" será "capacitacion:limites_administrativos" (el nombre de la capa publicada en GeoServer).
   * la baseUrl debe apuntar al servidor geoserver donde hemos cargado la capa.
 
-
 ## Capas del portal
-
 
 Cada "portalLayer" representa una capa en el árbol de capas del portal y por tanto añade nuevos datos necesarios para mostrar la información en la interfaz gráfica.
 
@@ -137,9 +135,7 @@ Cada "portalLayer" representa una capa en el árbol de capas del portal y por ta
 
 ## Grupos
 
-Los "Groups" son una estructura recursiva (multinivel) para agrupar visualmente las capas en el panel.
-El "group" de primer nivel construye cada uno de los grupos de capas en forma de persiana desplegable, conteniendo una lista de
-"items" que hacen referencia a los contextos definidos anteriormente.
+Los "Groups" son una estructura recursiva (multinivel) para agrupar visualmente las capas en el panel. El "group" de primer nivel construye cada uno de los grupos de capas en forma de persiana desplegable, conteniendo una lista de "items" que hacen referencia a los contextos definidos anteriormente.
 
 	"groups" : [
 		{
