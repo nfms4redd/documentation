@@ -1,6 +1,3 @@
-> ### TODO ¿Esto va aquí?
-
-
 Esta lista de buenas prácticas se basa en la experiencia de múltiples instalaciones de GeoServer a lo largo de los años.
 
 Pretende repasar las cuestiones básicas a tener en cuenta para un rendimiento aceptable de GeoServer, pero es una lista conservadora y razonable: No se han considerado situaciones excepcionales, ni se ha tratado de optimizar a toda costa. Se ha preferido conservar una instalación y mantenimiento lo más fáciles posible.
