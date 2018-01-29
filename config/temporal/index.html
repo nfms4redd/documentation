@@ -10,20 +10,20 @@
       
       
       
-        <link rel="shortcut icon" href="../assets/images/favicon.png">
+        <link rel="shortcut icon" href="../../assets/images/favicon.png">
       
       <meta name="generator" content="mkdocs-0.16.2, mkdocs-material-1.7.5">
     
     
       
-        <title>Carga de datos en PostGIS - Documentación de administración de NFMS4REDD</title>
+        <title>Configuración de capas temporales - Documentación de administración de NFMS4REDD</title>
       
     
     
-      <script src="../assets/javascripts/modernizr-1df76c4e58.js"></script>
+      <script src="../../assets/javascripts/modernizr-1df76c4e58.js"></script>
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/application-769c285a91.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application-769c285a91.css">
       
     
     
@@ -60,7 +60,7 @@
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
         
-          <a href=".." title="Documentación de administración de NFMS4REDD" class="md-icon md-icon--home md-header-nav__button">
+          <a href="../.." title="Documentación de administración de NFMS4REDD" class="md-icon md-icon--home md-header-nav__button">
           </a>
         
       </div>
@@ -72,8 +72,12 @@
           
             
               
+                <span class="md-header-nav__parent">
+                  Configuración del portal
+                </span>
+              
             
-            Carga de datos en PostGIS
+            Configuración de capas temporales
           
         </span>
       </div>
@@ -134,7 +138,7 @@
 
 
   <li class="md-nav__item">
-    <a href=".." title="Introducción" class="md-nav__link">
+    <a href="../.." title="Introducción" class="md-nav__link">
       Introducción
     </a>
   </li>
@@ -146,7 +150,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../inventory/" title="Inventario" class="md-nav__link">
+    <a href="../../inventory/" title="Inventario" class="md-nav__link">
       Inventario
     </a>
   </li>
@@ -177,7 +181,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../install/docker/" title="Instalación con Docker" class="md-nav__link">
+    <a href="../../install/docker/" title="Instalación con Docker" class="md-nav__link">
       Instalación con Docker
     </a>
   </li>
@@ -189,7 +193,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../install/packages/" title="Instalación con paquetes" class="md-nav__link">
+    <a href="../../install/packages/" title="Instalación con paquetes" class="md-nav__link">
       Instalación con paquetes
     </a>
   </li>
@@ -201,7 +205,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../install/backups/" title="Copias de seguridad" class="md-nav__link">
+    <a href="../../install/backups/" title="Copias de seguridad" class="md-nav__link">
       Copias de seguridad
     </a>
   </li>
@@ -213,7 +217,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../install/performance/" title="Rendimiento" class="md-nav__link">
+    <a href="../../install/performance/" title="Rendimiento" class="md-nav__link">
       Rendimiento
     </a>
   </li>
@@ -228,43 +232,11 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="toc">
-        Carga de datos en PostGIS
-      </label>
-    
-    <a href="./" title="Carga de datos en PostGIS" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../../postgis/" title="Carga de datos en PostGIS" class="md-nav__link">
       Carga de datos en PostGIS
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#configuracion-inicial" title="Configuración inicial" class="md-nav__link">
-    Configuración inicial
-  </a>
-  
-</li>
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
     
@@ -274,7 +246,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../geoserver/" title="Publicación de datos en GeoServer" class="md-nav__link">
+    <a href="../../geoserver/" title="Publicación de datos en GeoServer" class="md-nav__link">
       Publicación de datos en GeoServer
     </a>
   </li>
@@ -284,10 +256,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" checked>
     
     <label class="md-nav__link" for="nav-6">
       Configuración del portal
@@ -305,7 +279,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../config/portal/" title="Configuración del portal" class="md-nav__link">
+    <a href="../portal/" title="Configuración del portal" class="md-nav__link">
       Configuración del portal
     </a>
   </li>
@@ -315,11 +289,54 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../config/temporal/" title="Configuración de capas temporales" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Configuración de capas temporales
+      </label>
+    
+    <a href="./" title="Configuración de capas temporales" class="md-nav__link md-nav__link--active">
       Configuración de capas temporales
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#preparacion-y-publicacion-de-capas-vectoriales" title="Preparación y publicación de capas vectoriales" class="md-nav__link">
+    Preparación y publicación de capas vectoriales
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-de-la-capa-en-el-portal" title="Configuración de la capa en el portal" class="md-nav__link">
+    Configuración de la capa en el portal
+  </a>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -329,7 +346,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../config/raster_temporal/" title="Configuración de capas raster temporales" class="md-nav__link">
+    <a href="../raster_temporal/" title="Configuración de capas raster temporales" class="md-nav__link">
       Configuración de capas raster temporales
     </a>
   </li>
@@ -346,7 +363,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../optimization/" title="Optimizaciones" class="md-nav__link">
+    <a href="../../optimization/" title="Optimizaciones" class="md-nav__link">
       Optimizaciones
     </a>
   </li>
@@ -366,13 +383,22 @@
 <nav class="md-nav md-nav--secondary">
   
   
+    
+  
   
     <label class="md-nav__title" for="toc">Table of contents</label>
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#configuracion-inicial" title="Configuración inicial" class="md-nav__link">
-    Configuración inicial
+  <a href="#preparacion-y-publicacion-de-capas-vectoriales" title="Preparación y publicación de capas vectoriales" class="md-nav__link">
+    Preparación y publicación de capas vectoriales
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-de-la-capa-en-el-portal" title="Configuración de la capa en el portal" class="md-nav__link">
+    Configuración de la capa en el portal
   </a>
   
 </li>
@@ -392,38 +418,65 @@
               
                 
                 
-                  <h1>Carga de datos en PostGIS</h1>
-                
-                <p><em>Enlaces a geotalleres</em></p>
-<h2 id="configuracion-inicial">Configuración inicial</h2>
-<p>Una vez el servicio está funcionando, crearemos una nueva base de datos:</p>
-<div class="codehilite"><pre><span></span>sudo -u postgres createdb nfms
+                <h1 id="configuracion-de-capas-temporales">Configuración de capas temporales</h1>
+<table>
+<thead>
+<tr>
+<th>Fecha</th>
+<th>Autores</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>16 Marzo 2015</td>
+<td>Fernando González (fernando.gonzalez@fao.org)</td>
+</tr>
+<tr>
+<td>17 Enero 2018</td>
+<td>Micho García (micho.garcia@geomati.co)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>©2013 FAO Forestry </p>
+<p>Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : Creative Commons (Creative Commons - Attribution - Share Alike: http://creativecommons.org/licenses/by-sa/3.0/deed.es)</p>
+</blockquote>
+<p>La configuración de capas temporales consta de tres etapas:</p>
+<ol>
+<li>Preparación de los datos</li>
+<li>Publicación en GeoServer</li>
+<li>Configuración de la capa en el portal</li>
+</ol>
+<p>Los dos primeros pasos dependen del tipo de datos que se quiere publicar, vectorial o raster.</p>
+<h2 id="preparacion-y-publicacion-de-capas-vectoriales">Preparación y publicación de capas vectoriales</h2>
+<p>La preparación consistirá en introducir una columna de tipo fecha con la fecha para la cual ese registro es válido. Esto se puede realizar para shapefiles o para bases de datos PostGIS indistintamente, pero el campo ha de ser de tipo fecha.</p>
+<p>La publicación en GeoServer se hace exactamente igual al de cualquier otra capa y la diferencia es que una vez la capa está publicada, hay que ir a la pestaña "Dimensiones" de la capa en cuestión y habilitar el checkbox para Tiempo. En el combo que aparece como "Atributo" hay que seleccionar el campo fecha añadido anteriormente, y para "Presentación" hay que seleccionar "List". Una vez esta configuración se guarda, la capa ya está preparada para servirse en distintas instancias temporales.</p>
+<p><img alt="" src="../images/vector_temporal.png" /></p>
+<h2 id="configuracion-de-la-capa-en-el-portal">Configuración de la capa en el portal</h2>
+<p>La configuración de la capa en el portal sólo implica añadir un atributo "timeInstances" al elemento <code>portalLayer</code>::</p>
+<div class="codehilite"><pre><span></span>{
+        &quot;id&quot; : &quot;mascara_forestal&quot;,
+        &quot;label&quot; : &quot;Máscara forestal&quot;,
+        &quot;layers&quot; : [ &quot;forest_mask_wms&quot; ],
+        &quot;timeInstances&quot; : &quot;2000-01-01T00:00:00.000Z,2005-01-01T00:00:00.000Z,2010-01-01T00:00:00.000Z&quot;
+}
 </pre></div>
 
 
-<p>y conectaremos a ella:</p>
-<div class="codehilite"><pre><span></span>sudo -u postgres psql -d nfms
-</pre></div>
-
-
-<p>Estando conectados deberemos activar PostGIS en nuestra base de datos:</p>
-<div class="codehilite"><pre><span></span>CREATE EXTENSION postgis<span class="p">;</span>
-</pre></div>
-
-
-<p>y crear dos usuarios, uno para administración y otro sólo para lectura (<strong>¡es importante cambiar las contraseñas por otras más seguras!</strong>):</p>
-<div class="codehilite"><pre><span></span>CREATE ROLE admin WITH LOGIN CREATEROLE PASSWORD <span class="s1">&#39;admin&#39;</span><span class="p">;</span>
-CREATE ROLE <span class="nb">readonly</span> WITH LOGIN PASSWORD <span class="s1">&#39;readonly&#39;</span><span class="p">;</span>
-</pre></div>
-
-
-<p>Por último, crearemos el esquema que contendrá nuestros datos espaciales:</p>
-<div class="codehilite"><pre><span></span>CREATE SCHEMA spatial AUTHORIZATION admin<span class="p">;</span>
-</pre></div>
-
-
-<p>Para salir de la conexión a la base de datos basta con escribir <code>\q</code>.</p>
-<p>A partir de ahora se debería poder conectar a la base de datos sin problemas desde QGIS o pgAdmin.</p>
+<p>El formato del atributo es una lista de fechas separadas por comas en la que cada fecha tiene el siguiente formato:  <strong>yyyy-MM-ddTHH:mm:ssZ</strong>, donde:</p>
+<ul>
+<li><strong>yyyy</strong> es el año</li>
+<li><strong>MM</strong> es el mes</li>
+<li><strong>dd</strong> es el día del mes</li>
+<li><strong>T</strong> separa fecha y hora</li>
+<li><strong>HH</strong> es la hora en formato 24h</li>
+<li><strong>mm</strong> son los minutos</li>
+<li><strong>ss</strong> son los segundos</li>
+<li><strong>Z</strong> indica el final de la fecha</li>
+</ul>
+<blockquote>
+<p>Anteriormente este parámetro se llamába <code>wmsTime</code> y se configuraba en los elementos <code>wmsLayer</code> por lo que es posible encontrar algún fichero con el formato antiguo que esté configurado de esta manera.Portal: Configuración de capas temporales</p>
+</blockquote>
                 
                   
                 
@@ -442,7 +495,7 @@ CREATE ROLE <span class="nb">readonly</span> WITH LOGIN PASSWORD <span class="s1
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../install/performance/" title="Rendimiento" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../portal/" title="Configuración del portal" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -451,19 +504,19 @@ CREATE ROLE <span class="nb">readonly</span> WITH LOGIN PASSWORD <span class="s1
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Rendimiento
+                Configuración del portal
               </span>
             </div>
           </a>
         
         
-          <a href="../geoserver/" title="Publicación de datos en GeoServer" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../raster_temporal/" title="Configuración de capas raster temporales" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Publicación de datos en GeoServer
+                Configuración de capas raster temporales
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
@@ -493,10 +546,10 @@ CREATE ROLE <span class="nb">readonly</span> WITH LOGIN PASSWORD <span class="s1
       
     </div>
     
-      <script src="../assets/javascripts/application-07b0fbb49b.js"></script>
+      <script src="../../assets/javascripts/application-07b0fbb49b.js"></script>
       
       
-      <script>app.initialize({url:{base:".."}})</script>
+      <script>app.initialize({url:{base:"../.."}})</script>
       
     
     
