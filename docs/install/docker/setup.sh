@@ -75,6 +75,10 @@ else
   cp ${app} ${installDir}/${name}.war
 fi
 
+unzip -q ${installDir}/${name}.war WEB-INF/default_config/*
+mv WEB-INF/default_config ${installDir}/geoladris/${name}
+rm -r WEB-INF
+
 echo "Configurando..."
 function addToBashrc { 
   grep "$1" ~/.bashrc > /dev/null || echo "export $1=$2" >> ~/.bashrc
