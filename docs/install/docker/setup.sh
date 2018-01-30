@@ -55,12 +55,6 @@ while getopts ":hd:a:n:u:p:" opt; do
 done
 
 
-if [ `id -u` != "0" ]; then
-  echo "El script se tiene que ejecutar como root:"
-  echo "$ sudo $0"
-  exit 1
-fi
-
 if [ -e "${installDir}" ]; then
   echo "El directorio ${installDir} ya existe"
   exit 1
@@ -83,7 +77,6 @@ fi
 
 echo "Configurando..."
 function addToBashrc { 
-  grep "$1" /root/.bashrc > /dev/null || echo "export $1=$2" >> /root/.bashrc
   grep "$1" ~/.bashrc > /dev/null || echo "export $1=$2" >> ~/.bashrc
   export $1=$2
 }
