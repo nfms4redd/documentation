@@ -1,12 +1,10 @@
-# Configuración de capas temporales
-
-|	Fecha      |        Autores   |
-| -- | -- |
-|  16 Marzo 2015  |  Fernando González (fernando.gonzalez@fao.org) |
-|  17 Enero 2018  |  Micho García (micho.garcia@geomati.co) |
-
-> ©2013 FAO Forestry 
-	
+> |	Fecha      |        Autores   |
+> | -- | -- |
+> |  16 Marzo 2015  |  Fernando González (fernando.gonzalez@fao.org) |
+> |  17 Enero 2018  |  Micho García (micho.garcia@geomati.co) |
+>
+> ©2013 FAO Forestry
+>
 > Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : Creative Commons (Creative Commons - Attribution - Share Alike: http://creativecommons.org/licenses/by-sa/3.0/deed.es)
 
 La configuración de capas temporales consta de tres etapas:

@@ -1,3 +1,12 @@
+> | Fecha         | Autores                                         |
+> |---------------|-------------------------------------------------|
+> | 24 Junio 2013 | Fernando González (<fernando.gonzalez@fao.org>) |
+> | 9  Enero 2018 | Víctor González (<victor.gonzalez@fao.org>)  |
+>
+> ©2013 FAO Forestry
+>
+> Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia [Creative Commons](http://creativecommons.org/licenses/by-sa/3.0/deed.es).
+
 Lo primero que deberemos hacer, antes de empezar a instalar el sistema, será hacer un listado de los datos a publicar. Por cada capa que vayamos a publicar, deberemos indicar:
 
 - **Formato**: GeoTIFF, ECW, SHP, etc.

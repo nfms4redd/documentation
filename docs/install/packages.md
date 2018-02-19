@@ -1,3 +1,11 @@
+> | Fecha         | Autores                                         |
+> |---------------|-------------------------------------------------|
+> | 9  Enero 2018 | Víctor González (<victor.gonzalez@fao.org>)  |
+>
+> ©2013 FAO Forestry
+>
+> Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia [Creative Commons](http://creativecommons.org/licenses/by-sa/3.0/deed.es).
+
 Para la instalación de todo el sistema mediante paquetes se asume la utilización de un servidor con Linux. En caso de no estar familiarizado con este sistema operativo, se recomienda leer antes una [introducción](https://geotalleres.readthedocs.io/es/latest/linux/linux.html).
 
 > **NOTA**: Esta guía se ha realizado utilizando Ubuntu 16.04 (Xenial).

@@ -1,3 +1,12 @@
+> | Fecha         | Autores                                         |
+> |---------------|-------------------------------------------------|
+> | 2  Julio 2015 | Oscar Fonts (<oscar.fonts@geomati.co>)          |
+> | 9  Enero 2018 | Víctor González (<victor.gonzalez@fao.org>)     |
+>
+> ©2013 FAO Forestry
+>
+> Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia [Creative Commons](http://creativecommons.org/licenses/by-sa/3.0/deed.es).
+
 Esta lista de buenas prácticas se basa en la experiencia de múltiples instalaciones de GeoServer a lo largo de los años.
 
 Pretende repasar las cuestiones básicas a tener en cuenta para un rendimiento aceptable de GeoServer, pero es una lista conservadora y razonable: No se han considerado situaciones excepcionales, ni se ha tratado de optimizar a toda costa. Se ha preferido conservar una instalación y mantenimiento lo más fáciles posible.

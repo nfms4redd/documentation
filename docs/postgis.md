@@ -1,3 +1,12 @@
+> | Fecha         | Autores                                         |
+> |---------------|-------------------------------------------------|
+> | 9  Enero 2018 | Víctor González (<victor.gonzalez@fao.org>)  |
+> | 15 Enero 2018 | Micho García (<micho.garcia@fao.org>) |
+>
+> ©2013 FAO Forestry
+>
+> Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia [Creative Commons](http://creativecommons.org/licenses/by-sa/3.0/deed.es).
+
 *Enlaces a geotalleres*
 
 ## Configuración inicial

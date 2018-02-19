@@ -1,4 +1,11 @@
-# Publicación de datos en GeoServer
+> | Fecha         | Autores                                         |
+> |---------------|-------------------------------------------------|
+> | 9  Enero 2018 | Víctor González (<victor.gonzalez@fao.org>)  |
+> | 15 Enero 2018 | Micho García (<micho.garcia@fao.org>) |
+>
+> ©2013 FAO Forestry
+>
+> Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia [Creative Commons](http://creativecommons.org/licenses/by-sa/3.0/deed.es).
 
 Existe en la red cantidad de información sobre el proceso de publicación de datos en GeoServer. Enlazamos desde aquí a la información de GeoTalleres donde encontrará documentación amplia información sobre este servidor de mapas.
 

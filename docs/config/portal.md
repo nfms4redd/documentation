@@ -1,10 +1,10 @@
-|	Fecha      |        Autores |
-| -- | -- |
-|	1 Noviembre 2012 |   Stefano Giaccio (Stefano.Giaccio@fao.org) |
-|	1 Diciembre 2012   | Oscar Fonts (oscar.fonts@geomati.co) |
-|	24 Junio 2013		| Fernando González (fernando.gonzalez@fao.org)  |
-|	15 Enero 2018		| Micho García (micho.garcia@geomati.co)  |
-
+> |	Fecha      |        Autores |
+> | -- | -- |
+> |	1 Noviembre 2012 |   Stefano Giaccio (Stefano.Giaccio@fao.org) |
+> |	1 Diciembre 2012   | Oscar Fonts (oscar.fonts@geomati.co) |
+> |	24 Junio 2013		| Fernando González (fernando.gonzalez@fao.org)  |
+> |	15 Enero 2018		| Micho García (micho.garcia@geomati.co)  |
+>
 >	©2013 FAO Forestry
 >
 >	Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : [Creative Commons](http://creativecommons.org/licenses/by-sa/3.0/deed.es)

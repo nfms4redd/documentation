@@ -1,6 +1,14 @@
-> La instalación con [Docker](https://www.docker.com) es muy sencilla y permite tener el sistema funcionando en muy pocos minutos.
+> | Fecha         | Autores                                         |
+> |---------------|-------------------------------------------------|
+> | 9  Enero 2018 | Víctor González (<victor.gonzalez@fao.org>)  |
+>
+> ©2013 FAO Forestry
+>
+> Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia [Creative Commons](http://creativecommons.org/licenses/by-sa/3.0/deed.es).
 
-> Sin embargo, en algunos entornos no es posible utilizar Docker o la política de sistemas lo impide. En tal caso, es posible [instalar el sistema mediante paquetes](packages.md).
+La instalación con [Docker](https://www.docker.com) es muy sencilla y permite tener el sistema funcionando en muy pocos minutos.
+
+Sin embargo, en algunos entornos no es posible utilizar Docker o la política de sistemas lo impide. En tal caso, es posible [instalar el sistema mediante paquetes](packages.md).
 
 ## Instalar Docker
 
